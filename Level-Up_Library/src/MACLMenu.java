@@ -32,6 +32,7 @@ public class MACLMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         MACLPane = new javax.swing.JPanel();
+        MACLPane.setVisible(false);
         min = new javax.swing.JLabel();
         minMACL = new javax.swing.JTextField();
         max = new javax.swing.JLabel();
@@ -77,7 +78,7 @@ public class MACLMenu extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        MACLToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Expanded.png"))); // NOI18N
+        MACLToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
         MACLToggle.setText("MACL");
         MACLToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         MACLToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);

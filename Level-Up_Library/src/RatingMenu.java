@@ -32,6 +32,7 @@ public class RatingMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         ratingPane = new javax.swing.JPanel();
+        ratingPane.setVisible(false);
         noStars = new javax.swing.JCheckBox();
         oneStar = new javax.swing.JCheckBox();
         twoStars = new javax.swing.JCheckBox();
@@ -87,7 +88,7 @@ public class RatingMenu extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ratingToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Expanded.png"))); // NOI18N
+        ratingToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
         ratingToggle.setText("Rating");
         ratingToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ratingToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);

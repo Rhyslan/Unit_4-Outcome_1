@@ -1,19 +1,47 @@
 
-import javax.swing.ImageIcon;
-
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import mdlaf.MaterialLookAndFeel;
+import mdlaf.themes.JMarsDarkTheme;
+import mdlaf.themes.MaterialLiteTheme;
+import mdlaf.utils.MaterialColors;
 
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author dylan
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    static {
+        try {
+            UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialLiteTheme()));
+            UIManager.put("Button.mouseHoverEnable", false); //Because the test are more difficulte with effect mouse hover
+            JDialog.setDefaultLookAndFeelDecorated(true);
+            JFrame.setDefaultLookAndFeelDecorated(false); //not support yet
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * Creates new form MainWindow
      */
@@ -75,7 +103,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         filterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         filterLabel.setText("Filters");
+        filterLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         filterLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        filterLabel.setMinimumSize(new java.awt.Dimension(31, 20));
+        filterLabel.setPreferredSize(new java.awt.Dimension(31, 20));
         sidebarInner.add(filterLabel);
         sidebarInner.add(classificationMenu1);
         sidebarInner.add(mACLMenu1);
@@ -99,12 +130,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         fileMenu.setText("File");
 
+        saveOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         saveOption.setText("Save");
         fileMenu.add(saveOption);
 
+        loadOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         loadOption.setText("Load");
+        loadOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadOptionActionPerformed(evt);
+            }
+        });
         fileMenu.add(loadOption);
 
+        quitOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         quitOption.setText("Quit");
         quitOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,9 +156,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         gameMenu.setText("Game");
 
+        addOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         addOption.setText("Add New");
         gameMenu.add(addOption);
 
+        updateOption.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         updateOption.setText("Update Data");
         gameMenu.add(updateOption);
 
@@ -164,6 +205,49 @@ public class MainWindow extends javax.swing.JFrame {
     private void quitOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitOptionActionPerformed
         System.exit(0);
     }//GEN-LAST:event_quitOptionActionPerformed
+
+    private void loadOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadOptionActionPerformed
+        JFileChooser fileBrowser = new JFileChooser(System.getProperty("user.dir"));
+        fileBrowser.setSelectedFile(new File("database.xml"));
+        fileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
+        fileBrowser.setAcceptAllFileFilterUsed(false);
+        int response = fileBrowser.showOpenDialog(null);
+        String filePath = null;
+
+        if (response == JFileChooser.APPROVE_OPTION) {
+            filePath = fileBrowser.getSelectedFile().getAbsolutePath();
+        } else {
+            return;
+        }
+
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = builder.parse(new File(filePath));
+            doc.getDocumentElement().normalize();
+
+            NodeList allGames = doc.getElementsByTagName("game");
+
+            for (int i = 0; i < allGames.getLength(); i++) {
+                Node currentGame = allGames.item(i);
+                System.out.println(currentGame.getAttributes().item(0));
+                System.out.println(currentGame.getAttributes().item(1));
+                NodeList elementList = currentGame.getChildNodes();
+                int n = elementList.getLength();
+                Node currentElement;
+
+                for (int j = 0; j < n; j++) {
+                    currentElement = elementList.item(j);
+                    if (currentElement.getNodeType() == Node.ELEMENT_NODE) {
+                        System.out.println(
+                                currentElement.getNodeName() + ": " + currentElement.getTextContent());
+                    }
+                }
+                System.out.println();
+            }
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_loadOptionActionPerformed
 
     /**
      * @param args the command line arguments

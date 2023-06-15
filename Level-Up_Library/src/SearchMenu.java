@@ -34,16 +34,18 @@ public class SearchMenu extends javax.swing.JPanel {
         advancedSearchCategory = new javax.swing.ButtonGroup();
         searchToggle = new javax.swing.JButton();
         searchPane = new javax.swing.JPanel();
+        searchPane.setVisible(false);
         searchQuery = new javax.swing.JTextField();
         searchConfirm = new javax.swing.JButton();
         advancedToggle = new javax.swing.JButton();
         advancedSearchPane = new javax.swing.JPanel();
+        advancedSearchPane.setVisible(false);
         advancedCategory = new javax.swing.JLabel();
         titleSearchCategory = new javax.swing.JRadioButton();
         notesSearchCategory = new javax.swing.JRadioButton();
         searchExactMatch = new javax.swing.JCheckBox();
 
-        searchToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Expanded.png"))); // NOI18N
+        searchToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
         searchToggle.setText("Search");
         searchToggle.setBorderPainted(false);
         searchToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -62,7 +64,7 @@ public class SearchMenu extends javax.swing.JPanel {
 
         searchConfirm.setText("Search");
 
-        advancedToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Expanded.png"))); // NOI18N
+        advancedToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
         advancedToggle.setText("Advanced");
         advancedToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         advancedToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);

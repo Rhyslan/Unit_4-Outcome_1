@@ -32,6 +32,7 @@ public class YearMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         yearPane = new javax.swing.JPanel();
+        yearPane.setVisible(false);
         maxMACL = new javax.swing.JTextField();
         max = new javax.swing.JLabel();
         min = new javax.swing.JLabel();
@@ -77,7 +78,7 @@ public class YearMenu extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        yearToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Expanded.png"))); // NOI18N
+        yearToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
         yearToggle.setText("Year");
         yearToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         yearToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);

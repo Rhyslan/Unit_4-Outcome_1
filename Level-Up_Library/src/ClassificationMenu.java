@@ -32,6 +32,7 @@ public class ClassificationMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         classificationPane = new javax.swing.JPanel();
+        classificationPane.setVisible(false);
         classG = new javax.swing.JCheckBox();
         classPG = new javax.swing.JCheckBox();
         classM = new javax.swing.JCheckBox();
@@ -83,7 +84,7 @@ public class ClassificationMenu extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        classificationToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Expanded.png"))); // NOI18N
+        classificationToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
         classificationToggle.setText("Classification");
         classificationToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         classificationToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -104,7 +105,7 @@ public class ClassificationMenu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(classificationToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(classificationPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
