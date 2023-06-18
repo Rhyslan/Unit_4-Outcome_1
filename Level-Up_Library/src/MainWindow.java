@@ -14,10 +14,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import mdlaf.MaterialLookAndFeel;
-import mdlaf.themes.JMarsDarkTheme;
-import mdlaf.themes.MaterialLiteTheme;
-import mdlaf.utils.MaterialColors;
 
 
 /*
@@ -30,17 +26,6 @@ import mdlaf.utils.MaterialColors;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    static {
-        try {
-            UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialLiteTheme()));
-            UIManager.put("Button.mouseHoverEnable", false); //Because the test are more difficulte with effect mouse hover
-            JDialog.setDefaultLookAndFeelDecorated(true);
-            JFrame.setDefaultLookAndFeelDecorated(false); //not support yet
-        }
-        catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-    }
     
     /**
      * Creates new form MainWindow

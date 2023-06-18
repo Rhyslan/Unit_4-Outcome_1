@@ -26,19 +26,50 @@ public class GameEntry extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        lblSpacerFront = new javax.swing.JLabel();
+        lblBoxArtImage = new javax.swing.JLabel();
+        lblGameName = new javax.swing.JLabel();
+        lblClassification = new javax.swing.JLabel();
+        lblMACL = new javax.swing.JLabel();
+        lblReleaseYear = new javax.swing.JLabel();
+        lblPlayStatus = new javax.swing.JLabel();
+        starRating1 = new com.softwaredevelopment.level.up_library.GameEntry.StarRating();
+
+        org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
+        horizontalLayout1.setGap(5);
+        setLayout(horizontalLayout1);
+        add(lblSpacerFront);
+
+        lblBoxArtImage.setText("Box Art");
+        lblBoxArtImage.setToolTipText("");
+        add(lblBoxArtImage);
+
+        lblGameName.setText("Title");
+        add(lblGameName);
+
+        lblClassification.setText("Classification");
+        add(lblClassification);
+
+        lblMACL.setText("MACL");
+        add(lblMACL);
+
+        lblReleaseYear.setText("Release Year");
+        add(lblReleaseYear);
+
+        lblPlayStatus.setText("Play Status");
+        add(lblPlayStatus);
+        add(starRating1);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblBoxArtImage;
+    private javax.swing.JLabel lblClassification;
+    private javax.swing.JLabel lblGameName;
+    private javax.swing.JLabel lblMACL;
+    private javax.swing.JLabel lblPlayStatus;
+    private javax.swing.JLabel lblReleaseYear;
+    private javax.swing.JLabel lblSpacerFront;
+    private com.softwaredevelopment.level.up_library.GameEntry.StarRating starRating1;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,19 +26,108 @@ public class ClassificationMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnClassificationToggle = new javax.swing.JButton();
+        pnlClassification = new javax.swing.JPanel();
+        pnlClassification.setVisible(false);
+        cbxG = new javax.swing.JCheckBox();
+        cbxPG = new javax.swing.JCheckBox();
+        cbxM = new javax.swing.JCheckBox();
+        cbxMA15 = new javax.swing.JCheckBox();
+        cbxR18 = new javax.swing.JCheckBox();
+
+        btnClassificationToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Collapsed.png"))); // NOI18N
+        btnClassificationToggle.setText("Classification");
+        btnClassificationToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnClassificationToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        btnClassificationToggle.setIconTextGap(38);
+        btnClassificationToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClassificationToggleActionPerformed(evt);
+            }
+        });
+
+        pnlClassification.setBackground(new java.awt.Color(255, 0, 0));
+        pnlClassification.setMinimumSize(new java.awt.Dimension(190, 84));
+        pnlClassification.setPreferredSize(new java.awt.Dimension(190, 84));
+
+        cbxG.setText("G");
+
+        cbxPG.setText("PG");
+
+        cbxM.setText("M");
+
+        cbxMA15.setText("MA15+");
+
+        cbxR18.setText("R18+");
+
+        javax.swing.GroupLayout pnlClassificationLayout = new javax.swing.GroupLayout(pnlClassification);
+        pnlClassification.setLayout(pnlClassificationLayout);
+        pnlClassificationLayout.setHorizontalGroup(
+            pnlClassificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlClassificationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlClassificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxR18)
+                    .addGroup(pnlClassificationLayout.createSequentialGroup()
+                        .addGroup(pnlClassificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxM)
+                            .addComponent(cbxG))
+                        .addGap(51, 51, 51)
+                        .addGroup(pnlClassificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxPG)
+                            .addComponent(cbxMA15))))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        pnlClassificationLayout.setVerticalGroup(
+            pnlClassificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlClassificationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlClassificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxG)
+                    .addComponent(cbxPG))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlClassificationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxM)
+                    .addComponent(cbxMA15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxR18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnClassificationToggle, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(pnlClassification, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnClassificationToggle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlClassification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnClassificationToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassificationToggleActionPerformed
+        pnlClassification.setVisible(!pnlClassification.isVisible());
+    }//GEN-LAST:event_btnClassificationToggleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClassificationToggle;
+    private javax.swing.JCheckBox cbxG;
+    private javax.swing.JCheckBox cbxM;
+    private javax.swing.JCheckBox cbxMA15;
+    private javax.swing.JCheckBox cbxPG;
+    private javax.swing.JCheckBox cbxR18;
+    private javax.swing.JPanel pnlClassification;
     // End of variables declaration//GEN-END:variables
 }

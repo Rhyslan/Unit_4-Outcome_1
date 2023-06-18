@@ -26,19 +26,173 @@ public class SearchMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgpSearchCategory = new javax.swing.ButtonGroup();
+        btnSearchToggle = new javax.swing.JButton();
+        pnlSearch = new javax.swing.JPanel();
+        pnlSearch.setVisible(false);
+        txtSearchQuery = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnAdvancedToggle = new javax.swing.JButton();
+        pnlAdvancedSearch = new javax.swing.JPanel();
+        pnlAdvancedSearch.setVisible(false);
+        lblCategory = new javax.swing.JLabel();
+        rtbTitle = new javax.swing.JRadioButton();
+        rtnNotes = new javax.swing.JRadioButton();
+        cbxExactSearch = new javax.swing.JCheckBox();
+
+        btnSearchToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Collapsed.png"))); // NOI18N
+        btnSearchToggle.setText("Search");
+        btnSearchToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnSearchToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        btnSearchToggle.setIconTextGap(53);
+        btnSearchToggle.setMaximumSize(new java.awt.Dimension(130, 23));
+        btnSearchToggle.setMinimumSize(new java.awt.Dimension(190, 23));
+        btnSearchToggle.setPreferredSize(new java.awt.Dimension(130, 23));
+        btnSearchToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchToggleActionPerformed(evt);
+            }
+        });
+
+        pnlSearch.setBackground(new java.awt.Color(255, 0, 0));
+        pnlSearch.setMinimumSize(new java.awt.Dimension(190, 75));
+        pnlSearch.setPreferredSize(new java.awt.Dimension(190, 75));
+
+        txtSearchQuery.setText("Search");
+        txtSearchQuery.setMinimumSize(new java.awt.Dimension(71, 22));
+
+        btnSearch.setText("Search");
+
+        btnAdvancedToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Collapsed.png"))); // NOI18N
+        btnAdvancedToggle.setText("Advanced");
+        btnAdvancedToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnAdvancedToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        btnAdvancedToggle.setIconTextGap(42);
+        btnAdvancedToggle.setMinimumSize(null);
+        btnAdvancedToggle.setPreferredSize(new java.awt.Dimension(178, 23));
+        btnAdvancedToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdvancedToggleActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlSearchLayout = new javax.swing.GroupLayout(pnlSearch);
+        pnlSearch.setLayout(pnlSearchLayout);
+        pnlSearchLayout.setHorizontalGroup(
+            pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlSearchLayout.createSequentialGroup()
+                        .addComponent(txtSearchQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAdvancedToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlSearchLayout.setVerticalGroup(
+            pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearchQuery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdvancedToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pnlAdvancedSearch.setBackground(new java.awt.Color(0, 0, 255));
+        pnlAdvancedSearch.setMinimumSize(new java.awt.Dimension(0, 0));
+        pnlAdvancedSearch.setPreferredSize(new java.awt.Dimension(178, 114));
+
+        lblCategory.setText("Category:");
+
+        bgpSearchCategory.add(rtbTitle);
+        rtbTitle.setSelected(true);
+        rtbTitle.setText("Title");
+
+        bgpSearchCategory.add(rtnNotes);
+        rtnNotes.setText("Notes");
+
+        cbxExactSearch.setText("Exact Match");
+        cbxExactSearch.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        cbxExactSearch.setIconTextGap(5);
+
+        javax.swing.GroupLayout pnlAdvancedSearchLayout = new javax.swing.GroupLayout(pnlAdvancedSearch);
+        pnlAdvancedSearch.setLayout(pnlAdvancedSearchLayout);
+        pnlAdvancedSearchLayout.setHorizontalGroup(
+            pnlAdvancedSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdvancedSearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAdvancedSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCategory)
+                    .addComponent(rtbTitle)
+                    .addComponent(rtnNotes)
+                    .addComponent(cbxExactSearch))
+                .addGap(84, 84, 84))
+        );
+        pnlAdvancedSearchLayout.setVerticalGroup(
+            pnlAdvancedSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdvancedSearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCategory)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rtbTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rtnNotes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbxExactSearch)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(pnlAdvancedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearchToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSearchToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(pnlAdvancedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAdvancedToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdvancedToggleActionPerformed
+        pnlAdvancedSearch.setVisible(!pnlAdvancedSearch.isVisible());
+    }//GEN-LAST:event_btnAdvancedToggleActionPerformed
+
+    private void btnSearchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchToggleActionPerformed
+        pnlSearch.setVisible(!pnlSearch.isVisible());
+    }//GEN-LAST:event_btnSearchToggleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgpSearchCategory;
+    private javax.swing.JButton btnAdvancedToggle;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearchToggle;
+    private javax.swing.JCheckBox cbxExactSearch;
+    private javax.swing.JLabel lblCategory;
+    private javax.swing.JPanel pnlAdvancedSearch;
+    private javax.swing.JPanel pnlSearch;
+    private javax.swing.JRadioButton rtbTitle;
+    private javax.swing.JRadioButton rtnNotes;
+    private javax.swing.JTextField txtSearchQuery;
     // End of variables declaration//GEN-END:variables
 }

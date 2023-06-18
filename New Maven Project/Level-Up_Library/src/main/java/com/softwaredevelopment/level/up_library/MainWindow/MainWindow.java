@@ -26,72 +26,130 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        srpSidebar = new javax.swing.JScrollPane();
+        pnlSidebar = new javax.swing.JPanel();
+        pnlSearchMenu = new com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu();
+        lblFilters = new javax.swing.JLabel();
+        pnlClassificationMenu = new com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu();
+        pnlMACLMenu = new com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu();
+        tbpGameEntries = new javax.swing.JTabbedPane();
+        srpGameEntries = new javax.swing.JScrollPane();
+        pnlGameEntries = new javax.swing.JPanel();
+        pnlGameEntry = new com.softwaredevelopment.level.up_library.GameEntry.GameEntry();
+        mnuTitlebar = new javax.swing.JMenuBar();
+        menFile = new javax.swing.JMenu();
+        optSave = new javax.swing.JMenuItem();
+        optLoad = new javax.swing.JMenuItem();
+        optQuit = new javax.swing.JMenuItem();
+        menGame = new javax.swing.JMenu();
+        optAddNew = new javax.swing.JMenuItem();
+        optUpdate = new javax.swing.JMenuItem();
+        optRemove = new javax.swing.JMenuItem();
+        menHelp = new javax.swing.JMenu();
+        optOnlineDocs = new javax.swing.JMenuItem();
+        optManual = new javax.swing.JMenuItem();
+        optAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Level-Up Library - Main Window");
+        setMinimumSize(new java.awt.Dimension(1024, 600));
+        setName("MainWindow"); // NOI18N
 
-        jMenu1.setText("File");
+        srpSidebar.setBorder(null);
+        srpSidebar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        srpSidebar.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        srpSidebar.setHorizontalScrollBar(null);
+        srpSidebar.setMinimumSize(new java.awt.Dimension(220, 100));
+        srpSidebar.setPreferredSize(new java.awt.Dimension(220, 100));
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenu1.add(jMenuItem1);
+        pnlSidebar.setMinimumSize(new java.awt.Dimension(210, 29));
+        pnlSidebar.setPreferredSize(new java.awt.Dimension(210, 458));
+        pnlSidebar.setLayout(new org.jdesktop.swingx.VerticalLayout());
+        pnlSidebar.add(pnlSearchMenu);
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenu1.add(jMenuItem2);
+        lblFilters.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFilters.setText("Filters");
+        lblFilters.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lblFilters.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblFilters.setMinimumSize(new java.awt.Dimension(31, 20));
+        lblFilters.setName(""); // NOI18N
+        lblFilters.setPreferredSize(new java.awt.Dimension(31, 25));
+        pnlSidebar.add(lblFilters);
+        pnlSidebar.add(pnlClassificationMenu);
+        pnlSidebar.add(pnlMACLMenu);
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu1.add(jMenuItem3);
+        srpSidebar.setViewportView(pnlSidebar);
 
-        jMenuBar1.add(jMenu1);
+        srpGameEntries.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        srpGameEntries.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jMenu2.setText("Game");
+        pnlGameEntries.setLayout(new org.jdesktop.swingx.VerticalLayout());
+        pnlGameEntries.add(pnlGameEntry);
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenu2.add(jMenuItem4);
+        srpGameEntries.setViewportView(pnlGameEntries);
 
-        jMenuItem5.setText("jMenuItem5");
-        jMenu2.add(jMenuItem5);
+        tbpGameEntries.addTab("tab1", srpGameEntries);
 
-        jMenuItem6.setText("jMenuItem6");
-        jMenu2.add(jMenuItem6);
+        menFile.setText("File");
 
-        jMenuBar1.add(jMenu2);
+        optSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        optSave.setText("Save");
+        menFile.add(optSave);
 
-        jMenu3.setText("Help");
+        optLoad.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        optLoad.setText("Load");
+        menFile.add(optLoad);
 
-        jMenuItem7.setText("jMenuItem7");
-        jMenu3.add(jMenuItem7);
+        optQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        optQuit.setText("Quit");
+        menFile.add(optQuit);
 
-        jMenuItem8.setText("jMenuItem8");
-        jMenu3.add(jMenuItem8);
+        mnuTitlebar.add(menFile);
 
-        jMenuItem9.setText("jMenuItem9");
-        jMenu3.add(jMenuItem9);
+        menGame.setText("Game");
 
-        jMenuBar1.add(jMenu3);
+        optAddNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        optAddNew.setText("Add New");
+        menGame.add(optAddNew);
 
-        setJMenuBar(jMenuBar1);
+        optUpdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        optUpdate.setText("Update");
+        menGame.add(optUpdate);
+
+        optRemove.setText("Remove");
+        menGame.add(optRemove);
+
+        mnuTitlebar.add(menGame);
+
+        menHelp.setText("Help");
+
+        optOnlineDocs.setText("Online Documentation");
+        menHelp.add(optOnlineDocs);
+
+        optManual.setText("Manual");
+        menHelp.add(optManual);
+
+        optAbout.setText("About");
+        menHelp.add(optAbout);
+
+        mnuTitlebar.add(menHelp);
+
+        setJMenuBar(mnuTitlebar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(srpSidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(tbpGameEntries, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addComponent(srpSidebar, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(tbpGameEntries)
         );
 
         pack();
@@ -133,18 +191,28 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JLabel lblFilters;
+    private javax.swing.JMenu menFile;
+    private javax.swing.JMenu menGame;
+    private javax.swing.JMenu menHelp;
+    private javax.swing.JMenuBar mnuTitlebar;
+    private javax.swing.JMenuItem optAbout;
+    private javax.swing.JMenuItem optAddNew;
+    private javax.swing.JMenuItem optLoad;
+    private javax.swing.JMenuItem optManual;
+    private javax.swing.JMenuItem optOnlineDocs;
+    private javax.swing.JMenuItem optQuit;
+    private javax.swing.JMenuItem optRemove;
+    private javax.swing.JMenuItem optSave;
+    private javax.swing.JMenuItem optUpdate;
+    private com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu pnlClassificationMenu;
+    private javax.swing.JPanel pnlGameEntries;
+    private com.softwaredevelopment.level.up_library.GameEntry.GameEntry pnlGameEntry;
+    private com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu pnlMACLMenu;
+    private com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu pnlSearchMenu;
+    private javax.swing.JPanel pnlSidebar;
+    private javax.swing.JScrollPane srpGameEntries;
+    private javax.swing.JScrollPane srpSidebar;
+    private javax.swing.JTabbedPane tbpGameEntries;
     // End of variables declaration//GEN-END:variables
 }

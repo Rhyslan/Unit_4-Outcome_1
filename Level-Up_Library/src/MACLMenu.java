@@ -31,13 +31,25 @@ public class MACLMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MACLToggle = new javax.swing.JButton();
         MACLPane = new javax.swing.JPanel();
         MACLPane.setVisible(false);
         min = new javax.swing.JLabel();
         minMACL = new javax.swing.JTextField();
         max = new javax.swing.JLabel();
         maxMACL = new javax.swing.JTextField();
-        MACLToggle = new javax.swing.JButton();
+
+        MACLToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
+        MACLToggle.setText("MACL");
+        MACLToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        MACLToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        MACLToggle.setIconTextGap(57);
+        MACLToggle.setMinimumSize(new java.awt.Dimension(193, 23));
+        MACLToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MACLToggleActionPerformed(evt);
+            }
+        });
 
         MACLPane.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -77,18 +89,6 @@ public class MACLMenu extends javax.swing.JPanel {
                     .addComponent(maxMACL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        MACLToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
-        MACLToggle.setText("MACL");
-        MACLToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        MACLToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        MACLToggle.setIconTextGap(57);
-        MACLToggle.setMinimumSize(new java.awt.Dimension(193, 23));
-        MACLToggle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MACLToggleActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

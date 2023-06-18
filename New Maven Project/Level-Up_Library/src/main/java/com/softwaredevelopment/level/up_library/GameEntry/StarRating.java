@@ -26,19 +26,44 @@ public class StarRating extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        lblSpacerFront = new javax.swing.JLabel();
+        lblStar1 = new javax.swing.JLabel();
+        lblStar2 = new javax.swing.JLabel();
+        lblStar3 = new javax.swing.JLabel();
+        lblStar4 = new javax.swing.JLabel();
+        lblStar5 = new javax.swing.JLabel();
+        lblSpacerBack = new javax.swing.JLabel();
+
+        org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
+        horizontalLayout1.setGap(5);
+        setLayout(horizontalLayout1);
+        add(lblSpacerFront);
+
+        lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        add(lblStar1);
+
+        lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        add(lblStar2);
+
+        lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        add(lblStar3);
+
+        lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        add(lblStar4);
+
+        lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        add(lblStar5);
+        add(lblSpacerBack);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblSpacerBack;
+    private javax.swing.JLabel lblSpacerFront;
+    private javax.swing.JLabel lblStar1;
+    private javax.swing.JLabel lblStar2;
+    private javax.swing.JLabel lblStar3;
+    private javax.swing.JLabel lblStar4;
+    private javax.swing.JLabel lblStar5;
     // End of variables declaration//GEN-END:variables
 }

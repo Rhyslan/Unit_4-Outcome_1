@@ -51,7 +51,8 @@ public class SearchMenu extends javax.swing.JPanel {
         searchToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         searchToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         searchToggle.setIconTextGap(52);
-        searchToggle.setMinimumSize(new java.awt.Dimension(193, 23));
+        searchToggle.setMinimumSize(new java.awt.Dimension(190, 23));
+        searchToggle.setPreferredSize(new java.awt.Dimension(190, 23));
         searchToggle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchToggleActionPerformed(evt);
@@ -59,6 +60,8 @@ public class SearchMenu extends javax.swing.JPanel {
         });
 
         searchPane.setBackground(new java.awt.Color(255, 0, 0));
+        searchPane.setMinimumSize(new java.awt.Dimension(190, 241));
+        searchPane.setPreferredSize(new java.awt.Dimension(190, 241));
 
         searchQuery.setText("Search Text");
 
@@ -69,6 +72,7 @@ public class SearchMenu extends javax.swing.JPanel {
         advancedToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         advancedToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         advancedToggle.setIconTextGap(40);
+        advancedToggle.setPreferredSize(new java.awt.Dimension(182, 23));
         advancedToggle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 advancedToggleActionPerformed(evt);
@@ -76,6 +80,7 @@ public class SearchMenu extends javax.swing.JPanel {
         });
 
         advancedSearchPane.setBackground(new java.awt.Color(0, 0, 255));
+        advancedSearchPane.setPreferredSize(new java.awt.Dimension(178, 135));
 
         advancedCategory.setText("Category:");
 
@@ -100,7 +105,7 @@ public class SearchMenu extends javax.swing.JPanel {
                     .addComponent(titleSearchCategory)
                     .addComponent(notesSearchCategory)
                     .addComponent(searchExactMatch))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         advancedSearchPaneLayout.setVerticalGroup(
             advancedSearchPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,14 +131,14 @@ public class SearchMenu extends javax.swing.JPanel {
                         .addGap(17, 17, 17)
                         .addComponent(searchQuery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchConfirm)
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addComponent(searchConfirm))
                     .addGroup(searchPaneLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(searchPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(advancedSearchPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(advancedToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addComponent(advancedToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(searchPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(advancedSearchPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(2, Short.MAX_VALUE))
         );
         searchPaneLayout.setVerticalGroup(
             searchPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +148,7 @@ public class SearchMenu extends javax.swing.JPanel {
                     .addComponent(searchQuery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchConfirm))
                 .addGap(32, 32, 32)
-                .addComponent(advancedToggle)
+                .addComponent(advancedToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(advancedSearchPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -156,7 +161,7 @@ public class SearchMenu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(searchPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
