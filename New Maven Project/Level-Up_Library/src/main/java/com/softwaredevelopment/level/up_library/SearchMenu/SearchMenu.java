@@ -4,6 +4,9 @@
  */
 package com.softwaredevelopment.level.up_library.SearchMenu;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author dylan
@@ -15,6 +18,34 @@ public class SearchMenu extends javax.swing.JPanel {
      */
     public SearchMenu() {
         initComponents();
+    }
+    
+    /**
+     * My Variables and Methods
+     */
+    public static String advancedPrevious = "N/A";
+    
+    public static String doLogicalComparisons(String strStates) {
+        /**
+         *************KEY**************
+         * OS = Opening search
+         * CS = Closing search
+         * AWO = Advanced was open
+         * AWC = Advanced was closed
+         * SIO = Search is open
+         * OA = Opening Advanced
+         * CA = Closing advanced
+         */
+        
+        Map<String, String> finalStates = new HashMap<String, String>();
+        finalStates.put("CS, AWO", "false, false"); // Closing search, advanced was closed
+        finalStates.put("CS, AWC", "false, false"); // Closing search, advanced was open
+        finalStates.put("OS, AWO", "true, true"); // Opening search, advanced was closed
+        finalStates.put("OS, AWC", "true, false"); // Opening search, advanced was open
+        finalStates.put("SIO, OA", "true, true"); // Search is open, opening advanced
+        finalStates.put("SIO, CA", "true, false"); // Search is open, closing advanced
+        
+        return finalStates.get(strStates);
     }
 
     /**
@@ -32,13 +63,15 @@ public class SearchMenu extends javax.swing.JPanel {
         pnlSearch.setVisible(false);
         txtSearchQuery = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        btnAdvancedToggle = new javax.swing.JButton();
         pnlAdvancedSearch = new javax.swing.JPanel();
         pnlAdvancedSearch.setVisible(false);
         lblCategory = new javax.swing.JLabel();
         rtbTitle = new javax.swing.JRadioButton();
         rtnNotes = new javax.swing.JRadioButton();
         cbxExactSearch = new javax.swing.JCheckBox();
+        btnAdvancedToggle = new javax.swing.JButton();
+        btnAdvancedToggle.setVisible(false);
+        advancedPrevious = "AWC";
 
         btnSearchToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Collapsed.png"))); // NOI18N
         btnSearchToggle.setText("Search");
@@ -46,8 +79,8 @@ public class SearchMenu extends javax.swing.JPanel {
         btnSearchToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         btnSearchToggle.setIconTextGap(53);
         btnSearchToggle.setMaximumSize(new java.awt.Dimension(130, 23));
-        btnSearchToggle.setMinimumSize(new java.awt.Dimension(190, 23));
-        btnSearchToggle.setPreferredSize(new java.awt.Dimension(130, 23));
+        btnSearchToggle.setMinimumSize(new java.awt.Dimension(190, 29));
+        btnSearchToggle.setPreferredSize(new java.awt.Dimension(130, 29));
         btnSearchToggle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchToggleActionPerformed(evt);
@@ -55,26 +88,13 @@ public class SearchMenu extends javax.swing.JPanel {
         });
 
         pnlSearch.setBackground(new java.awt.Color(255, 0, 0));
-        pnlSearch.setMinimumSize(new java.awt.Dimension(190, 75));
-        pnlSearch.setPreferredSize(new java.awt.Dimension(190, 75));
+        pnlSearch.setMinimumSize(new java.awt.Dimension(190, 10));
+        pnlSearch.setPreferredSize(new java.awt.Dimension(190, 36));
 
         txtSearchQuery.setText("Search");
         txtSearchQuery.setMinimumSize(new java.awt.Dimension(71, 22));
 
         btnSearch.setText("Search");
-
-        btnAdvancedToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Collapsed.png"))); // NOI18N
-        btnAdvancedToggle.setText("Advanced");
-        btnAdvancedToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnAdvancedToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        btnAdvancedToggle.setIconTextGap(42);
-        btnAdvancedToggle.setMinimumSize(null);
-        btnAdvancedToggle.setPreferredSize(new java.awt.Dimension(178, 23));
-        btnAdvancedToggle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdvancedToggleActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlSearchLayout = new javax.swing.GroupLayout(pnlSearch);
         pnlSearch.setLayout(pnlSearchLayout);
@@ -82,12 +102,9 @@ public class SearchMenu extends javax.swing.JPanel {
             pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSearchLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSearchLayout.createSequentialGroup()
-                        .addComponent(txtSearchQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAdvancedToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtSearchQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlSearchLayout.setVerticalGroup(
@@ -97,9 +114,7 @@ public class SearchMenu extends javax.swing.JPanel {
                 .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearchQuery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAdvancedToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(13, 13, 13))
         );
 
         pnlAdvancedSearch.setBackground(new java.awt.Color(0, 0, 255));
@@ -146,6 +161,20 @@ public class SearchMenu extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnAdvancedToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Collapsed.png"))); // NOI18N
+        btnAdvancedToggle.setText("Advanced");
+        btnAdvancedToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnAdvancedToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        btnAdvancedToggle.setIconTextGap(42);
+        btnAdvancedToggle.setMaximumSize(new java.awt.Dimension(135, 29));
+        btnAdvancedToggle.setMinimumSize(null);
+        btnAdvancedToggle.setPreferredSize(new java.awt.Dimension(178, 29));
+        btnAdvancedToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdvancedToggleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,10 +183,12 @@ public class SearchMenu extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(pnlAdvancedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnSearchToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAdvancedToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlAdvancedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -166,19 +197,57 @@ public class SearchMenu extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnSearchToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAdvancedToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlAdvancedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdvancedToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdvancedToggleActionPerformed
-        pnlAdvancedSearch.setVisible(!pnlAdvancedSearch.isVisible());
+        boolean advancedState = pnlAdvancedSearch.isVisible();
+        String searchCode = "SIO";
+        String advancedCode = "N/A";
+        
+        if (advancedState == true) advancedCode = "CA";
+        else if (advancedState == false) advancedCode = "OA";
+        
+        advancedPrevious = advancedCode;
+        
+        String newStates = doLogicalComparisons(searchCode + ", " + advancedCode);
+        
+        String[] bools = newStates.split(", ");
+        
+        pnlSearch.setVisible(Boolean.parseBoolean(bools[0]));
+        btnAdvancedToggle.setVisible(Boolean.parseBoolean(bools[0]));
+        pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
     }//GEN-LAST:event_btnAdvancedToggleActionPerformed
 
     private void btnSearchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchToggleActionPerformed
-        pnlSearch.setVisible(!pnlSearch.isVisible());
+        boolean searchState = pnlSearch.isVisible();
+        boolean advancedState = pnlAdvancedSearch.isVisible();
+        String searchCode = "N/A";
+        String advancedCode = "N/A";
+        
+        if (searchState == true) searchCode = "CS";
+        else if (searchState == false) searchCode = "OS";
+        
+        if (advancedState == true) advancedCode = "AWO";
+        else if (advancedState == false) advancedCode = "AWC";
+        
+        if (searchCode == "OS") advancedCode = advancedPrevious;
+        
+        String newStates = doLogicalComparisons(searchCode + ", " + advancedCode);
+        
+        advancedPrevious = advancedCode;
+        
+        String[] bools = newStates.split(", ");
+        
+        pnlSearch.setVisible(Boolean.parseBoolean(bools[0]));
+        btnAdvancedToggle.setVisible(Boolean.parseBoolean(bools[0]));
+        pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
     }//GEN-LAST:event_btnSearchToggleActionPerformed
 
 

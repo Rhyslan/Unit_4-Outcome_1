@@ -183,6 +183,12 @@
             </Component>
             <Component class="com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu" name="pnlMACLMenu">
             </Component>
+            <Component class="com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu" name="ratingMenu1">
+            </Component>
+            <Component class="com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu" name="statusMenu1">
+            </Component>
+            <Component class="com.softwaredevelopment.level.up_library.YearMenu.YearMenu" name="yearMenu1">
+            </Component>
           </SubComponents>
           <LayoutCode>
             <CodeStatement>
@@ -271,6 +277,54 @@
                 </CodeExpression>
               </Parameters>
             </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="1_pnlSidebar"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="7_ratingMenu1">
+                  <CodeVariable name="ratingMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="ratingMenu1"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="1_pnlSidebar"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="8_statusMenu1">
+                  <CodeVariable name="statusMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="statusMenu1"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="1_pnlSidebar"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="9_yearMenu1">
+                  <CodeVariable name="yearMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.YearMenu.YearMenu"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="yearMenu1"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
           </LayoutCode>
         </Container>
       </SubComponents>
@@ -301,7 +355,7 @@
               </SubComponents>
               <LayoutCode>
                 <CodeStatement>
-                  <CodeExpression id="7_pnlGameEntries">
+                  <CodeExpression id="10_pnlGameEntries">
                     <CodeVariable name="pnlGameEntries" type="8194" declaredType="javax.swing.JPanel"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="ComponentRef">
@@ -313,7 +367,7 @@
                     <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="8">
+                    <CodeExpression id="11">
                       <ExpressionOrigin>
                         <ExpressionProvider type="CodeConstructor">
                           <CodeConstructor class="org.jdesktop.swingx.VerticalLayout" parameterTypes=""/>
@@ -323,12 +377,12 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="7_pnlGameEntries"/>
+                  <CodeExpression id="10_pnlGameEntries"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="9_pnlGameEntry">
+                    <CodeExpression id="12_pnlGameEntry">
                       <CodeVariable name="pnlGameEntry" type="8194" declaredType="com.softwaredevelopment.level.up_library.GameEntry.GameEntry"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">

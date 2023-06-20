@@ -32,6 +32,9 @@ public class MainWindow extends javax.swing.JFrame {
         lblFilters = new javax.swing.JLabel();
         pnlClassificationMenu = new com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu();
         pnlMACLMenu = new com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu();
+        ratingMenu1 = new com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu();
+        statusMenu1 = new com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu();
+        yearMenu1 = new com.softwaredevelopment.level.up_library.YearMenu.YearMenu();
         tbpGameEntries = new javax.swing.JTabbedPane();
         srpGameEntries = new javax.swing.JScrollPane();
         pnlGameEntries = new javax.swing.JPanel();
@@ -77,6 +80,9 @@ public class MainWindow extends javax.swing.JFrame {
         pnlSidebar.add(lblFilters);
         pnlSidebar.add(pnlClassificationMenu);
         pnlSidebar.add(pnlMACLMenu);
+        pnlSidebar.add(ratingMenu1);
+        pnlSidebar.add(statusMenu1);
+        pnlSidebar.add(yearMenu1);
 
         srpSidebar.setViewportView(pnlSidebar);
 
@@ -211,8 +217,11 @@ public class MainWindow extends javax.swing.JFrame {
     private com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu pnlMACLMenu;
     private com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu pnlSearchMenu;
     private javax.swing.JPanel pnlSidebar;
+    private com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu ratingMenu1;
     private javax.swing.JScrollPane srpGameEntries;
     private javax.swing.JScrollPane srpSidebar;
+    private com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu statusMenu1;
     private javax.swing.JTabbedPane tbpGameEntries;
+    private com.softwaredevelopment.level.up_library.YearMenu.YearMenu yearMenu1;
     // End of variables declaration//GEN-END:variables
 }

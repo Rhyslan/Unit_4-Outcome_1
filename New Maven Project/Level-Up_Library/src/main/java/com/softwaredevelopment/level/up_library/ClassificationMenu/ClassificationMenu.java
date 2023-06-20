@@ -40,6 +40,7 @@ public class ClassificationMenu extends javax.swing.JPanel {
         btnClassificationToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnClassificationToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         btnClassificationToggle.setIconTextGap(38);
+        btnClassificationToggle.setMinimumSize(new java.awt.Dimension(148, 30));
         btnClassificationToggle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClassificationToggleActionPerformed(evt);
@@ -109,7 +110,7 @@ public class ClassificationMenu extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnClassificationToggle)
+                .addComponent(btnClassificationToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlClassification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
