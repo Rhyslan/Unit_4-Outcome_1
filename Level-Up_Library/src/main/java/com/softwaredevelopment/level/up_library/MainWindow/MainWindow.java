@@ -28,17 +28,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         srpSidebar = new javax.swing.JScrollPane();
         pnlSidebar = new javax.swing.JPanel();
-        pnlSearchMenu = new com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu();
+        searchMenu1 = new com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu();
         lblFilters = new javax.swing.JLabel();
-        pnlClassificationMenu = new com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu();
-        pnlMACLMenu = new com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu();
+        classificationMenu1 = new com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu();
+        mACLMenu1 = new com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu();
         ratingMenu1 = new com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu();
         statusMenu1 = new com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu();
         yearMenu1 = new com.softwaredevelopment.level.up_library.YearMenu.YearMenu();
         tbpGameEntries = new javax.swing.JTabbedPane();
         srpGameEntries = new javax.swing.JScrollPane();
         pnlGameEntries = new javax.swing.JPanel();
-        pnlGameEntry = new com.softwaredevelopment.level.up_library.GameEntry.GameEntry();
+        gameEntry1 = new com.softwaredevelopment.level.up_library.GameEntry.GameEntry();
         mnuTitlebar = new javax.swing.JMenuBar();
         menFile = new javax.swing.JMenu();
         optSave = new javax.swing.JMenuItem();
@@ -68,7 +68,7 @@ public class MainWindow extends javax.swing.JFrame {
         pnlSidebar.setMinimumSize(new java.awt.Dimension(210, 29));
         pnlSidebar.setPreferredSize(new java.awt.Dimension(210, 458));
         pnlSidebar.setLayout(new org.jdesktop.swingx.VerticalLayout());
-        pnlSidebar.add(pnlSearchMenu);
+        pnlSidebar.add(searchMenu1);
 
         lblFilters.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFilters.setText("Filters");
@@ -78,8 +78,8 @@ public class MainWindow extends javax.swing.JFrame {
         lblFilters.setName(""); // NOI18N
         lblFilters.setPreferredSize(new java.awt.Dimension(31, 25));
         pnlSidebar.add(lblFilters);
-        pnlSidebar.add(pnlClassificationMenu);
-        pnlSidebar.add(pnlMACLMenu);
+        pnlSidebar.add(classificationMenu1);
+        pnlSidebar.add(mACLMenu1);
         pnlSidebar.add(ratingMenu1);
         pnlSidebar.add(statusMenu1);
         pnlSidebar.add(yearMenu1);
@@ -90,7 +90,7 @@ public class MainWindow extends javax.swing.JFrame {
         srpGameEntries.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         pnlGameEntries.setLayout(new org.jdesktop.swingx.VerticalLayout());
-        pnlGameEntries.add(pnlGameEntry);
+        pnlGameEntries.add(gameEntry1);
 
         srpGameEntries.setViewportView(pnlGameEntries);
 
@@ -197,7 +197,10 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu classificationMenu1;
+    private com.softwaredevelopment.level.up_library.GameEntry.GameEntry gameEntry1;
     private javax.swing.JLabel lblFilters;
+    private com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu mACLMenu1;
     private javax.swing.JMenu menFile;
     private javax.swing.JMenu menGame;
     private javax.swing.JMenu menHelp;
@@ -211,13 +214,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem optRemove;
     private javax.swing.JMenuItem optSave;
     private javax.swing.JMenuItem optUpdate;
-    private com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu pnlClassificationMenu;
     private javax.swing.JPanel pnlGameEntries;
-    private com.softwaredevelopment.level.up_library.GameEntry.GameEntry pnlGameEntry;
-    private com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu pnlMACLMenu;
-    private com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu pnlSearchMenu;
     private javax.swing.JPanel pnlSidebar;
     private com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu ratingMenu1;
+    private com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu searchMenu1;
     private javax.swing.JScrollPane srpGameEntries;
     private javax.swing.JScrollPane srpSidebar;
     private com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu statusMenu1;
