@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameList>
+	<game id="XXXX99" platform="platform">
+		<boxArt>XXXX99.png</boxArt>
+		<gameName>Xxxxxxxxxx(less than 101)</gameName>
+		<MACL>9999.9</MACL>
+		<classification>XXXXX</classification>
+		<releaseYear>YYYY</releaseYear>
+		<playStatus>XX(NP, IP, FG, FS, AB)</playStatus>
+		<personalRating>9</personalRating>
+		<notes>Xxxxxxxxxxx(less than 501)</notes>
+	</game>
+</gameList>
