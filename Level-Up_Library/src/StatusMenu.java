@@ -32,6 +32,7 @@ public class StatusMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         statusPane = new javax.swing.JPanel();
+        statusPane.setVisible(false);
         notPlaying = new javax.swing.JCheckBox();
         inProgress = new javax.swing.JCheckBox();
         finishedGame = new javax.swing.JCheckBox();
@@ -87,7 +88,7 @@ public class StatusMenu extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        statusToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Expanded.png"))); // NOI18N
+        statusToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Collapsed.png"))); // NOI18N
         statusToggle.setText("Status");
         statusToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         statusToggle.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
