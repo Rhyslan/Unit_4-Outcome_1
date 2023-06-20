@@ -4,6 +4,8 @@
  */
 package com.softwaredevelopment.level.up_library.StatusMenu;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author dylan
@@ -16,6 +18,12 @@ public class StatusMenu extends javax.swing.JPanel {
     public StatusMenu() {
         initComponents();
     }
+    
+    /**
+     * My Variables and Methods
+     */
+    public static ImageIcon icnCollapsedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Collapsed.png");
+    public static ImageIcon icnExpandedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Expanded.png");
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,6 +130,8 @@ public class StatusMenu extends javax.swing.JPanel {
 
     private void btnStatusToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusToggleActionPerformed
         pnlStatus.setVisible(!pnlStatus.isVisible());
+        if (pnlStatus.isVisible()) btnStatusToggle.setIcon(icnExpandedIcon);
+        else btnStatusToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnStatusToggleActionPerformed
 
 

@@ -12,3 +12,4 @@ Button Group: bgp
 Radio Button: rtn
 Checkbox: cbx
 JFileChooser: jfc
+Icon: icn

@@ -4,6 +4,8 @@
  */
 package com.softwaredevelopment.level.up_library.RatingMenu;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author dylan
@@ -16,6 +18,12 @@ public class RatingMenu extends javax.swing.JPanel {
     public RatingMenu() {
         initComponents();
     }
+    
+    /**
+     * My Variables and Methods
+     */
+    public static ImageIcon icnCollapsedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Collapsed.png");
+    public static ImageIcon icnExpandedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Expanded.png");
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,6 +128,8 @@ public class RatingMenu extends javax.swing.JPanel {
 
     private void btnRatingToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRatingToggleActionPerformed
         pnlRating.setVisible(!pnlRating.isVisible());
+        if (pnlRating.isVisible()) btnRatingToggle.setIcon(icnExpandedIcon);
+        else btnRatingToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnRatingToggleActionPerformed
 
 

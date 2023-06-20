@@ -4,6 +4,8 @@
  */
 package com.softwaredevelopment.level.up_library.MACLMenu;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author dylan
@@ -16,6 +18,12 @@ public class MACLMenu extends javax.swing.JPanel {
     public MACLMenu() {
         initComponents();
     }
+    
+    /**
+     * My Variables and Methods
+     */
+    public static ImageIcon icnCollapsedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Collapsed.png");
+    public static ImageIcon icnExpandedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Expanded.png");
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,6 +120,8 @@ public class MACLMenu extends javax.swing.JPanel {
 
     private void btnMACLToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMACLToggleActionPerformed
         pnlMACL.setVisible(!pnlMACL.isVisible());
+        if (pnlMACL.isVisible()) btnMACLToggle.setIcon(icnExpandedIcon);
+        else btnMACLToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnMACLToggleActionPerformed
 
 

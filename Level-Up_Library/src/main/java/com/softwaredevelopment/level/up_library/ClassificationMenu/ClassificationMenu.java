@@ -4,6 +4,8 @@
  */
 package com.softwaredevelopment.level.up_library.ClassificationMenu;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author dylan
@@ -16,6 +18,12 @@ public class ClassificationMenu extends javax.swing.JPanel {
     public ClassificationMenu() {
         initComponents();
     }
+    
+    /**
+     * My Variables and Methods
+     */
+    public static ImageIcon icnCollapsedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Collapsed.png");
+    public static ImageIcon icnExpandedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Expanded.png");
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,6 +127,8 @@ public class ClassificationMenu extends javax.swing.JPanel {
 
     private void btnClassificationToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassificationToggleActionPerformed
         pnlClassification.setVisible(!pnlClassification.isVisible());
+        if (pnlClassification.isVisible()) btnClassificationToggle.setIcon(icnExpandedIcon);
+        else btnClassificationToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnClassificationToggleActionPerformed
 
 

@@ -4,6 +4,8 @@
  */
 package com.softwaredevelopment.level.up_library.YearMenu;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author dylan
@@ -16,6 +18,12 @@ public class YearMenu extends javax.swing.JPanel {
     public YearMenu() {
         initComponents();
     }
+    
+    /**
+     * My Variables and Methods
+     */
+    public static ImageIcon icnCollapsedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Collapsed.png");
+    public static ImageIcon icnExpandedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Expanded.png");
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,6 +126,8 @@ public class YearMenu extends javax.swing.JPanel {
 
     private void btnYearToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYearToggleActionPerformed
         pnlYear.setVisible(!pnlYear.isVisible());
+        if (pnlYear.isVisible()) btnYearToggle.setIcon(icnExpandedIcon);
+        else btnYearToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnYearToggleActionPerformed
 
 

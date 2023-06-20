@@ -6,6 +6,7 @@ package com.softwaredevelopment.level.up_library.SearchMenu;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -23,6 +24,9 @@ public class SearchMenu extends javax.swing.JPanel {
     /**
      * My Variables and Methods
      */
+    public static ImageIcon icnCollapsedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Collapsed.png");
+    public static ImageIcon icnExpandedIcon = new ImageIcon("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Level-Up_Library\\src\\main\\resources\\Expanded.png");
+    
     public static String advancedPrevious = "N/A";
     
     public static String doLogicalComparisons(String strStates) {
@@ -223,6 +227,9 @@ public class SearchMenu extends javax.swing.JPanel {
         pnlSearch.setVisible(Boolean.parseBoolean(bools[0]));
         btnAdvancedToggle.setVisible(Boolean.parseBoolean(bools[0]));
         pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
+        
+        if (pnlAdvancedSearch.isVisible()) btnAdvancedToggle.setIcon(icnExpandedIcon);
+        else btnAdvancedToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnAdvancedToggleActionPerformed
 
     private void btnSearchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchToggleActionPerformed
@@ -248,6 +255,9 @@ public class SearchMenu extends javax.swing.JPanel {
         pnlSearch.setVisible(Boolean.parseBoolean(bools[0]));
         btnAdvancedToggle.setVisible(Boolean.parseBoolean(bools[0]));
         pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
+        
+        if (pnlSearch.isVisible()) btnSearchToggle.setIcon(icnExpandedIcon);
+        else btnSearchToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnSearchToggleActionPerformed
 
 
