@@ -22,6 +22,11 @@
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar1MouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar1MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar1MouseExited"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar2">
       <Properties>
@@ -29,6 +34,11 @@
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar2MouseDragged"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar2MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar2MouseExited"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar3">
       <Properties>
@@ -36,6 +46,11 @@
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar3MouseDragged"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar3MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar3MouseExited"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar4">
       <Properties>
@@ -43,6 +58,11 @@
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar4MouseDragged"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar4MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar4MouseExited"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar5">
       <Properties>
@@ -50,6 +70,11 @@
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar5MouseDragged"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar5MouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar5MouseExited"/>
+      </Events>
     </Component>
   </SubComponents>
   <LayoutCode>

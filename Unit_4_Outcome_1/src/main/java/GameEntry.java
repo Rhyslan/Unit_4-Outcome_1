@@ -27,7 +27,7 @@ public class GameEntry extends javax.swing.JPanel {
         lblMACL = new javax.swing.JLabel();
         lblRealeaseYear = new javax.swing.JLabel();
         lblPlayStatus = new javax.swing.JLabel();
-        starRating1 = new StarRating();
+        starRating2 = new StarRating();
 
         org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
         horizontalLayout1.setGap(5);
@@ -51,7 +51,7 @@ public class GameEntry extends javax.swing.JPanel {
 
         lblPlayStatus.setText("Play Status");
         add(lblPlayStatus);
-        add(starRating1);
+        add(starRating2);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -63,6 +63,6 @@ public class GameEntry extends javax.swing.JPanel {
     public javax.swing.JLabel lblMACL;
     public javax.swing.JLabel lblPlayStatus;
     public javax.swing.JLabel lblRealeaseYear;
-    private StarRating starRating1;
+    private StarRating starRating2;
     // End of variables declaration//GEN-END:variables
 }

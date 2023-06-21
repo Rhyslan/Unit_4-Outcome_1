@@ -64,7 +64,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="StarRating" name="starRating1">
+    <Component class="StarRating" name="starRating2">
     </Component>
   </SubComponents>
   <LayoutCode>
@@ -227,11 +227,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="11_starRating1">
-          <CodeVariable name="starRating1" type="8194" declaredType="StarRating"/>
+        <CodeExpression id="11_starRating2">
+          <CodeVariable name="starRating2" type="8194" declaredType="StarRating"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="starRating1"/>
+              <ComponentRef name="starRating2"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>

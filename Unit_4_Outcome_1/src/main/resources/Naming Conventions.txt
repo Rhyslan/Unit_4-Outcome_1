@@ -11,6 +11,7 @@ Menu Item: opt
 
 TabbedPane: tbp
 Text Field: txt
+Text Area: txa
 Button Group: bgp
 Radio Button: rtn
 Checkbox: cbx
@@ -20,3 +21,5 @@ Icon: icn
 
 Game Entry: gme
 Star Rating: srt
+
+JFrame: frm

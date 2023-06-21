@@ -2,6 +2,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -14,34 +15,6 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
-    }
-    
-    public ImageIcon icnCollapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
-    public ImageIcon icnExpandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
-    
-    public static String strAdvancedPrevious = "N/A";
-    
-    public static String doLogicalComparisons(String strStates) {
-        /**
-         *************KEY**************
-         * OS = Opening search
-         * CS = Closing search
-         * AWO = Advanced was open
-         * AWC = Advanced was closed
-         * SIO = Search is open
-         * OA = Opening Advanced
-         * CA = Closing advanced
-         */
-        
-        Map<String, String> finalStates = new HashMap<String, String>();
-        finalStates.put("CS, AWO", "false, false"); // Closing search, advanced was closed
-        finalStates.put("CS, AWC", "false, false"); // Closing search, advanced was open
-        finalStates.put("OS, AWO", "true, true"); // Opening search, advanced was closed
-        finalStates.put("OS, AWC", "true, false"); // Opening search, advanced was open
-        finalStates.put("SIO, OA", "true, true"); // Search is open, opening advanced
-        finalStates.put("SIO, CA", "true, false"); // Search is open, closing advanced
-        
-        return finalStates.get(strStates);
     }
 
     /**
@@ -118,14 +91,14 @@ public class MainWindow extends javax.swing.JFrame {
         lblSetMaxYear = new javax.swing.JLabel();
         lblSetMinYear = new javax.swing.JLabel();
         tbpGameEntries = new javax.swing.JTabbedPane();
-        pnlTab1 = new javax.swing.JPanel();
-        gameEntry1 = new GameEntry();
-        gameEntry2 = new GameEntry();
         pnlTab2 = new javax.swing.JPanel();
         gameEntry3 = new GameEntry();
         gameEntry4 = new GameEntry();
         gameEntry5 = new GameEntry();
         gameEntry6 = new GameEntry();
+        pnlTab1 = new javax.swing.JPanel();
+        gameEntry1 = new GameEntry();
+        gameEntry2 = new GameEntry();
         mnbTitleBar = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         optLoad = new javax.swing.JMenuItem();
@@ -144,6 +117,7 @@ public class MainWindow extends javax.swing.JFrame {
         setTitle("Level-Up Library - Main Window");
         setMaximumSize(new java.awt.Dimension(1024, 600));
         setMinimumSize(new java.awt.Dimension(1024, 600));
+        setName("MainWindow"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 600));
 
         srpSidebarScroll.setBorder(null);
@@ -654,14 +628,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         srpSidebarScroll.setViewportView(pnlSidebarInner);
 
-        org.jdesktop.swingx.VerticalLayout verticalLayout3 = new org.jdesktop.swingx.VerticalLayout();
-        verticalLayout3.setGap(5);
-        pnlTab1.setLayout(verticalLayout3);
-        pnlTab1.add(gameEntry1);
-        pnlTab1.add(gameEntry2);
-
-        tbpGameEntries.addTab("tab1", pnlTab1);
-
         org.jdesktop.swingx.VerticalLayout verticalLayout2 = new org.jdesktop.swingx.VerticalLayout();
         verticalLayout2.setGap(5);
         pnlTab2.setLayout(verticalLayout2);
@@ -671,6 +637,14 @@ public class MainWindow extends javax.swing.JFrame {
         pnlTab2.add(gameEntry6);
 
         tbpGameEntries.addTab("tab2", pnlTab2);
+
+        org.jdesktop.swingx.VerticalLayout verticalLayout3 = new org.jdesktop.swingx.VerticalLayout();
+        verticalLayout3.setGap(5);
+        pnlTab1.setLayout(verticalLayout3);
+        pnlTab1.add(gameEntry1);
+        pnlTab1.add(gameEntry2);
+
+        tbpGameEntries.addTab("tab1", pnlTab1);
 
         mnuFile.setText("File");
 
@@ -692,9 +666,19 @@ public class MainWindow extends javax.swing.JFrame {
 
         optAddNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         optAddNew.setText("Add New");
+        optAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optAddNewActionPerformed(evt);
+            }
+        });
         mnuGame.add(optAddNew);
 
         optUpdate.setText("Update");
+        optUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optUpdateActionPerformed(evt);
+            }
+        });
         mnuGame.add(optUpdate);
 
         optRemove.setText("Remove");
@@ -737,6 +721,35 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private ImageIcon icnCollapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
+    private ImageIcon icnExpandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
+    
+    private static String strAdvancedPrevious = "N/A";
+    
+    private static String doLogicalComparisons(String strStates) {
+        /**
+         *************KEY**************
+         * OS = Opening search
+         * CS = Closing search
+         * AWO = Advanced was open
+         * AWC = Advanced was closed
+         * SIO = Search is open
+         * OA = Opening Advanced
+         * CA = Closing advanced
+         */
+        
+        Map<String, String> finalStates = new HashMap<String, String>();
+        finalStates.put("CS, AWO", "false, false"); // Closing search, advanced was closed
+        finalStates.put("CS, AWC", "false, false"); // Closing search, advanced was open
+        finalStates.put("OS, AWO", "true, true"); // Opening search, advanced was closed
+        finalStates.put("OS, AWC", "true, false"); // Opening search, advanced was open
+        finalStates.put("SIO, OA", "true, true"); // Search is open, opening advanced
+        finalStates.put("SIO, CA", "true, false"); // Search is open, closing advanced
+        
+        return finalStates.get(strStates);
+    }    
+    
+    //<editor-fold defaultstate="collapsed" desc="UI Setup Functions">
     private void btnSearchMenuToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMenuToggleActionPerformed
         boolean searchState = pnlSearchMenu.isVisible();
         boolean advancedState = pnlAdvancedSearch.isVisible();
@@ -842,6 +855,20 @@ public class MainWindow extends javax.swing.JFrame {
     private void txtSetMaxYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMaxYearActionPerformed
         rslYearSlider.setSecondValue(Integer.parseInt(txtSetMaxYear.getText()));
     }//GEN-LAST:event_txtSetMaxYearActionPerformed
+    //</editor-fold>
+    
+    private void optAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optAddNewActionPerformed
+        GameDataWindow frmAddGame = new GameDataWindow();
+        frmAddGame.setTitle("Level-Up Library - Add Game");
+        frmAddGame.btnRemoveGame.setEnabled(false);
+        frmAddGame.setVisible(true);
+    }//GEN-LAST:event_optAddNewActionPerformed
+
+    private void optUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optUpdateActionPerformed
+        GameDataWindow frmAddGame = new GameDataWindow();
+        frmAddGame.setTitle("Level-Up Library - Update Game");
+        frmAddGame.setVisible(true);
+    }//GEN-LAST:event_optUpdateActionPerformed
 
     /**
      * @param args the command line arguments
