@@ -1,0 +1,22 @@
+/*  Swing Components
+Button: btn
+Label: lbl
+Panel: pnl
+ScrollPane: srp
+Range Slider: rsl
+
+Menu Bar: mnb
+Menu: mnu
+Menu Item: opt
+
+TabbedPane: tbp
+Text Field: txt
+Button Group: bgp
+Radio Button: rtn
+Checkbox: cbx
+
+JFileChooser: jfc
+Icon: icn
+
+Game Entry: gme
+Star Rating: srt
