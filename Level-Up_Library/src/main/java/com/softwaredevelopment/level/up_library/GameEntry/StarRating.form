@@ -19,35 +19,35 @@
     <Component class="javax.swing.JLabel" name="lblStar1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/DeselectedStar.png"/>
+          <Image iconType="3" name="/main/resources/DeselectedStar.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/DeselectedStar.png"/>
+          <Image iconType="3" name="/main/resources/DeselectedStar.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/DeselectedStar.png"/>
+          <Image iconType="3" name="/main/resources/DeselectedStar.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/DeselectedStar.png"/>
+          <Image iconType="3" name="/main/resources/DeselectedStar.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStar5">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/DeselectedStar.png"/>
+          <Image iconType="3" name="/main/resources/DeselectedStar.png"/>
         </Property>
       </Properties>
     </Component>

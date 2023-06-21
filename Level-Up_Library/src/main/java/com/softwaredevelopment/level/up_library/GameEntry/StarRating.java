@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.softwaredevelopment.level.up_library.GameEntry;
+package main.java.com.softwaredevelopment.level.up_library.GameEntry;
 
 /**
  *
@@ -39,19 +39,19 @@ public class StarRating extends javax.swing.JPanel {
         setLayout(horizontalLayout1);
         add(lblSpacerFront);
 
-        lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/resources/DeselectedStar.png"))); // NOI18N
         add(lblStar1);
 
-        lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/resources/DeselectedStar.png"))); // NOI18N
         add(lblStar2);
 
-        lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/resources/DeselectedStar.png"))); // NOI18N
         add(lblStar3);
 
-        lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/resources/DeselectedStar.png"))); // NOI18N
         add(lblStar4);
 
-        lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/resources/DeselectedStar.png"))); // NOI18N
         add(lblStar5);
         add(lblSpacerBack);
     }// </editor-fold>//GEN-END:initComponents

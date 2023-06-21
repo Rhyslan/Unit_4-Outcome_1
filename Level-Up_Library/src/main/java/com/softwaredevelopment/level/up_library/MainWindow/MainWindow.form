@@ -162,8 +162,6 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Component class="com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu" name="searchMenu1">
-            </Component>
             <Component class="javax.swing.JLabel" name="lblFilters">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
@@ -178,16 +176,6 @@
                   <Dimension value="[31, 25]"/>
                 </Property>
               </Properties>
-            </Component>
-            <Component class="com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu" name="classificationMenu1">
-            </Component>
-            <Component class="com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu" name="mACLMenu1">
-            </Component>
-            <Component class="com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu" name="ratingMenu1">
-            </Component>
-            <Component class="com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu" name="statusMenu1">
-            </Component>
-            <Component class="com.softwaredevelopment.level.up_library.YearMenu.YearMenu" name="yearMenu1">
             </Component>
           </SubComponents>
           <LayoutCode>
@@ -219,107 +207,11 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="3_searchMenu1">
-                  <CodeVariable name="searchMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.SearchMenu.SearchMenu"/>
-                  <ExpressionOrigin>
-                    <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="searchMenu1"/>
-                    </ExpressionProvider>
-                  </ExpressionOrigin>
-                </CodeExpression>
-              </Parameters>
-            </CodeStatement>
-            <CodeStatement>
-              <CodeExpression id="1_pnlSidebar"/>
-              <StatementProvider type="CodeMethod">
-                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-              </StatementProvider>
-              <Parameters>
-                <CodeExpression id="4_lblFilters">
+                <CodeExpression id="3_lblFilters">
                   <CodeVariable name="lblFilters" type="8194" declaredType="javax.swing.JLabel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
                       <ComponentRef name="lblFilters"/>
-                    </ExpressionProvider>
-                  </ExpressionOrigin>
-                </CodeExpression>
-              </Parameters>
-            </CodeStatement>
-            <CodeStatement>
-              <CodeExpression id="1_pnlSidebar"/>
-              <StatementProvider type="CodeMethod">
-                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-              </StatementProvider>
-              <Parameters>
-                <CodeExpression id="5_classificationMenu1">
-                  <CodeVariable name="classificationMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.ClassificationMenu.ClassificationMenu"/>
-                  <ExpressionOrigin>
-                    <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="classificationMenu1"/>
-                    </ExpressionProvider>
-                  </ExpressionOrigin>
-                </CodeExpression>
-              </Parameters>
-            </CodeStatement>
-            <CodeStatement>
-              <CodeExpression id="1_pnlSidebar"/>
-              <StatementProvider type="CodeMethod">
-                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-              </StatementProvider>
-              <Parameters>
-                <CodeExpression id="6_mACLMenu1">
-                  <CodeVariable name="mACLMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.MACLMenu.MACLMenu"/>
-                  <ExpressionOrigin>
-                    <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="mACLMenu1"/>
-                    </ExpressionProvider>
-                  </ExpressionOrigin>
-                </CodeExpression>
-              </Parameters>
-            </CodeStatement>
-            <CodeStatement>
-              <CodeExpression id="1_pnlSidebar"/>
-              <StatementProvider type="CodeMethod">
-                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-              </StatementProvider>
-              <Parameters>
-                <CodeExpression id="7_ratingMenu1">
-                  <CodeVariable name="ratingMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.RatingMenu.RatingMenu"/>
-                  <ExpressionOrigin>
-                    <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="ratingMenu1"/>
-                    </ExpressionProvider>
-                  </ExpressionOrigin>
-                </CodeExpression>
-              </Parameters>
-            </CodeStatement>
-            <CodeStatement>
-              <CodeExpression id="1_pnlSidebar"/>
-              <StatementProvider type="CodeMethod">
-                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-              </StatementProvider>
-              <Parameters>
-                <CodeExpression id="8_statusMenu1">
-                  <CodeVariable name="statusMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.StatusMenu.StatusMenu"/>
-                  <ExpressionOrigin>
-                    <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="statusMenu1"/>
-                    </ExpressionProvider>
-                  </ExpressionOrigin>
-                </CodeExpression>
-              </Parameters>
-            </CodeStatement>
-            <CodeStatement>
-              <CodeExpression id="1_pnlSidebar"/>
-              <StatementProvider type="CodeMethod">
-                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-              </StatementProvider>
-              <Parameters>
-                <CodeExpression id="9_yearMenu1">
-                  <CodeVariable name="yearMenu1" type="8194" declaredType="com.softwaredevelopment.level.up_library.YearMenu.YearMenu"/>
-                  <ExpressionOrigin>
-                    <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="yearMenu1"/>
                     </ExpressionProvider>
                   </ExpressionOrigin>
                 </CodeExpression>
@@ -349,13 +241,9 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="pnlGameEntries">
-              <SubComponents>
-                <Component class="com.softwaredevelopment.level.up_library.GameEntry.GameEntry" name="gameEntry1">
-                </Component>
-              </SubComponents>
               <LayoutCode>
                 <CodeStatement>
-                  <CodeExpression id="10_pnlGameEntries">
+                  <CodeExpression id="4_pnlGameEntries">
                     <CodeVariable name="pnlGameEntries" type="8194" declaredType="javax.swing.JPanel"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="ComponentRef">
@@ -367,26 +255,10 @@
                     <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="11">
+                    <CodeExpression id="5">
                       <ExpressionOrigin>
                         <ExpressionProvider type="CodeConstructor">
                           <CodeConstructor class="org.jdesktop.swingx.VerticalLayout" parameterTypes=""/>
-                        </ExpressionProvider>
-                      </ExpressionOrigin>
-                    </CodeExpression>
-                  </Parameters>
-                </CodeStatement>
-                <CodeStatement>
-                  <CodeExpression id="10_pnlGameEntries"/>
-                  <StatementProvider type="CodeMethod">
-                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-                  </StatementProvider>
-                  <Parameters>
-                    <CodeExpression id="12_gameEntry1">
-                      <CodeVariable name="gameEntry1" type="8194" declaredType="com.softwaredevelopment.level.up_library.GameEntry.GameEntry"/>
-                      <ExpressionOrigin>
-                        <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="gameEntry1"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>

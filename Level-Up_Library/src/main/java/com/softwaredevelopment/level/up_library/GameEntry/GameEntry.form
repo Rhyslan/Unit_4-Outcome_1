@@ -47,8 +47,6 @@
         <Property name="text" type="java.lang.String" value="Play Status"/>
       </Properties>
     </Component>
-    <Component class="com.softwaredevelopment.level.up_library.GameEntry.StarRating" name="starRating1">
-    </Component>
   </SubComponents>
   <LayoutCode>
     <CodeStatement>
@@ -199,22 +197,6 @@
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
               <ComponentRef name="lblPlayStatus"/>
-            </ExpressionProvider>
-          </ExpressionOrigin>
-        </CodeExpression>
-      </Parameters>
-    </CodeStatement>
-    <CodeStatement>
-      <CodeExpression id="3"/>
-      <StatementProvider type="CodeMethod">
-        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-      </StatementProvider>
-      <Parameters>
-        <CodeExpression id="11_starRating1">
-          <CodeVariable name="starRating1" type="8194" declaredType="com.softwaredevelopment.level.up_library.GameEntry.StarRating"/>
-          <ExpressionOrigin>
-            <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="starRating1"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>

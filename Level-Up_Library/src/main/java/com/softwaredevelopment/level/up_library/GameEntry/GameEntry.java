@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.softwaredevelopment.level.up_library.GameEntry;
+package main.java.com.softwaredevelopment.level.up_library.GameEntry;
 
 /**
  *
@@ -33,7 +33,6 @@ public class GameEntry extends javax.swing.JPanel {
         lblMACL = new javax.swing.JLabel();
         lblReleaseYear = new javax.swing.JLabel();
         lblPlayStatus = new javax.swing.JLabel();
-        starRating1 = new com.softwaredevelopment.level.up_library.GameEntry.StarRating();
 
         org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
         horizontalLayout1.setGap(5);
@@ -58,7 +57,6 @@ public class GameEntry extends javax.swing.JPanel {
 
         lblPlayStatus.setText("Play Status");
         add(lblPlayStatus);
-        add(starRating1);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -70,6 +68,5 @@ public class GameEntry extends javax.swing.JPanel {
     private javax.swing.JLabel lblPlayStatus;
     private javax.swing.JLabel lblReleaseYear;
     private javax.swing.JLabel lblSpacerFront;
-    private com.softwaredevelopment.level.up_library.GameEntry.StarRating starRating1;
     // End of variables declaration//GEN-END:variables
 }

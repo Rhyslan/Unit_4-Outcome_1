@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.softwaredevelopment.level.up_library.MACLMenu;
+package main.java.com.softwaredevelopment.level.up_library.MACLMenu;
 
 import javax.swing.ImageIcon;
 
