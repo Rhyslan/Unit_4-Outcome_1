@@ -20,49 +20,49 @@ public class GameEntry extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        frontSpacer = new javax.swing.JLabel();
-        boxArt = new javax.swing.JLabel();
-        gameName = new javax.swing.JLabel();
-        classification = new javax.swing.JLabel();
-        mACL = new javax.swing.JLabel();
-        realeaseYear = new javax.swing.JLabel();
-        playStatus = new javax.swing.JLabel();
-        starRating = new StarRating();
+        lblFrontSpacer = new javax.swing.JLabel();
+        lblBoxArt = new javax.swing.JLabel();
+        lblGameName = new javax.swing.JLabel();
+        lblClassification = new javax.swing.JLabel();
+        lblMACL = new javax.swing.JLabel();
+        lblRealeaseYear = new javax.swing.JLabel();
+        lblPlayStatus = new javax.swing.JLabel();
+        starRating2 = new StarRating();
 
         org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
         horizontalLayout1.setGap(5);
         setLayout(horizontalLayout1);
-        add(frontSpacer);
+        add(lblFrontSpacer);
 
-        boxArt.setText("Box Art");
-        add(boxArt);
+        lblBoxArt.setText("Box Art");
+        add(lblBoxArt);
 
-        gameName.setText("Title");
-        add(gameName);
+        lblGameName.setText("Title");
+        add(lblGameName);
 
-        classification.setText("Classification");
-        add(classification);
+        lblClassification.setText("Classification");
+        add(lblClassification);
 
-        mACL.setText("MACL");
-        add(mACL);
+        lblMACL.setText("MACL");
+        add(lblMACL);
 
-        realeaseYear.setText("Release Year");
-        add(realeaseYear);
+        lblRealeaseYear.setText("Release Year");
+        add(lblRealeaseYear);
 
-        playStatus.setText("Play Status");
-        add(playStatus);
-        add(starRating);
+        lblPlayStatus.setText("Play Status");
+        add(lblPlayStatus);
+        add(starRating2);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel boxArt;
-    public javax.swing.JLabel classification;
-    private javax.swing.JLabel frontSpacer;
-    public javax.swing.JLabel gameName;
-    public javax.swing.JLabel mACL;
-    public javax.swing.JLabel playStatus;
-    public javax.swing.JLabel realeaseYear;
-    private StarRating starRating;
+    public javax.swing.JLabel lblBoxArt;
+    public javax.swing.JLabel lblClassification;
+    private javax.swing.JLabel lblFrontSpacer;
+    public javax.swing.JLabel lblGameName;
+    public javax.swing.JLabel lblMACL;
+    public javax.swing.JLabel lblPlayStatus;
+    public javax.swing.JLabel lblRealeaseYear;
+    private StarRating starRating2;
     // End of variables declaration//GEN-END:variables
 }

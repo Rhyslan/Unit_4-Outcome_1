@@ -91,12 +91,12 @@ public class MainWindow extends javax.swing.JFrame {
         lblSetMaxYear = new javax.swing.JLabel();
         lblSetMinYear = new javax.swing.JLabel();
         tbpGameEntries = new javax.swing.JTabbedPane();
-        tab2 = new javax.swing.JPanel();
+        pnlTab2 = new javax.swing.JPanel();
         gameEntry3 = new GameEntry();
         gameEntry4 = new GameEntry();
         gameEntry5 = new GameEntry();
         gameEntry6 = new GameEntry();
-        tab1 = new javax.swing.JPanel();
+        pnlTab1 = new javax.swing.JPanel();
         gameEntry1 = new GameEntry();
         gameEntry2 = new GameEntry();
         mnbTitleBar = new javax.swing.JMenuBar();
@@ -630,21 +630,21 @@ public class MainWindow extends javax.swing.JFrame {
 
         org.jdesktop.swingx.VerticalLayout verticalLayout2 = new org.jdesktop.swingx.VerticalLayout();
         verticalLayout2.setGap(5);
-        tab2.setLayout(verticalLayout2);
-        tab2.add(gameEntry3);
-        tab2.add(gameEntry4);
-        tab2.add(gameEntry5);
-        tab2.add(gameEntry6);
+        pnlTab2.setLayout(verticalLayout2);
+        pnlTab2.add(gameEntry3);
+        pnlTab2.add(gameEntry4);
+        pnlTab2.add(gameEntry5);
+        pnlTab2.add(gameEntry6);
 
-        tbpGameEntries.addTab("tab2", tab2);
+        tbpGameEntries.addTab("tab2", pnlTab2);
 
         org.jdesktop.swingx.VerticalLayout verticalLayout3 = new org.jdesktop.swingx.VerticalLayout();
         verticalLayout3.setGap(5);
-        tab1.setLayout(verticalLayout3);
-        tab1.add(gameEntry1);
-        tab1.add(gameEntry2);
+        pnlTab1.setLayout(verticalLayout3);
+        pnlTab1.add(gameEntry1);
+        pnlTab1.add(gameEntry2);
 
-        tbpGameEntries.addTab("tab1", tab1);
+        tbpGameEntries.addTab("tab1", pnlTab1);
 
         mnuFile.setText("File");
 
@@ -721,12 +721,12 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private ImageIcon collapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
-    private ImageIcon expandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
+    private ImageIcon icnCollapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
+    private ImageIcon icnExpandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
     
     private static String strAdvancedPrevious = "N/A";
     
-    private static String determineSearchVisibility(String strStates) {
+    private static String doLogicalComparisons(String strStates) {
         /**
          *************KEY**************
          * OS = Opening search
@@ -764,7 +764,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         if (searchCode == "OS") advancedCode = strAdvancedPrevious;
         
-        String newStates = determineSearchVisibility(searchCode + ", " + advancedCode);
+        String newStates = doLogicalComparisons(searchCode + ", " + advancedCode);
         
         strAdvancedPrevious = advancedCode;
         
@@ -774,8 +774,8 @@ public class MainWindow extends javax.swing.JFrame {
         btnAdvancedSearchToggle.setVisible(Boolean.parseBoolean(bools[0]));
         pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
         
-        if (pnlSearchMenu.isVisible()) btnSearchMenuToggle.setIcon(expandedIcon);
-        else btnSearchMenuToggle.setIcon(collapsedIcon);
+        if (pnlSearchMenu.isVisible()) btnSearchMenuToggle.setIcon(icnExpandedIcon);
+        else btnSearchMenuToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnSearchMenuToggleActionPerformed
 
     private void btnAdvancedSearchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdvancedSearchToggleActionPerformed
@@ -788,7 +788,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         strAdvancedPrevious = advancedCode;
         
-        String newStates = determineSearchVisibility(searchCode + ", " + advancedCode);
+        String newStates = doLogicalComparisons(searchCode + ", " + advancedCode);
         
         String[] bools = newStates.split(", ");
         
@@ -796,38 +796,38 @@ public class MainWindow extends javax.swing.JFrame {
         btnAdvancedSearchToggle.setVisible(Boolean.parseBoolean(bools[0]));
         pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
         
-        if (pnlAdvancedSearch.isVisible()) btnAdvancedSearchToggle.setIcon(expandedIcon);
-        else btnAdvancedSearchToggle.setIcon(collapsedIcon);
+        if (pnlAdvancedSearch.isVisible()) btnAdvancedSearchToggle.setIcon(icnExpandedIcon);
+        else btnAdvancedSearchToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnAdvancedSearchToggleActionPerformed
 
     private void btnClassificationToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassificationToggleActionPerformed
         pnlClassificationFilter.setVisible(!pnlClassificationFilter.isVisible());
-        if (pnlClassificationFilter.isVisible()) btnClassificationToggle.setIcon(expandedIcon);
-        else btnClassificationToggle.setIcon(collapsedIcon);
+        if (pnlClassificationFilter.isVisible()) btnClassificationToggle.setIcon(icnExpandedIcon);
+        else btnClassificationToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnClassificationToggleActionPerformed
 
     private void btnMACLToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMACLToggleActionPerformed
         pnlMACLFilter.setVisible(!pnlMACLFilter.isVisible());
-        if (pnlMACLFilter.isVisible()) btnMACLToggle.setIcon(expandedIcon);
-        else btnMACLToggle.setIcon(collapsedIcon);
+        if (pnlMACLFilter.isVisible()) btnMACLToggle.setIcon(icnExpandedIcon);
+        else btnMACLToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnMACLToggleActionPerformed
 
     private void btnRatingToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRatingToggleActionPerformed
         pnlRatingFilter.setVisible(!pnlRatingFilter.isVisible());
-        if (pnlRatingFilter.isVisible()) btnRatingToggle.setIcon(expandedIcon);
-        else btnRatingToggle.setIcon(collapsedIcon);
+        if (pnlRatingFilter.isVisible()) btnRatingToggle.setIcon(icnExpandedIcon);
+        else btnRatingToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnRatingToggleActionPerformed
 
     private void btnStatusToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusToggleActionPerformed
         pnlStatusFilter.setVisible(!pnlStatusFilter.isVisible());
-        if (pnlStatusFilter.isVisible()) btnStatusToggle.setIcon(expandedIcon);
-        else btnStatusToggle.setIcon(collapsedIcon);
+        if (pnlStatusFilter.isVisible()) btnStatusToggle.setIcon(icnExpandedIcon);
+        else btnStatusToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnStatusToggleActionPerformed
 
     private void btnYearToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYearToggleActionPerformed
         pnlYearFilter.setVisible(!pnlYearFilter.isVisible());
-        if (pnlYearFilter.isVisible()) btnYearToggle.setIcon(expandedIcon);
-        else btnYearToggle.setIcon(collapsedIcon);
+        if (pnlYearFilter.isVisible()) btnYearToggle.setIcon(icnExpandedIcon);
+        else btnYearToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnYearToggleActionPerformed
 
     private void rslMACLSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rslMACLSliderStateChanged
@@ -968,14 +968,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSearchMenu;
     private javax.swing.JPanel pnlSidebarInner;
     private javax.swing.JPanel pnlStatusFilter;
+    private javax.swing.JPanel pnlTab1;
+    private javax.swing.JPanel pnlTab2;
     private javax.swing.JPanel pnlYearFilter;
     private JRangeSlider rslMACLSlider;
     private JRangeSlider rslYearSlider;
     private javax.swing.JRadioButton rtnNotesCategory;
     private javax.swing.JRadioButton rtnTitleCategory;
     private javax.swing.JScrollPane srpSidebarScroll;
-    private javax.swing.JPanel tab1;
-    private javax.swing.JPanel tab2;
     private javax.swing.JTabbedPane tbpGameEntries;
     private javax.swing.JTextField txtSearchQuery;
     private javax.swing.JTextField txtSetMaxMACL;
