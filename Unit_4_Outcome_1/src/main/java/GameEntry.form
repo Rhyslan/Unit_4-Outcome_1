@@ -14,9 +14,9 @@
     <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,0,88,0,0,2,-92"/>
   </AuxValues>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblFrontSpacer">
+    <Component class="javax.swing.JLabel" name="frontSpacer">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblBoxArt">
+    <Component class="javax.swing.JLabel" name="boxArt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Box Art"/>
       </Properties>
@@ -24,7 +24,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblGameName">
+    <Component class="javax.swing.JLabel" name="gameName">
       <Properties>
         <Property name="text" type="java.lang.String" value="Title"/>
       </Properties>
@@ -32,7 +32,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblClassification">
+    <Component class="javax.swing.JLabel" name="classification">
       <Properties>
         <Property name="text" type="java.lang.String" value="Classification"/>
       </Properties>
@@ -40,7 +40,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblMACL">
+    <Component class="javax.swing.JLabel" name="mACL">
       <Properties>
         <Property name="text" type="java.lang.String" value="MACL"/>
       </Properties>
@@ -48,7 +48,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblRealeaseYear">
+    <Component class="javax.swing.JLabel" name="realeaseYear">
       <Properties>
         <Property name="text" type="java.lang.String" value="Release Year"/>
       </Properties>
@@ -56,7 +56,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPlayStatus">
+    <Component class="javax.swing.JLabel" name="playStatus">
       <Properties>
         <Property name="text" type="java.lang.String" value="Play Status"/>
       </Properties>
@@ -64,7 +64,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="StarRating" name="starRating2">
+    <Component class="StarRating" name="starRating">
     </Component>
   </SubComponents>
   <LayoutCode>
@@ -115,11 +115,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="4_lblFrontSpacer">
-          <CodeVariable name="lblFrontSpacer" type="8194" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="4_frontSpacer">
+          <CodeVariable name="frontSpacer" type="8194" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblFrontSpacer"/>
+              <ComponentRef name="frontSpacer"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -131,11 +131,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="5_lblBoxArt">
-          <CodeVariable name="lblBoxArt" type="8193" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="5_boxArt">
+          <CodeVariable name="boxArt" type="8193" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblBoxArt"/>
+              <ComponentRef name="boxArt"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -147,11 +147,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="6_lblGameName">
-          <CodeVariable name="lblGameName" type="8193" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="6_gameName">
+          <CodeVariable name="gameName" type="8193" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblGameName"/>
+              <ComponentRef name="gameName"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -163,11 +163,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="7_lblClassification">
-          <CodeVariable name="lblClassification" type="8193" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="7_classification">
+          <CodeVariable name="classification" type="8193" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblClassification"/>
+              <ComponentRef name="classification"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -179,11 +179,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="8_lblMACL">
-          <CodeVariable name="lblMACL" type="8193" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="8_mACL">
+          <CodeVariable name="mACL" type="8193" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblMACL"/>
+              <ComponentRef name="mACL"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -195,11 +195,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="9_lblRealeaseYear">
-          <CodeVariable name="lblRealeaseYear" type="8193" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="9_realeaseYear">
+          <CodeVariable name="realeaseYear" type="8193" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblRealeaseYear"/>
+              <ComponentRef name="realeaseYear"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -211,11 +211,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="10_lblPlayStatus">
-          <CodeVariable name="lblPlayStatus" type="8193" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="10_playStatus">
+          <CodeVariable name="playStatus" type="8193" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblPlayStatus"/>
+              <ComponentRef name="playStatus"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -227,11 +227,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="11_starRating2">
-          <CodeVariable name="starRating2" type="8194" declaredType="StarRating"/>
+        <CodeExpression id="11_starRating">
+          <CodeVariable name="starRating" type="8194" declaredType="StarRating"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="starRating2"/>
+              <ComponentRef name="starRating"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
