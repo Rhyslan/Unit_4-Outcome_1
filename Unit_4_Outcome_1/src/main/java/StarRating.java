@@ -127,7 +127,7 @@ public class StarRating extends javax.swing.JPanel {
     }//GEN-LAST:event_lblStar1MouseEntered
 
     private void lblStar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar1MouseExited
-        if (booIsSelector == true) {
+        if (booIsSelector == true & intSelectedRating != 1) {
             lblStar1.setIcon(icnDeselectedIcon);
         }
     }//GEN-LAST:event_lblStar1MouseExited
@@ -140,7 +140,7 @@ public class StarRating extends javax.swing.JPanel {
     }//GEN-LAST:event_lblStar2MouseEntered
 
     private void lblStar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar2MouseExited
-        if (booIsSelector == true) {
+        if (booIsSelector == true & intSelectedRating != 2) {
             lblStar1.setIcon(icnDeselectedIcon);
             lblStar2.setIcon(icnDeselectedIcon);
         }
@@ -155,7 +155,7 @@ public class StarRating extends javax.swing.JPanel {
     }//GEN-LAST:event_lblStar3MouseEntered
 
     private void lblStar3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar3MouseExited
-        if (booIsSelector == true) {
+        if (booIsSelector == true  & intSelectedRating != 3) {
             lblStar1.setIcon(icnDeselectedIcon);
             lblStar2.setIcon(icnDeselectedIcon);
             lblStar3.setIcon(icnDeselectedIcon);
@@ -172,7 +172,7 @@ public class StarRating extends javax.swing.JPanel {
     }//GEN-LAST:event_lblStar4MouseEntered
 
     private void lblStar4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar4MouseExited
-        if (booIsSelector == true) {
+        if (booIsSelector == true  & intSelectedRating != 4) {
             lblStar1.setIcon(icnDeselectedIcon);
             lblStar2.setIcon(icnDeselectedIcon);
             lblStar3.setIcon(icnDeselectedIcon);
@@ -191,7 +191,7 @@ public class StarRating extends javax.swing.JPanel {
     }//GEN-LAST:event_lblStar5MouseEntered
 
     private void lblStar5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar5MouseExited
-        if (booIsSelector == true) {
+        if (booIsSelector == true  & intSelectedRating != 5) {
             lblStar1.setIcon(icnDeselectedIcon);
             lblStar2.setIcon(icnDeselectedIcon);
             lblStar3.setIcon(icnDeselectedIcon);

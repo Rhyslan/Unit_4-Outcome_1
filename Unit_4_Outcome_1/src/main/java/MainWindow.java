@@ -1,8 +1,25 @@
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -650,6 +667,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         optLoad.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         optLoad.setText("Load");
+        optLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optLoadActionPerformed(evt);
+            }
+        });
         mnuFile.add(optLoad);
 
         optSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -869,6 +891,75 @@ public class MainWindow extends javax.swing.JFrame {
         frmAddGame.setTitle("Level-Up Library - Update Game");
         frmAddGame.setVisible(true);
     }//GEN-LAST:event_optUpdateActionPerformed
+
+    private void optLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optLoadActionPerformed
+        JFileChooser jfcFileBrowser = new JFileChooser(System.getProperty("user.dir") + "\\src\\main\\resources\\");
+        jfcFileBrowser.setSelectedFile(new File("database.xml"));
+        jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
+        jfcFileBrowser.setAcceptAllFileFilterUsed(false);
+        int intResponse=  jfcFileBrowser.showOpenDialog(null);
+        Path pthRecordFilePath = null;
+        
+        if (intResponse == JFileChooser.APPROVE_OPTION) {
+            pthRecordFilePath = Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
+        }
+        else {
+            return;
+        }
+        
+        // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
+        String[][] gameData = new String[2][10];
+        
+        //<editor-fold defaultstate="collapsed" desc="XML Loading">
+        
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = builder.parse(new File(pthRecordFilePath.toString()));
+            doc.getDocumentElement().normalize();
+            
+            Element root = doc.getDocumentElement();
+            
+            NodeList nodeList = root.getChildNodes();
+            
+            int a = 0;
+            int b = 2;
+            
+            for (int i=0; i<gameData[0].length-1;i++) {
+                Node current = nodeList.item(i);
+                if (current != null && current.getNodeType() == Node.ELEMENT_NODE) {
+                    NamedNodeMap attrList = current.getAttributes();
+                
+                    for (int j=0;j<attrList.getLength();j++) {
+                        gameData[i-(i-a)][j] = attrList.item(j).getNodeValue();
+                    }
+                
+                    NodeList childList = current.getChildNodes();
+                    Node child;
+
+                    for (int k=0; k<childList.getLength()-1; k++) {
+                        child = childList.item(k);
+                        if (child.getNodeType() == Node.ELEMENT_NODE) {
+                            gameData[i-(i-a)][b] = child.getTextContent();
+                            //System.out.println(child.setGetContent());
+                            b++;
+                        }
+                    }
+                    b = 2;
+                    a++;
+                }
+            }
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (int l = 0; l < gameData.length; l++) {
+            for (int m = 0; m < 10; m++) {
+                System.out.println(gameData[l][m]);
+            }
+        }
+        
+        //</editor-fold>
+    }//GEN-LAST:event_optLoadActionPerformed
 
     /**
      * @param args the command line arguments
