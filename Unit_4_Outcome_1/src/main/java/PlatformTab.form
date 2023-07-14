@@ -16,7 +16,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JScrollPane" name="srpTab1">
+    <Container class="javax.swing.JScrollPane" name="tabScroll">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
@@ -28,12 +28,12 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="pnlTab1">
+        <Container class="javax.swing.JPanel" name="tabMainPanel">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="topSpacer">
             </Component>
           </SubComponents>
           <LayoutCode>
@@ -64,11 +64,11 @@
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="3_pnlTab1">
-                <CodeVariable name="pnlTab1" type="8193" declaredType="javax.swing.JPanel"/>
+              <CodeExpression id="3_tabMainPanel">
+                <CodeVariable name="tabMainPanel" type="8193" declaredType="javax.swing.JPanel"/>
                 <ExpressionOrigin>
                   <ExpressionProvider type="ComponentRef">
-                    <ComponentRef name="pnlTab1"/>
+                    <ComponentRef name="tabMainPanel"/>
                   </ExpressionProvider>
                 </ExpressionOrigin>
               </CodeExpression>
@@ -80,16 +80,16 @@
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="3_pnlTab1"/>
+              <CodeExpression id="3_tabMainPanel"/>
               <StatementProvider type="CodeMethod">
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="4_jLabel1">
-                  <CodeVariable name="jLabel1" type="8194" declaredType="javax.swing.JLabel"/>
+                <CodeExpression id="4_topSpacer">
+                  <CodeVariable name="topSpacer" type="8194" declaredType="javax.swing.JLabel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="jLabel1"/>
+                      <ComponentRef name="topSpacer"/>
                     </ExpressionProvider>
                   </ExpressionOrigin>
                 </CodeExpression>

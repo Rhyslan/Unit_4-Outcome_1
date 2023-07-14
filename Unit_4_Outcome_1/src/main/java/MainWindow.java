@@ -1,6 +1,4 @@
 
-import java.awt.Color;
-import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -721,7 +719,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     private static String strAdvancedPrevious = "N/A";
     
-    private static String doLogicalComparisons(String strStates) {
+    private static String doLogicalComparisons(String strStates) {      // TODO: Rename method
         /**
          *************KEY**************
          * OS = Opening search
@@ -733,15 +731,15 @@ public class MainWindow extends javax.swing.JFrame {
          * CA = Closing advanced
          */
         
-        Map<String, String> finalStates = new HashMap<>();
-        finalStates.put("CS, AWO", "false, false"); // Closing search, advanced was closed
-        finalStates.put("CS, AWC", "false, false"); // Closing search, advanced was open
-        finalStates.put("OS, AWO", "true, true"); // Opening search, advanced was closed
-        finalStates.put("OS, AWC", "true, false"); // Opening search, advanced was open
-        finalStates.put("SIO, OA", "true, true"); // Search is open, opening advanced
-        finalStates.put("SIO, CA", "true, false"); // Search is open, closing advanced
+        Map<String, String> mapFinalStates = new HashMap<>();
+        mapFinalStates.put("CS, AWO", "false, false"); // Closing search, advanced was closed
+        mapFinalStates.put("CS, AWC", "false, false"); // Closing search, advanced was open
+        mapFinalStates.put("OS, AWO", "true, true"); // Opening search, advanced was closed
+        mapFinalStates.put("OS, AWC", "true, false"); // Opening search, advanced was open
+        mapFinalStates.put("SIO, OA", "true, true"); // Search is open, opening advanced
+        mapFinalStates.put("SIO, CA", "true, false"); // Search is open, closing advanced
         
-        return finalStates.get(strStates);
+        return mapFinalStates.get(strStates);
     }    
     
     //<editor-fold defaultstate="collapsed" desc="UI Setup Functions">
@@ -853,16 +851,16 @@ public class MainWindow extends javax.swing.JFrame {
     //</editor-fold>
     
     private void optAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optAddNewActionPerformed
-        GameDataWindow frmAddGame = new GameDataWindow();
-        frmAddGame.setTitle("Level-Up Library - Add Game");
-        frmAddGame.btnRemoveGame.setEnabled(false);
-        frmAddGame.setVisible(true);
+        GameDataWindow winAddGame = new GameDataWindow();
+        winAddGame.setTitle("Level-Up Library - Add Game");
+        winAddGame.btnRemoveGame.setEnabled(false);
+        winAddGame.setVisible(true);
     }//GEN-LAST:event_optAddNewActionPerformed
 
     private void optUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optUpdateActionPerformed
-        GameDataWindow frmAddGame = new GameDataWindow();
-        frmAddGame.setTitle("Level-Up Library - Update Game");
-        frmAddGame.setVisible(true);
+        GameDataWindow winAddGame = new GameDataWindow();
+        winAddGame.setTitle("Level-Up Library - Update Game");
+        winAddGame.setVisible(true);
     }//GEN-LAST:event_optUpdateActionPerformed
 
     private void optLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optLoadActionPerformed
@@ -882,95 +880,95 @@ public class MainWindow extends javax.swing.JFrame {
         
         //<editor-fold defaultstate="collapsed" desc="XML Loading">
         
-        String[][] gameData = null;
-        int numberOfPlatforms = 0;
+        String[][] smaGameData = null;
+        int intPlatformCount = 0;
         
         try {
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document doc = builder.parse(new File(pthRecordFilePath.toString()));
-            doc.getDocumentElement().normalize();
+            DocumentBuilder dcbBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document docXMLFile = dcbBuilder.parse(new File(pthRecordFilePath.toString()));
+            docXMLFile.getDocumentElement().normalize();
             
-            Element root = doc.getDocumentElement();
+            Element elmRoot = docXMLFile.getDocumentElement();
             
-            NodeList nodeList = root.getChildNodes();
+            NodeList ndlEntryNodes = elmRoot.getChildNodes();
             
             // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
-            gameData = new String[nodeList.getLength()/2][10];
+            smaGameData = new String[ndlEntryNodes.getLength()/2][10];
             
-            int a = 0;
-            int b = 2;
+            int intIncrementNoSkip = 0;
+            int intNumberAfterAttr = 2;
             
-            for (int i=0; i<gameData[0].length-1;i++) {
-                Node current = nodeList.item(i);
-                if (current != null && current.getNodeType() == Node.ELEMENT_NODE) {
-                    NamedNodeMap attrList = current.getAttributes();
+            for (int i=0; i<smaGameData[0].length-1;i++) {
+                Node nodCurrent = ndlEntryNodes.item(i);
+                if (nodCurrent != null && nodCurrent.getNodeType() == Node.ELEMENT_NODE) {
+                    NamedNodeMap nnmAttrList = nodCurrent.getAttributes();
                 
-                    for (int j=0;j<attrList.getLength();j++) {
-                        gameData[i-(i-a)][j] = attrList.item(j).getNodeValue();
+                    for (int j=0;j<nnmAttrList.getLength();j++) {
+                        smaGameData[i-(i-intIncrementNoSkip)][j] = nnmAttrList.item(j).getNodeValue();
                     }
                 
-                    NodeList childList = current.getChildNodes();
-                    Node child;
+                    NodeList ndlDataList = nodCurrent.getChildNodes();
+                    Node nodCurrentChild;
 
-                    for (int k=0; k<childList.getLength()-1; k++) {
-                        child = childList.item(k);
-                        if (child.getNodeType() == Node.ELEMENT_NODE) {
-                            gameData[i-(i-a)][b] = child.getTextContent();
-                            b++;
+                    for (int k=0; k<ndlDataList.getLength()-1; k++) {
+                        nodCurrentChild = ndlDataList.item(k);
+                        if (nodCurrentChild.getNodeType() == Node.ELEMENT_NODE) {
+                            smaGameData[i-(i-intIncrementNoSkip)][intNumberAfterAttr] = nodCurrentChild.getTextContent();
+                            intNumberAfterAttr++;
                         }
                     }
-                    b = 2;
-                    a++;
+                    intNumberAfterAttr = 2;
+                    intIncrementNoSkip++;
                 }
             }
-            numberOfPlatforms = Integer.parseInt(root.getAttributes().item(0).getTextContent());
-        } catch (ParserConfigurationException | SAXException | IOException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            intPlatformCount = Integer.parseInt(elmRoot.getAttributes().item(0).getTextContent());
+        } catch (ParserConfigurationException | SAXException | IOException exc) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, exc);
         }
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="Add data to UI">
         
-        Map<String, PlatformTab> platformTabs = new HashMap<>();
-        String[] platformList = new String[numberOfPlatforms];
-        boolean visited[] = new boolean[gameData.length];
-        Arrays.fill(visited, false);
-        int count_dis=0;
+        Map<String, PlatformTab> mapPlatformTabs = new HashMap<>();
+        String[] sarPlatformList = new String[intPlatformCount];
+        boolean barVisited[] = new boolean[smaGameData.length];
+        Arrays.fill(barVisited, false);
+        int intDistinct=0;
         // Traverse through array elements and
         // count frequencies
-        for (int i = 0; i < gameData.length; i++) {
+        for (int i = 0; i < smaGameData.length; i++) {
             // Skip this element if already processed
-            if (visited[i] == true)
+            if (barVisited[i] == true)
                continue;
            
-            for (int j = i + 1; j < gameData.length; j++) {
-                if (gameData[i][1].equals(gameData[j][1])) {
-                   visited[j] = true;
+            for (int j = i + 1; j < smaGameData.length; j++) {
+                if (smaGameData[i][1].equals(smaGameData[j][1])) {
+                   barVisited[j] = true;
                 }
             }
-            count_dis = count_dis+1;
-            platformList[count_dis-1] = gameData[i][1];
-            platformTabs.put(platformList[count_dis-1], new PlatformTab());
+            intDistinct = intDistinct+1;
+            sarPlatformList[intDistinct-1] = smaGameData[i][1];
+            mapPlatformTabs.put(sarPlatformList[intDistinct-1], new PlatformTab());
         }
         
-        for (int j=0;j<count_dis;j++) {
-            tbpGameEntries.addTab(platformList[j], platformTabs.get(platformList[j]));
+        for (int j=0;j<intDistinct;j++) {
+            tbpGameEntries.addTab(sarPlatformList[j], mapPlatformTabs.get(sarPlatformList[j]));
         }
         
-        Map<String, Map> platformEntries = new HashMap<>();
+        Map<String, Map> mapPlatforms = new HashMap<>();
         
-        for (int i=0;i<platformList.length;i++) {
-            Map<String, GameEntry> gameEntries = new HashMap<>();
-            platformEntries.put(platformList[i], gameEntries);
+        for (int i=0;i<sarPlatformList.length;i++) {
+            Map<String, GameEntry> mapGames = new HashMap<>();
+            mapPlatforms.put(sarPlatformList[i], mapGames);
         }
         
-        for (int i=0;i<gameData.length;i++) {
-            Map<String, GameEntry> currentPlatform = platformEntries.get(gameData[i][1]);
-            currentPlatform.put(gameData[i][0], new GameEntry());
-            GameEntry currentGame = currentPlatform.get(gameData[i][0]);
-            currentGame.SetFields(gameData[i]);
-            PlatformTab tab = platformTabs.get(gameData[i][1]);
-            tab.pnlTab1.add(currentGame);
+        for (int i=0;i<smaGameData.length;i++) {
+            Map<String, GameEntry> mapCurrentPlatform = mapPlatforms.get(smaGameData[i][1]);
+            mapCurrentPlatform.put(smaGameData[i][0], new GameEntry());
+            GameEntry gmeCurrentGame = mapCurrentPlatform.get(smaGameData[i][0]);
+            gmeCurrentGame.setFields(smaGameData[i]);
+            PlatformTab pmtCurrentTab = mapPlatformTabs.get(smaGameData[i][1]);
+            pmtCurrentTab.tabMainPanel.add(gmeCurrentGame);
         }
         
         //</editor-fold>

@@ -1,25 +1,70 @@
-/*  Swing Components
-Button: btn
-Label: lbl
-Panel: pnl
-ScrollPane: srp
-Range Slider: rsl
+**Swing Components**
+btn - JButton
+chk - JCheckBox
+clr - JColorChooser
+cmb - JComboBox
+ico - JDesktopIcon
+edt - JEditorPane
+fch - JFileChooser
+ifr - JInternalFrame
+lbl - JLabel
+lyp - JLayeredPane
+lst - JList
+mnu - JMenuBar
+mni - JMenuItem
+opt - JOptionPane
+pnl - JPanel
+pmn - JPopupMenu
+prg - JProgressBar
+rad - JRadioButton
+rot - JRootPane
+scb - JScollBar
+scr - JScrollPane
+spr - JSeparator
+sld - JSlider
+spn - JSpinner
+spl - JSplitPane
+tab - JTabbedPaneJTable
+tbl - JTable
+tbh - JTableHeader
+txa - JTextArea
+txt - JTextField
+txp - JTextPane
+tgl - JToggleButton
+tlb - JToolBar
+tlt - JToolTip
+tre - JTree
+vpr - JViewport
+win - JWindow and descendants (JFrame, JDialog, JFileDialog)
 
-Menu Bar: mnb
-Menu: mnu
-Menu Item: opt
+**Data Types**
+int - Integer
+flt - Float
+chr - Character
+bln - Boolean
+str - String
+*ar - (Data type) Array
+*ma - (Data type) Muli-dimensional array
+map - Map/HashMap
 
-TabbedPane: tbp
-Text Field: txt
-Text Area: txa
-Button Group: bgp
-Radio Button: rtn
-Checkbox: cbx
+**Files**
+icn - Image icon
+jfc - JFileChooser
+pth - Path
 
-JFileChooser: jfc
-Icon: icn
+**XML**
+dcb - Document Builder
+doc - Document
+elm - Element
+ndl - NodeList
+nod - Node
+nnm - Named Node Map
 
-Game Entry: gme
-Star Rating: srt
+**Other**
+exc - exception
 
-JFrame: frm
+**Objects**
+srt - Star Rating
+gme - Game Entry
+pmt - Platform Tab
+gdw - Game Data Window (add/update)

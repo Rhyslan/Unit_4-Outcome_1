@@ -303,7 +303,7 @@ public class StarRating extends javax.swing.JPanel {
                 lblStar3.setIcon(icnDeselectedIcon);
                 lblStar4.setIcon(icnDeselectedIcon);
                 lblStar5.setIcon(icnDeselectedIcon);
-                System.out.println("switch did not work");
+                System.err.println("Rating setter did not work");
         }
     }
     

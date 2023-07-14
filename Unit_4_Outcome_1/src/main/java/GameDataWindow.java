@@ -24,21 +24,21 @@ public class GameDataWindow extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         txtGameName = new javax.swing.JTextField();
         lblPlatform = new javax.swing.JLabel();
-        cbxPlatformSelector = new javax.swing.JComboBox<>();
+        cmbPlatformSelector = new javax.swing.JComboBox<>();
         lblBoxArt = new javax.swing.JLabel();
         lblBoxArtImage = new javax.swing.JLabel();
         btnLoadImage = new javax.swing.JButton();
         btnRemoveImage = new javax.swing.JButton();
         lblReleaseYear = new javax.swing.JLabel();
-        cbxReleaseYearSelector = new javax.swing.JComboBox<>();
+        cmbReleaseYearSelector = new javax.swing.JComboBox<>();
         lblPlayStatus = new javax.swing.JLabel();
-        cbxPlayStatus = new javax.swing.JComboBox<>();
+        cmbPlayStatus = new javax.swing.JComboBox<>();
         lblRating = new javax.swing.JLabel();
         btnRemoveGame = new javax.swing.JButton();
-        srpNotes = new javax.swing.JScrollPane();
+        scrNotes = new javax.swing.JScrollPane();
         txaNotes = new javax.swing.JTextArea();
         lblClassification = new javax.swing.JLabel();
-        cbxClassificationSelector = new javax.swing.JComboBox<>();
+        cmbClassificationSelector = new javax.swing.JComboBox<>();
         lblMACL = new javax.swing.JLabel();
         txtMACLEntry = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
@@ -55,8 +55,8 @@ public class GameDataWindow extends javax.swing.JFrame {
 
         lblPlatform.setText("Platform:");
 
-        cbxPlatformSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxPlatformSelector.setPreferredSize(new java.awt.Dimension(150, 22));
+        cmbPlatformSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbPlatformSelector.setPreferredSize(new java.awt.Dimension(150, 22));
 
         lblBoxArt.setText("Box Art Image:");
 
@@ -73,12 +73,12 @@ public class GameDataWindow extends javax.swing.JFrame {
 
         lblReleaseYear.setText("Release Year:");
 
-        cbxReleaseYearSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxReleaseYearSelector.setPreferredSize(new java.awt.Dimension(100, 22));
+        cmbReleaseYearSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbReleaseYearSelector.setPreferredSize(new java.awt.Dimension(100, 22));
 
         lblPlayStatus.setText("Play Status:");
 
-        cbxPlayStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NP", "IP", "FG", "FS", "AB" }));
+        cmbPlayStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NP", "IP", "FG", "FS", "AB" }));
 
         lblRating.setText("Rating:");
 
@@ -87,12 +87,12 @@ public class GameDataWindow extends javax.swing.JFrame {
         txaNotes.setColumns(20);
         txaNotes.setLineWrap(true);
         txaNotes.setRows(5);
-        srpNotes.setViewportView(txaNotes);
+        scrNotes.setViewportView(txaNotes);
 
         lblClassification.setText("Classification:");
 
-        cbxClassificationSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "G", "PG", "M", "MA15+", "R18+" }));
-        cbxClassificationSelector.setToolTipText("");
+        cmbClassificationSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "G", "PG", "M", "MA15+", "R18+" }));
+        cmbClassificationSelector.setToolTipText("");
 
         lblMACL.setText("MACL:");
 
@@ -122,8 +122,8 @@ public class GameDataWindow extends javax.swing.JFrame {
                                 .addComponent(lblPlayStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbxReleaseYearSelector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbxPlayStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cmbReleaseYearSelector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbPlayStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblClassification, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +131,7 @@ public class GameDataWindow extends javax.swing.JFrame {
                                         .addComponent(lblMACL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(28, 28, 28)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbxClassificationSelector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbClassificationSelector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtMACLEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(36, 36, 36))
                             .addGroup(layout.createSequentialGroup()
@@ -157,11 +157,11 @@ public class GameDataWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxPlatformSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbPlatformSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(127, 127, 127)
                                 .addComponent(btnRemoveGame)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(srpNotes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(scrNotes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +183,7 @@ public class GameDataWindow extends javax.swing.JFrame {
                     .addComponent(lblTitle)
                     .addComponent(txtGameName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPlatform)
-                    .addComponent(cbxPlatformSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbPlatformSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRemoveGame))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -202,15 +202,15 @@ public class GameDataWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblReleaseYear)
-                                    .addComponent(cbxReleaseYearSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbReleaseYearSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblPlayStatus)
-                                    .addComponent(cbxPlayStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cmbPlayStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblClassification)
-                                    .addComponent(cbxClassificationSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbClassificationSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblMACL)
@@ -219,7 +219,7 @@ public class GameDataWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblRating)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(srpNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(scrNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(srtRatingSelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -276,10 +276,10 @@ public class GameDataWindow extends javax.swing.JFrame {
     public javax.swing.JButton btnRemoveGame;
     private javax.swing.JButton btnRemoveImage;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cbxClassificationSelector;
-    private javax.swing.JComboBox<String> cbxPlatformSelector;
-    private javax.swing.JComboBox<String> cbxPlayStatus;
-    private javax.swing.JComboBox<String> cbxReleaseYearSelector;
+    private javax.swing.JComboBox<String> cmbClassificationSelector;
+    private javax.swing.JComboBox<String> cmbPlatformSelector;
+    private javax.swing.JComboBox<String> cmbPlayStatus;
+    private javax.swing.JComboBox<String> cmbReleaseYearSelector;
     private javax.swing.JLabel lblBoxArt;
     private javax.swing.JLabel lblBoxArtImage;
     private javax.swing.JLabel lblClassification;
@@ -289,7 +289,7 @@ public class GameDataWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblRating;
     private javax.swing.JLabel lblReleaseYear;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JScrollPane srpNotes;
+    private javax.swing.JScrollPane scrNotes;
     private StarRating srtRatingSelector;
     private javax.swing.JTextArea txaNotes;
     private javax.swing.JTextField txtGameName;

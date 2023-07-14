@@ -52,17 +52,17 @@ public class GameEntry extends javax.swing.JPanel {
         add(lblPlayStatus);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void SetFields(String[] gameData) {
+    public void setFields(String[] sarGameData) {
         // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
-        lblBoxArt.setText(gameData[2]);
-        lblGameName.setText(gameData[3]);
-        lblMACL.setText(gameData[4]);
-        lblClassification.setText(gameData[5]);
-        lblRealeaseYear.setText(gameData[6]);
-        lblPlayStatus.setText(gameData[7]);
-        StarRating rating = new StarRating();
-        rating.setRating(Integer.parseInt(gameData[8]));
-        this.add(rating);
+        lblBoxArt.setText(sarGameData[2]);
+        lblGameName.setText(sarGameData[3]);
+        lblMACL.setText(sarGameData[4]);
+        lblClassification.setText(sarGameData[5]);
+        lblRealeaseYear.setText(sarGameData[6]);
+        lblPlayStatus.setText(sarGameData[7]);
+        StarRating srtRating = new StarRating();
+        srtRating.setRating(Integer.parseInt(sarGameData[8]));
+        this.add(srtRating);
     }
     
 

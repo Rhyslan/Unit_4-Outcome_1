@@ -33,8 +33,8 @@
                               <Component id="lblPlayStatus" min="-2" pref="67" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cbxReleaseYearSelector" max="32767" attributes="0"/>
-                                  <Component id="cbxPlayStatus" max="32767" attributes="0"/>
+                                  <Component id="cmbReleaseYearSelector" max="32767" attributes="0"/>
+                                  <Component id="cmbPlayStatus" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -45,7 +45,7 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cbxClassificationSelector" max="32767" attributes="0"/>
+                                  <Component id="cmbClassificationSelector" max="32767" attributes="0"/>
                                   <Component id="txtMACLEntry" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -82,12 +82,12 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="cbxPlatformSelector" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbPlatformSelector" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
                               <Component id="btnRemoveGame" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="srpNotes" alignment="1" min="-2" pref="350" max="-2" attributes="0"/>
+                          <Component id="scrNotes" alignment="1" min="-2" pref="350" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -118,7 +118,7 @@
                   <Component id="lblTitle" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtGameName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPlatform" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbxPlatformSelector" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbPlatformSelector" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRemoveGame" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -140,18 +140,18 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblReleaseYear" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxReleaseYearSelector" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbReleaseYearSelector" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblPlayStatus" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxPlayStatus" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbPlayStatus" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblClassification" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxClassificationSelector" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbClassificationSelector" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -165,7 +165,7 @@
                       <EmptySpace pref="24" max="-2" attributes="0"/>
                       <Component id="lblRating" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="srpNotes" min="-2" pref="199" max="-2" attributes="0"/>
+                      <Component id="scrNotes" min="-2" pref="199" max="-2" attributes="0"/>
                   </Group>
                   <Component id="srtRatingSelector" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -198,7 +198,7 @@
         <Property name="text" type="java.lang.String" value="Platform:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxPlatformSelector">
+    <Component class="javax.swing.JComboBox" name="cmbPlatformSelector">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -252,7 +252,7 @@
         <Property name="text" type="java.lang.String" value="Release Year:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxReleaseYearSelector">
+    <Component class="javax.swing.JComboBox" name="cmbReleaseYearSelector">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -275,7 +275,7 @@
         <Property name="text" type="java.lang.String" value="Play Status:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxPlayStatus">
+    <Component class="javax.swing.JComboBox" name="cmbPlayStatus">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -304,7 +304,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="srpNotes">
+    <Container class="javax.swing.JScrollPane" name="scrNotes">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
@@ -325,7 +325,7 @@
         <Property name="text" type="java.lang.String" value="Classification:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxClassificationSelector">
+    <Component class="javax.swing.JComboBox" name="cmbClassificationSelector">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">

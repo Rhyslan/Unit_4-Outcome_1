@@ -25,26 +25,26 @@ public class PlatformTab extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        srpTab1 = new javax.swing.JScrollPane();
-        pnlTab1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        tabScroll = new javax.swing.JScrollPane();
+        tabMainPanel = new javax.swing.JPanel();
+        topSpacer = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
         org.jdesktop.swingx.VerticalLayout verticalLayout1 = new org.jdesktop.swingx.VerticalLayout();
         verticalLayout1.setGap(5);
-        pnlTab1.setLayout(verticalLayout1);
-        pnlTab1.add(jLabel1);
+        tabMainPanel.setLayout(verticalLayout1);
+        tabMainPanel.add(topSpacer);
 
-        srpTab1.setViewportView(pnlTab1);
+        tabScroll.setViewportView(tabMainPanel);
 
-        add(srpTab1, java.awt.BorderLayout.CENTER);
+        add(tabScroll, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    public javax.swing.JPanel pnlTab1;
-    public javax.swing.JScrollPane srpTab1;
+    public javax.swing.JPanel tabMainPanel;
+    public javax.swing.JScrollPane tabScroll;
+    private javax.swing.JLabel topSpacer;
     // End of variables declaration//GEN-END:variables
 }
