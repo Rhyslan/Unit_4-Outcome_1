@@ -641,10 +641,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         optSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         optSave.setText("Save");
+        optSave.setEnabled(false);
         mnuFile.add(optSave);
 
         optQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         optQuit.setText("Quit");
+        optQuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optQuitActionPerformed(evt);
+            }
+        });
         mnuFile.add(optQuit);
 
         mnbTitleBar.add(mnuFile);
@@ -653,6 +659,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         optAddNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         optAddNew.setText("Add New");
+        optAddNew.setEnabled(false);
         optAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optAddNewActionPerformed(evt);
@@ -661,6 +668,7 @@ public class MainWindow extends javax.swing.JFrame {
         mnuGame.add(optAddNew);
 
         optUpdate.setText("Update");
+        optUpdate.setEnabled(false);
         optUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optUpdateActionPerformed(evt);
@@ -966,7 +974,13 @@ public class MainWindow extends javax.swing.JFrame {
         }
         
         //</editor-fold>
+        
+        optLoad.setEnabled(false);
     }//GEN-LAST:event_optLoadActionPerformed
+
+    private void optQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optQuitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_optQuitActionPerformed
 
     /**
      * @param args the command line arguments
