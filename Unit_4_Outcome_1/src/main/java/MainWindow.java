@@ -1,15 +1,17 @@
 
+import java.awt.Color;
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -108,14 +110,6 @@ public class MainWindow extends javax.swing.JFrame {
         lblSetMaxYear = new javax.swing.JLabel();
         lblSetMinYear = new javax.swing.JLabel();
         tbpGameEntries = new javax.swing.JTabbedPane();
-        pnlTab2 = new javax.swing.JPanel();
-        gameEntry3 = new GameEntry();
-        gameEntry4 = new GameEntry();
-        gameEntry5 = new GameEntry();
-        gameEntry6 = new GameEntry();
-        pnlTab1 = new javax.swing.JPanel();
-        gameEntry1 = new GameEntry();
-        gameEntry2 = new GameEntry();
         mnbTitleBar = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         optLoad = new javax.swing.JMenuItem();
@@ -159,7 +153,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
         pnlSidebarInner.add(btnSearchMenuToggle);
 
-        pnlSearchMenu.setBackground(new java.awt.Color(255, 0, 0));
         pnlSearchMenu.setPreferredSize(new java.awt.Dimension(230, 40));
 
         txtSearchQuery.setText("search query");
@@ -200,8 +193,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         pnlSidebarInner.add(btnAdvancedSearchToggle);
-
-        pnlAdvancedSearch.setBackground(new java.awt.Color(0, 0, 255));
 
         lblSearchCategory.setText("Category:");
 
@@ -266,7 +257,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
         pnlSidebarInner.add(btnClassificationToggle);
 
-        pnlClassificationFilter.setBackground(new java.awt.Color(255, 0, 0));
         pnlClassificationFilter.setPreferredSize(new java.awt.Dimension(230, 85));
 
         cbxRatedG.setText("G");
@@ -326,8 +316,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         pnlSidebarInner.add(btnMACLToggle);
-
-        pnlMACLFilter.setBackground(new java.awt.Color(255, 0, 0));
 
         lblAbsoluteMinMACL.setText("0");
 
@@ -431,7 +419,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
         pnlSidebarInner.add(btnRatingToggle);
 
-        pnlRatingFilter.setBackground(new java.awt.Color(255, 0, 0));
         pnlRatingFilter.setPreferredSize(new java.awt.Dimension(230, 160));
 
         cbx0Stars.setText("None");
@@ -493,8 +480,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
         pnlSidebarInner.add(btnStatusToggle);
 
-        pnlStatusFilter.setBackground(new java.awt.Color(255, 0, 0));
-
         cbxNotPlaying.setText("NP");
 
         cbxInProgress.setText("IP");
@@ -552,8 +537,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         pnlSidebarInner.add(btnYearToggle);
-
-        pnlYearFilter.setBackground(new java.awt.Color(255, 0, 0));
 
         lblAbsoluteEarliestYear.setText("1958");
 
@@ -645,24 +628,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         srpSidebarScroll.setViewportView(pnlSidebarInner);
 
-        org.jdesktop.swingx.VerticalLayout verticalLayout2 = new org.jdesktop.swingx.VerticalLayout();
-        verticalLayout2.setGap(5);
-        pnlTab2.setLayout(verticalLayout2);
-        pnlTab2.add(gameEntry3);
-        pnlTab2.add(gameEntry4);
-        pnlTab2.add(gameEntry5);
-        pnlTab2.add(gameEntry6);
-
-        tbpGameEntries.addTab("tab2", pnlTab2);
-
-        org.jdesktop.swingx.VerticalLayout verticalLayout3 = new org.jdesktop.swingx.VerticalLayout();
-        verticalLayout3.setGap(5);
-        pnlTab1.setLayout(verticalLayout3);
-        pnlTab1.add(gameEntry1);
-        pnlTab1.add(gameEntry2);
-
-        tbpGameEntries.addTab("tab1", pnlTab1);
-
         mnuFile.setText("File");
 
         optLoad.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -743,8 +708,8 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private ImageIcon icnCollapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
-    private ImageIcon icnExpandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
+    private final ImageIcon icnCollapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
+    private final ImageIcon icnExpandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
     
     private static String strAdvancedPrevious = "N/A";
     
@@ -760,7 +725,7 @@ public class MainWindow extends javax.swing.JFrame {
          * CA = Closing advanced
          */
         
-        Map<String, String> finalStates = new HashMap<String, String>();
+        Map<String, String> finalStates = new HashMap<>();
         finalStates.put("CS, AWO", "false, false"); // Closing search, advanced was closed
         finalStates.put("CS, AWC", "false, false"); // Closing search, advanced was open
         finalStates.put("OS, AWO", "true, true"); // Opening search, advanced was closed
@@ -907,10 +872,10 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
         
-        // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
-        String[][] gameData = new String[2][10];
-        
         //<editor-fold defaultstate="collapsed" desc="XML Loading">
+        
+        String[][] gameData = null;
+        int numberOfPlatforms = 0;
         
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -920,6 +885,9 @@ public class MainWindow extends javax.swing.JFrame {
             Element root = doc.getDocumentElement();
             
             NodeList nodeList = root.getChildNodes();
+            
+            // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
+            gameData = new String[nodeList.getLength()/2][10];
             
             int a = 0;
             int b = 2;
@@ -940,7 +908,6 @@ public class MainWindow extends javax.swing.JFrame {
                         child = childList.item(k);
                         if (child.getNodeType() == Node.ELEMENT_NODE) {
                             gameData[i-(i-a)][b] = child.getTextContent();
-                            //System.out.println(child.setGetContent());
                             b++;
                         }
                     }
@@ -948,14 +915,54 @@ public class MainWindow extends javax.swing.JFrame {
                     a++;
                 }
             }
+            numberOfPlatforms = Integer.parseInt(root.getAttributes().item(0).getTextContent());
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         
-        for (int l = 0; l < gameData.length; l++) {
-            for (int m = 0; m < 10; m++) {
-                System.out.println(gameData[l][m]);
+        //<editor-fold defaultstate="collapsed" desc="Add data to UI">
+        
+        Map<String, PlatformTab> platformTabs = new HashMap<>();
+        String[] platformList = new String[numberOfPlatforms];
+        boolean visited[] = new boolean[gameData.length];
+        Arrays.fill(visited, false);
+        int count_dis=0;
+        // Traverse through array elements and
+        // count frequencies
+        for (int i = 0; i < gameData.length; i++) {
+            // Skip this element if already processed
+            if (visited[i] == true)
+               continue;
+           
+            for (int j = i + 1; j < gameData.length; j++) {
+                if (gameData[i][1].equals(gameData[j][1])) {
+                   visited[j] = true;
+                }
             }
+            count_dis = count_dis+1;
+            platformList[count_dis-1] = gameData[i][1];
+            platformTabs.put(platformList[count_dis-1], new PlatformTab());
+        }
+        
+        for (int j=0;j<count_dis;j++) {
+            tbpGameEntries.addTab(platformList[j], platformTabs.get(platformList[j]));
+        }
+        
+        Map<String, Map> platformEntries = new HashMap<>();
+        
+        for (int i=0;i<platformList.length;i++) {
+            Map<String, GameEntry> gameEntries = new HashMap<>();
+            platformEntries.put(platformList[i], gameEntries);
+        }
+        
+        for (int i=0;i<gameData.length;i++) {
+            Map<String, GameEntry> currentPlatform = platformEntries.get(gameData[i][1]);
+            currentPlatform.put(gameData[i][0], new GameEntry());
+            GameEntry currentGame = currentPlatform.get(gameData[i][0]);
+            currentGame.SetFields(gameData[i]);
+            PlatformTab tab = platformTabs.get(gameData[i][1]);
+            tab.pnlTab1.add(currentGame);
         }
         
         //</editor-fold>
@@ -1023,12 +1030,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbxRatedMA15;
     private javax.swing.JCheckBox cbxRatedPG;
     private javax.swing.JCheckBox cbxRatedR18;
-    private GameEntry gameEntry1;
-    private GameEntry gameEntry2;
-    private GameEntry gameEntry3;
-    private GameEntry gameEntry4;
-    private GameEntry gameEntry5;
-    private GameEntry gameEntry6;
     private javax.swing.JLabel lblAbsoluteEarliestYear;
     private javax.swing.JLabel lblAbsoluteLatestYear;
     private javax.swing.JLabel lblAbsoluteMaxMACL;
@@ -1059,8 +1060,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSearchMenu;
     private javax.swing.JPanel pnlSidebarInner;
     private javax.swing.JPanel pnlStatusFilter;
-    private javax.swing.JPanel pnlTab1;
-    private javax.swing.JPanel pnlTab2;
     private javax.swing.JPanel pnlYearFilter;
     private JRangeSlider rslMACLSlider;
     private JRangeSlider rslYearSlider;

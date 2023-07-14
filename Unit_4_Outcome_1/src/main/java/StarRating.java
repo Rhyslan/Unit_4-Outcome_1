@@ -256,8 +256,55 @@ public class StarRating extends javax.swing.JPanel {
         this.booIsSelector = isSelector;
     }
     
-    private static void setRating(int intRating) {
-        System.out.println(intRating);
+    /**
+     *
+     * @param intRating
+     */
+    public void setRating(int intRating) {
+        intSelectedRating = intRating;
+        switch (intRating){
+            case 1:
+                lblStar1.setIcon(icnSelectedIcon);
+                lblStar2.setIcon(icnDeselectedIcon);
+                lblStar3.setIcon(icnDeselectedIcon);
+                lblStar4.setIcon(icnDeselectedIcon);
+                lblStar5.setIcon(icnDeselectedIcon);
+                break;
+            case 2:
+                lblStar1.setIcon(icnSelectedIcon);
+                lblStar3.setIcon(icnSelectedIcon);
+                lblStar4.setIcon(icnDeselectedIcon);
+                lblStar5.setIcon(icnDeselectedIcon);
+                break;
+            case 3:
+                lblStar1.setIcon(icnSelectedIcon);
+                lblStar2.setIcon(icnSelectedIcon);
+                lblStar3.setIcon(icnSelectedIcon);
+                lblStar4.setIcon(icnDeselectedIcon);
+                lblStar5.setIcon(icnDeselectedIcon);
+                break;
+            case 4:
+                lblStar1.setIcon(icnSelectedIcon);
+                lblStar2.setIcon(icnSelectedIcon);
+                lblStar3.setIcon(icnSelectedIcon);
+                lblStar4.setIcon(icnSelectedIcon);
+                lblStar5.setIcon(icnDeselectedIcon);
+                break;
+            case 5:
+                lblStar1.setIcon(icnSelectedIcon);
+                lblStar2.setIcon(icnSelectedIcon);
+                lblStar3.setIcon(icnSelectedIcon);
+                lblStar4.setIcon(icnSelectedIcon);
+                lblStar5.setIcon(icnSelectedIcon);
+                break;
+            default:
+                lblStar1.setIcon(icnDeselectedIcon);
+                lblStar2.setIcon(icnDeselectedIcon);
+                lblStar3.setIcon(icnDeselectedIcon);
+                lblStar4.setIcon(icnDeselectedIcon);
+                lblStar5.setIcon(icnDeselectedIcon);
+                System.out.println("switch did not work");
+        }
     }
     
 

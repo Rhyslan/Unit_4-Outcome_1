@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameList>
-    <game id="MINE11" platform="PS3">
+<gameList numberOfPlatforms="3">
+    <game id="MINE11" platform="3DS">
         <boxArt>MINE11.png</boxArt>
         <gameName>Minecraft</gameName>
         <MACL>0.0</MACL>
@@ -20,5 +20,27 @@
         <playStatus>FG</playStatus>
         <personalRating>5</personalRating>
         <notes>N/A</notes>
+    </game>
+    
+    <game id="LAST13" platform="PC">
+        <boxArt>LAST13.png</boxArt>
+        <gameName>The Last of Us</gameName>
+        <MACL>15.0</MACL>
+        <classification>R18+</classification>
+        <releaseYear>2013</releaseYear>
+        <playStatus>NP</playStatus>
+        <personalRating>5</personalRating>
+        <notes>I've never played it</notes>
+    </game>
+    
+    <game id="LAST13" platform="PS3">
+        <boxArt>LAST13.png</boxArt>
+        <gameName>The Last of Us</gameName>
+        <MACL>15.0</MACL>
+        <classification>R18+</classification>
+        <releaseYear>2013</releaseYear>
+        <playStatus>NP</playStatus>
+        <personalRating>5</personalRating>
+        <notes>I've never played it</notes>
     </game>
 </gameList>

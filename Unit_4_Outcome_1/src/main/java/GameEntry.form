@@ -64,8 +64,6 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="StarRating" name="starRating2">
-    </Component>
   </SubComponents>
   <LayoutCode>
     <CodeStatement>
@@ -216,22 +214,6 @@
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
               <ComponentRef name="lblPlayStatus"/>
-            </ExpressionProvider>
-          </ExpressionOrigin>
-        </CodeExpression>
-      </Parameters>
-    </CodeStatement>
-    <CodeStatement>
-      <CodeExpression id="3"/>
-      <StatementProvider type="CodeMethod">
-        <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-      </StatementProvider>
-      <Parameters>
-        <CodeExpression id="11_starRating2">
-          <CodeVariable name="starRating2" type="8194" declaredType="StarRating"/>
-          <ExpressionOrigin>
-            <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="starRating2"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>

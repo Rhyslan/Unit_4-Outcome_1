@@ -27,7 +27,6 @@ public class GameEntry extends javax.swing.JPanel {
         lblMACL = new javax.swing.JLabel();
         lblRealeaseYear = new javax.swing.JLabel();
         lblPlayStatus = new javax.swing.JLabel();
-        starRating2 = new StarRating();
 
         org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
         horizontalLayout1.setGap(5);
@@ -51,9 +50,21 @@ public class GameEntry extends javax.swing.JPanel {
 
         lblPlayStatus.setText("Play Status");
         add(lblPlayStatus);
-        add(starRating2);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void SetFields(String[] gameData) {
+        // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
+        lblBoxArt.setText(gameData[2]);
+        lblGameName.setText(gameData[3]);
+        lblMACL.setText(gameData[4]);
+        lblClassification.setText(gameData[5]);
+        lblRealeaseYear.setText(gameData[6]);
+        lblPlayStatus.setText(gameData[7]);
+        StarRating rating = new StarRating();
+        rating.setRating(Integer.parseInt(gameData[8]));
+        this.add(rating);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel lblBoxArt;
@@ -63,6 +74,5 @@ public class GameEntry extends javax.swing.JPanel {
     public javax.swing.JLabel lblMACL;
     public javax.swing.JLabel lblPlayStatus;
     public javax.swing.JLabel lblRealeaseYear;
-    private StarRating starRating2;
     // End of variables declaration//GEN-END:variables
 }
