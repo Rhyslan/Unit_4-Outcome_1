@@ -1,5 +1,6 @@
 
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -23,231 +24,163 @@ public class StarRating extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pmnContextMenu = new javax.swing.JPopupMenu();
+        mniUpdate = new javax.swing.JMenuItem();
         lblFrontSpacer = new javax.swing.JLabel();
-        lblStar1 = new javax.swing.JLabel();
-        lblStar2 = new javax.swing.JLabel();
-        lblStar3 = new javax.swing.JLabel();
-        lblStar4 = new javax.swing.JLabel();
-        lblStar5 = new javax.swing.JLabel();
+        lblStarOne = new javax.swing.JLabel();
+        lblStarTwo = new javax.swing.JLabel();
+        lblStarThree = new javax.swing.JLabel();
+        lblStarFour = new javax.swing.JLabel();
+        lblStarFive = new javax.swing.JLabel();
 
+        pmnContextMenu.setName(""); // NOI18N
+
+        mniUpdate.setText("Update");
+        mniUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniUpdateActionPerformed(evt);
+            }
+        });
+        pmnContextMenu.add(mniUpdate);
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
         horizontalLayout1.setGap(5);
         setLayout(horizontalLayout1);
         add(lblFrontSpacer);
 
-        lblStar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
-        lblStar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblStarOne.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStarOne.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblStar1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblStar1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblStar1MouseExited(evt);
+                lblStarOneMouseClicked(evt);
             }
         });
-        add(lblStar1);
+        add(lblStarOne);
 
-        lblStar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
-        lblStar2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                lblStar2MouseDragged(evt);
+        lblStarTwo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStarTwo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStarTwoMouseClicked(evt);
             }
         });
-        lblStar2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblStar2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblStar2MouseExited(evt);
-            }
-        });
-        add(lblStar2);
+        add(lblStarTwo);
 
-        lblStar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
-        lblStar3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                lblStar3MouseDragged(evt);
+        lblStarThree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStarThree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStarThreeMouseClicked(evt);
             }
         });
-        lblStar3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblStar3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblStar3MouseExited(evt);
-            }
-        });
-        add(lblStar3);
+        add(lblStarThree);
 
-        lblStar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
-        lblStar4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                lblStar4MouseDragged(evt);
+        lblStarFour.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStarFour.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStarFourMouseClicked(evt);
             }
         });
-        lblStar4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblStar4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblStar4MouseExited(evt);
-            }
-        });
-        add(lblStar4);
+        add(lblStarFour);
 
-        lblStar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
-        lblStar5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                lblStar5MouseDragged(evt);
+        lblStarFive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DeselectedStar.png"))); // NOI18N
+        lblStarFive.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblStarFiveMouseClicked(evt);
             }
         });
-        lblStar5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblStar5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblStar5MouseExited(evt);
-            }
-        });
-        add(lblStar5);
+        add(lblStarFive);
     }// </editor-fold>//GEN-END:initComponents
 
     private ImageIcon icnSelectedIcon = new ImageIcon(getClass().getResource("/SelectedStar.png"));
     private ImageIcon icnDeselectedIcon = new ImageIcon(getClass().getResource("/DeselectedStar.png"));
+    
     private boolean booIsSelector = false;
+    
     public int intSelectedRating = 0;
     
-    //<editor-fold defaultstate="collapsed" desc="Selection Highlighting">
-    private void lblStar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar1MouseEntered
+    //<editor-fold defaultstate="collapsed" desc="Click Selection">
+    public void selectRatingZero() {
         if (booIsSelector == true) {
-            lblStar1.setIcon(icnSelectedIcon);
+            intSelectedRating = 0;
+            lblStarOne.setIcon(icnDeselectedIcon);
+            lblStarTwo.setIcon(icnDeselectedIcon);
+            lblStarThree.setIcon(icnDeselectedIcon);
+            lblStarFour.setIcon(icnDeselectedIcon);
+            lblStarFive.setIcon(icnDeselectedIcon);
         }
-    }//GEN-LAST:event_lblStar1MouseEntered
-
-    private void lblStar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar1MouseExited
-        if (booIsSelector == true & intSelectedRating != 1) {
-            lblStar1.setIcon(icnDeselectedIcon);
-        }
-    }//GEN-LAST:event_lblStar1MouseExited
-
-    private void lblStar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar2MouseEntered
-        if (booIsSelector == true) {
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
-        }
-    }//GEN-LAST:event_lblStar2MouseEntered
-
-    private void lblStar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar2MouseExited
-        if (booIsSelector == true & intSelectedRating != 2) {
-            lblStar1.setIcon(icnDeselectedIcon);
-            lblStar2.setIcon(icnDeselectedIcon);
-        }
-    }//GEN-LAST:event_lblStar2MouseExited
-
-    private void lblStar3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar3MouseEntered
-        if (booIsSelector == true) {
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
-            lblStar3.setIcon(icnSelectedIcon);
-        }
-    }//GEN-LAST:event_lblStar3MouseEntered
-
-    private void lblStar3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar3MouseExited
-        if (booIsSelector == true  & intSelectedRating != 3) {
-            lblStar1.setIcon(icnDeselectedIcon);
-            lblStar2.setIcon(icnDeselectedIcon);
-            lblStar3.setIcon(icnDeselectedIcon);
-        }
-    }//GEN-LAST:event_lblStar3MouseExited
-
-    private void lblStar4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar4MouseEntered
-        if (booIsSelector == true) {
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
-            lblStar3.setIcon(icnSelectedIcon);
-            lblStar4.setIcon(icnSelectedIcon);
-        }
-    }//GEN-LAST:event_lblStar4MouseEntered
-
-    private void lblStar4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar4MouseExited
-        if (booIsSelector == true  & intSelectedRating != 4) {
-            lblStar1.setIcon(icnDeselectedIcon);
-            lblStar2.setIcon(icnDeselectedIcon);
-            lblStar3.setIcon(icnDeselectedIcon);
-            lblStar4.setIcon(icnDeselectedIcon);
-        }
-    }//GEN-LAST:event_lblStar4MouseExited
-
-    private void lblStar5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar5MouseEntered
-        if (booIsSelector == true) {
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
-            lblStar3.setIcon(icnSelectedIcon);
-            lblStar4.setIcon(icnSelectedIcon);
-            lblStar5.setIcon(icnSelectedIcon);
-        }
-    }//GEN-LAST:event_lblStar5MouseEntered
-
-    private void lblStar5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar5MouseExited
-        if (booIsSelector == true  & intSelectedRating != 5) {
-            lblStar1.setIcon(icnDeselectedIcon);
-            lblStar2.setIcon(icnDeselectedIcon);
-            lblStar3.setIcon(icnDeselectedIcon);
-            lblStar4.setIcon(icnDeselectedIcon);
-            lblStar5.setIcon(icnDeselectedIcon);
-        }
-    }//GEN-LAST:event_lblStar5MouseExited
-    //</editor-fold>
+    }
     
-    //<editor-fold defaultstate="collapsed" desc="Selection Handling">
-    private void lblStar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar1MouseClicked
+    private void lblStarOneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStarOneMouseClicked
         if (booIsSelector == true) {
             intSelectedRating = 1;
-            lblStar1.setIcon(icnSelectedIcon);
+            lblStarOne.setIcon(icnSelectedIcon);
+            lblStarTwo.setIcon(icnDeselectedIcon);
+            lblStarThree.setIcon(icnDeselectedIcon);
+            lblStarFour.setIcon(icnDeselectedIcon);
+            lblStarFive.setIcon(icnDeselectedIcon);
         }
-    }//GEN-LAST:event_lblStar1MouseClicked
+    }//GEN-LAST:event_lblStarOneMouseClicked
 
-    private void lblStar2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar2MouseDragged
+    private void lblStarTwoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStarTwoMouseClicked
         if (booIsSelector == true) {
             intSelectedRating = 2;
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
+            lblStarOne.setIcon(icnSelectedIcon);
+            lblStarTwo.setIcon(icnSelectedIcon);
+            lblStarThree.setIcon(icnDeselectedIcon);
+            lblStarFour.setIcon(icnDeselectedIcon);
+            lblStarFive.setIcon(icnDeselectedIcon);
         }
-    }//GEN-LAST:event_lblStar2MouseDragged
+    }//GEN-LAST:event_lblStarTwoMouseClicked
 
-    private void lblStar3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar3MouseDragged
+    private void lblStarThreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStarThreeMouseClicked
         if (booIsSelector == true) {
             intSelectedRating = 3;
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
-            lblStar3.setIcon(icnSelectedIcon);
+            lblStarOne.setIcon(icnSelectedIcon);
+            lblStarTwo.setIcon(icnSelectedIcon);
+            lblStarThree.setIcon(icnSelectedIcon);
+            lblStarFour.setIcon(icnDeselectedIcon);
+            lblStarFive.setIcon(icnDeselectedIcon);
         }
-    }//GEN-LAST:event_lblStar3MouseDragged
+    }//GEN-LAST:event_lblStarThreeMouseClicked
 
-    private void lblStar4MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar4MouseDragged
+    private void lblStarFourMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStarFourMouseClicked
         if (booIsSelector == true) {
             intSelectedRating = 4;
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
-            lblStar3.setIcon(icnSelectedIcon);
-            lblStar4.setIcon(icnSelectedIcon);
+            lblStarOne.setIcon(icnSelectedIcon);
+            lblStarTwo.setIcon(icnSelectedIcon);
+            lblStarThree.setIcon(icnSelectedIcon);
+            lblStarFour.setIcon(icnSelectedIcon);
+            lblStarFive.setIcon(icnDeselectedIcon);
         }
-    }//GEN-LAST:event_lblStar4MouseDragged
+    }//GEN-LAST:event_lblStarFourMouseClicked
 
-    private void lblStar5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStar5MouseDragged
+    private void lblStarFiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStarFiveMouseClicked
         if (booIsSelector == true) {
             intSelectedRating = 5;
-            lblStar1.setIcon(icnSelectedIcon);
-            lblStar2.setIcon(icnSelectedIcon);
-            lblStar3.setIcon(icnSelectedIcon);
-            lblStar4.setIcon(icnSelectedIcon);
-            lblStar5.setIcon(icnSelectedIcon);
+            lblStarOne.setIcon(icnSelectedIcon);
+            lblStarTwo.setIcon(icnSelectedIcon);
+            lblStarThree.setIcon(icnSelectedIcon);
+            lblStarFour.setIcon(icnSelectedIcon);
+            lblStarFive.setIcon(icnSelectedIcon);
         }
-    }//GEN-LAST:event_lblStar5MouseDragged
+    }//GEN-LAST:event_lblStarFiveMouseClicked
     //</editor-fold>
     
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            pmnContextMenu.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_formMouseClicked
+
+    private void mniUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUpdateActionPerformed
+        GameDataWindow winUpdateGame = new GameDataWindow();
+        winUpdateGame.setTitle("Level-Up Library - Update Game");
+        winUpdateGame.setVisible(true);
+    }//GEN-LAST:event_mniUpdateActionPerformed
+
     public boolean getIsSelector() {
         return booIsSelector;
     }
@@ -263,57 +196,68 @@ public class StarRating extends javax.swing.JPanel {
     public void setRating(int intRating) {
         intSelectedRating = intRating;
         switch (intRating){
-            case 1:
-                lblStar1.setIcon(icnSelectedIcon);
-                lblStar2.setIcon(icnDeselectedIcon);
-                lblStar3.setIcon(icnDeselectedIcon);
-                lblStar4.setIcon(icnDeselectedIcon);
-                lblStar5.setIcon(icnDeselectedIcon);
-                break;
-            case 2:
-                lblStar1.setIcon(icnSelectedIcon);
-                lblStar3.setIcon(icnSelectedIcon);
-                lblStar4.setIcon(icnDeselectedIcon);
-                lblStar5.setIcon(icnDeselectedIcon);
-                break;
-            case 3:
-                lblStar1.setIcon(icnSelectedIcon);
-                lblStar2.setIcon(icnSelectedIcon);
-                lblStar3.setIcon(icnSelectedIcon);
-                lblStar4.setIcon(icnDeselectedIcon);
-                lblStar5.setIcon(icnDeselectedIcon);
-                break;
-            case 4:
-                lblStar1.setIcon(icnSelectedIcon);
-                lblStar2.setIcon(icnSelectedIcon);
-                lblStar3.setIcon(icnSelectedIcon);
-                lblStar4.setIcon(icnSelectedIcon);
-                lblStar5.setIcon(icnDeselectedIcon);
-                break;
-            case 5:
-                lblStar1.setIcon(icnSelectedIcon);
-                lblStar2.setIcon(icnSelectedIcon);
-                lblStar3.setIcon(icnSelectedIcon);
-                lblStar4.setIcon(icnSelectedIcon);
-                lblStar5.setIcon(icnSelectedIcon);
-                break;
-            default:
-                lblStar1.setIcon(icnDeselectedIcon);
-                lblStar2.setIcon(icnDeselectedIcon);
-                lblStar3.setIcon(icnDeselectedIcon);
-                lblStar4.setIcon(icnDeselectedIcon);
-                lblStar5.setIcon(icnDeselectedIcon);
-                System.err.println("Rating setter did not work");
+            case 0 -> {
+                lblStarOne.setIcon(icnDeselectedIcon);
+                lblStarTwo.setIcon(icnDeselectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            case 1 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnDeselectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            case 2 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            case 3 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnSelectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            case 4 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnSelectedIcon);
+                lblStarFour.setIcon(icnSelectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            case 5 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnSelectedIcon);
+                lblStarFour.setIcon(icnSelectedIcon);
+                lblStarFive.setIcon(icnSelectedIcon);
+            }
+            default -> {
+                lblStarOne.setIcon(icnDeselectedIcon);
+                lblStarTwo.setIcon(icnDeselectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+                System.err.println("Provided rating is not within the range of '0' to '5' inclusively");
+            }
         }
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblFrontSpacer;
-    private javax.swing.JLabel lblStar1;
-    private javax.swing.JLabel lblStar2;
-    private javax.swing.JLabel lblStar3;
-    private javax.swing.JLabel lblStar4;
-    private javax.swing.JLabel lblStar5;
+    private javax.swing.JLabel lblStarFive;
+    private javax.swing.JLabel lblStarFour;
+    private javax.swing.JLabel lblStarOne;
+    private javax.swing.JLabel lblStarThree;
+    private javax.swing.JLabel lblStarTwo;
+    private javax.swing.JMenuItem mniUpdate;
+    private javax.swing.JPopupMenu pmnContextMenu;
     // End of variables declaration//GEN-END:variables
 }

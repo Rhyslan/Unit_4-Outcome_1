@@ -1,14 +1,35 @@
+
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
+
+
+
 /**
  *
  * @author dylan
  */
-public class GameEntry extends javax.swing.JPanel {
+// public class GameEntry extends javax.swing.JPanel {
+public class GameEntry extends javax.swing.JToggleButton {
 
     /**
      * Creates new form GameEntry
      */
     public GameEntry() {
         initComponents();
+        
+        /*
+        ActionListener actions = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                
+            }
+        };
+        this.addActionListener(actions);
+        */
     }
 
     /**
@@ -20,6 +41,9 @@ public class GameEntry extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pmnContextMenu = new javax.swing.JPopupMenu();
+        mniUpdate = new javax.swing.JMenuItem();
+        mniRemove = new javax.swing.JMenuItem();
         lblFrontSpacer = new javax.swing.JLabel();
         lblBoxArt = new javax.swing.JLabel();
         lblGameName = new javax.swing.JLabel();
@@ -28,6 +52,24 @@ public class GameEntry extends javax.swing.JPanel {
         lblRealeaseYear = new javax.swing.JLabel();
         lblPlayStatus = new javax.swing.JLabel();
 
+        pmnContextMenu.setName(""); // NOI18N
+
+        mniUpdate.setText("Update");
+        mniUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniUpdateActionPerformed(evt);
+            }
+        });
+        pmnContextMenu.add(mniUpdate);
+
+        mniRemove.setText("Remove");
+        pmnContextMenu.add(mniRemove);
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
         horizontalLayout1.setGap(5);
         setLayout(horizontalLayout1);
@@ -52,19 +94,54 @@ public class GameEntry extends javax.swing.JPanel {
         add(lblPlayStatus);
     }// </editor-fold>//GEN-END:initComponents
 
+    String[] sarThisGameData = new String[10];
+    
+    private void mniUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUpdateActionPerformed
+        GameDataWindow winUpdateGame = new GameDataWindow();
+        winUpdateGame.setTitle("Level-Up Library - Update Game");
+        
+        winUpdateGame.loadCurrentGameData(sarThisGameData);
+        
+        winUpdateGame.setVisible(true);
+    }//GEN-LAST:event_mniUpdateActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // this.setSelected(true);      PROBABLY REDUNDANT - MORE TESTING REQUIRED
+        MainWindow.strSelectedGame = sarThisGameData[0];
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            pmnContextMenu.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_formMouseClicked
+
     public void setFields(String[] sarGameData) {
         // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
-        lblBoxArt.setText(sarGameData[2]);
+        sarThisGameData = sarGameData;
+        
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + sarGameData[2]));
+        } catch (IOException e) {
+            System.out.println("Unable to load boxart image for GameEntry Update");
+        }
+        if (img != null) {
+            lblBoxArt.setText("");
+            Image dimg = img.getScaledInstance(45, 70, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            lblBoxArt.setIcon(imageIcon);
+        } else {
+            lblBoxArt.setText("No \n Image");
+        }
+        
         lblGameName.setText(sarGameData[3]);
         lblMACL.setText(sarGameData[4]);
         lblClassification.setText(sarGameData[5]);
         lblRealeaseYear.setText(sarGameData[6]);
         lblPlayStatus.setText(sarGameData[7]);
+        
         StarRating srtRating = new StarRating();
         srtRating.setRating(Integer.parseInt(sarGameData[8]));
         this.add(srtRating);
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel lblBoxArt;
@@ -74,5 +151,8 @@ public class GameEntry extends javax.swing.JPanel {
     public javax.swing.JLabel lblMACL;
     public javax.swing.JLabel lblPlayStatus;
     public javax.swing.JLabel lblRealeaseYear;
+    private javax.swing.JMenuItem mniRemove;
+    private javax.swing.JMenuItem mniUpdate;
+    private javax.swing.JPopupMenu pmnContextMenu;
     // End of variables declaration//GEN-END:variables
 }

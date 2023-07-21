@@ -44,6 +44,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         bgpSearchCategories = new javax.swing.ButtonGroup();
+        bgpGameSelection = new javax.swing.ButtonGroup();
         srpSidebarScroll = new javax.swing.JScrollPane();
         srpSidebarScroll.getVerticalScrollBar().setUnitIncrement(20);
         pnlSidebarInner = new javax.swing.JPanel();
@@ -110,24 +111,24 @@ public class MainWindow extends javax.swing.JFrame {
         tbpGameEntries = new javax.swing.JTabbedPane();
         mnbTitleBar = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
-        optLoad = new javax.swing.JMenuItem();
-        optSave = new javax.swing.JMenuItem();
-        optQuit = new javax.swing.JMenuItem();
+        mniLoad = new javax.swing.JMenuItem();
+        mniSave = new javax.swing.JMenuItem();
+        mniQuit = new javax.swing.JMenuItem();
         mnuGame = new javax.swing.JMenu();
-        optAddNew = new javax.swing.JMenuItem();
-        optUpdate = new javax.swing.JMenuItem();
-        optRemove = new javax.swing.JMenuItem();
+        mniAddNew = new javax.swing.JMenuItem();
+        mniUpdate = new javax.swing.JMenuItem();
+        mniRemove = new javax.swing.JMenuItem();
         mnuHelp = new javax.swing.JMenu();
-        optOnlineDocs = new javax.swing.JMenuItem();
-        optManual = new javax.swing.JMenuItem();
-        optAbout = new javax.swing.JMenuItem();
+        mniOnlineDocs = new javax.swing.JMenuItem();
+        mniManual = new javax.swing.JMenuItem();
+        mniAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Level-Up Library - Main Window");
-        setMaximumSize(new java.awt.Dimension(1024, 600));
         setMinimumSize(new java.awt.Dimension(1024, 600));
         setName("MainWindow"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 600));
+        setSize(new java.awt.Dimension(1024, 600));
 
         srpSidebarScroll.setBorder(null);
         srpSidebarScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -228,7 +229,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(rtnTitleCategory)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rtnNotesCategory)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbxExactSearch)
                 .addContainerGap())
         );
@@ -283,7 +284,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(cbxRatedG, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cbxRatedPG, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlClassificationFilterLayout.setVerticalGroup(
             pnlClassificationFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +381,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(pnlMACLFilterLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(lblAbsoluteMinMACL, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 92, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlMACLFilterLayout.setVerticalGroup(
@@ -444,7 +445,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(cbx3Stars, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbx4Stars, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbx5Stars, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlRatingFilterLayout.setVerticalGroup(
             pnlRatingFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,7 +505,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cbxFinishedStory, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbxAbandoned, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlStatusFilterLayout.setVerticalGroup(
             pnlStatusFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,7 +589,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(rslYearSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlYearFilterLayout.createSequentialGroup()
                         .addGroup(pnlYearFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSetMinYear, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                            .addComponent(lblSetMinYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblSetMaxYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlYearFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,69 +627,74 @@ public class MainWindow extends javax.swing.JFrame {
 
         srpSidebarScroll.setViewportView(pnlSidebarInner);
 
+        tbpGameEntries.setPreferredSize(new java.awt.Dimension(778, 577));
+
         mnuFile.setText("File");
 
-        optLoad.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        optLoad.setText("Load");
-        optLoad.addActionListener(new java.awt.event.ActionListener() {
+        mniLoad.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniLoad.setText("Load");
+        mniLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optLoadActionPerformed(evt);
+                mniLoadActionPerformed(evt);
             }
         });
-        mnuFile.add(optLoad);
+        mnuFile.add(mniLoad);
 
-        optSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        optSave.setText("Save");
-        optSave.setEnabled(false);
-        mnuFile.add(optSave);
+        mniSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniSave.setText("Save");
+        mniSave.setEnabled(false);
+        mnuFile.add(mniSave);
 
-        optQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        optQuit.setText("Quit");
-        optQuit.addActionListener(new java.awt.event.ActionListener() {
+        mniQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniQuit.setText("Quit");
+        mniQuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optQuitActionPerformed(evt);
+                mniQuitActionPerformed(evt);
             }
         });
-        mnuFile.add(optQuit);
+        mnuFile.add(mniQuit);
 
         mnbTitleBar.add(mnuFile);
 
         mnuGame.setText("Game");
 
-        optAddNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        optAddNew.setText("Add New");
-        optAddNew.setEnabled(false);
-        optAddNew.addActionListener(new java.awt.event.ActionListener() {
+        mniAddNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniAddNew.setText("Add New");
+        mniAddNew.setEnabled(false);
+        mniAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optAddNewActionPerformed(evt);
+                mniAddNewActionPerformed(evt);
             }
         });
-        mnuGame.add(optAddNew);
+        mnuGame.add(mniAddNew);
 
-        optUpdate.setText("Update");
-        optUpdate.setEnabled(false);
-        optUpdate.addActionListener(new java.awt.event.ActionListener() {
+        mniUpdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniUpdate.setText("Update");
+        mniUpdate.setEnabled(false);
+        mniUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optUpdateActionPerformed(evt);
+                mniUpdateActionPerformed(evt);
             }
         });
-        mnuGame.add(optUpdate);
+        mnuGame.add(mniUpdate);
 
-        optRemove.setText("Remove");
-        mnuGame.add(optRemove);
+        mniRemove.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
+        mniRemove.setText("Remove");
+        mniRemove.setEnabled(false);
+        mnuGame.add(mniRemove);
 
         mnbTitleBar.add(mnuGame);
 
         mnuHelp.setText("Help");
 
-        optOnlineDocs.setText("Online Docs");
-        mnuHelp.add(optOnlineDocs);
+        mniOnlineDocs.setText("Online Docs");
+        mnuHelp.add(mniOnlineDocs);
 
-        optManual.setText("Manual");
-        mnuHelp.add(optManual);
+        mniManual.setText("Manual");
+        mnuHelp.add(mniManual);
 
-        optAbout.setText("About");
-        mnuHelp.add(optAbout);
+        mniAbout.setText("About");
+        mnuHelp.add(mniAbout);
 
         mnbTitleBar.add(mnuHelp);
 
@@ -701,14 +707,14 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(srpSidebarScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tbpGameEntries, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE))
+                .addComponent(tbpGameEntries, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(srpSidebarScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(tbpGameEntries)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(tbpGameEntries, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -719,9 +725,15 @@ public class MainWindow extends javax.swing.JFrame {
     
     private static String strAdvancedPrevious = "N/A";
     
-    private static String doLogicalComparisons(String strStates) {      // TODO: Rename method
+    public static Map<String, Map> mapLoadedData = new HashMap<>();
+    public static String[] sarPlatformList = null;
+    public static int intPlatformCount = 0;
+    
+    public static String strSelectedGame = "N/A";
+    
+    private static String determineVisibilityStates(String strStates) {
         /**
-         *************KEY**************
+         ************ KEY *************
          * OS = Opening search
          * CS = Closing search
          * AWO = Advanced was open
@@ -732,12 +744,12 @@ public class MainWindow extends javax.swing.JFrame {
          */
         
         Map<String, String> mapFinalStates = new HashMap<>();
-        mapFinalStates.put("CS, AWO", "false, false"); // Closing search, advanced was closed
-        mapFinalStates.put("CS, AWC", "false, false"); // Closing search, advanced was open
-        mapFinalStates.put("OS, AWO", "true, true"); // Opening search, advanced was closed
-        mapFinalStates.put("OS, AWC", "true, false"); // Opening search, advanced was open
-        mapFinalStates.put("SIO, OA", "true, true"); // Search is open, opening advanced
-        mapFinalStates.put("SIO, CA", "true, false"); // Search is open, closing advanced
+        mapFinalStates.put("CS, AWO", "false, false");
+        mapFinalStates.put("CS, AWC", "false, false");
+        mapFinalStates.put("OS, AWO", "true, true");
+        mapFinalStates.put("OS, AWC", "true, false");
+        mapFinalStates.put("SIO, OA", "true, true");
+        mapFinalStates.put("SIO, CA", "true, false");
         
         return mapFinalStates.get(strStates);
     }    
@@ -757,7 +769,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         if (searchCode == "OS") advancedCode = strAdvancedPrevious;
         
-        String newStates = doLogicalComparisons(searchCode + ", " + advancedCode);
+        String newStates = determineVisibilityStates(searchCode + ", " + advancedCode);
         
         strAdvancedPrevious = advancedCode;
         
@@ -781,7 +793,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         strAdvancedPrevious = advancedCode;
         
-        String newStates = doLogicalComparisons(searchCode + ", " + advancedCode);
+        String newStates = determineVisibilityStates(searchCode + ", " + advancedCode);
         
         String[] bools = newStates.split(", ");
         
@@ -850,77 +862,96 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSetMaxYearActionPerformed
     //</editor-fold>
     
-    private void optAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optAddNewActionPerformed
+    private void mniAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAddNewActionPerformed
         GameDataWindow winAddGame = new GameDataWindow();
         winAddGame.setTitle("Level-Up Library - Add Game");
         winAddGame.btnRemoveGame.setEnabled(false);
+        winAddGame.setYearSelector();
         winAddGame.setVisible(true);
-    }//GEN-LAST:event_optAddNewActionPerformed
+    }//GEN-LAST:event_mniAddNewActionPerformed
 
-    private void optUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optUpdateActionPerformed
-        GameDataWindow winAddGame = new GameDataWindow();
-        winAddGame.setTitle("Level-Up Library - Update Game");
-        winAddGame.setVisible(true);
-    }//GEN-LAST:event_optUpdateActionPerformed
+    private void mniUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUpdateActionPerformed
+        try {
+            GameDataWindow winUpdateGame = new GameDataWindow();
+            winUpdateGame.setTitle("Level-Up Library - Update Game");
+            
+            String strCurrentPlatformTitle = tbpGameEntries.getTitleAt(tbpGameEntries.getSelectedIndex());
+            Map mapCurrentPlatformEntries = mapLoadedData.get(strCurrentPlatformTitle);
+            String[] sarCurrentGameData = (String[]) mapCurrentPlatformEntries.get(strSelectedGame);
+            winUpdateGame.loadCurrentGameData(sarCurrentGameData);
+            
+            winUpdateGame.setVisible(true);
+        } catch (NullPointerException exc) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.WARNING, null, exc);
+            System.err.println("Most likely no game selected: strSelectedGame = " + strSelectedGame);
+        }
+    }//GEN-LAST:event_mniUpdateActionPerformed
 
-    private void optLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optLoadActionPerformed
+    private void mniLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoadActionPerformed
         JFileChooser jfcFileBrowser = new JFileChooser(System.getProperty("user.dir") + "\\src\\main\\resources\\");
         jfcFileBrowser.setSelectedFile(new File("database.xml"));
         jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
         jfcFileBrowser.setAcceptAllFileFilterUsed(false);
-        int intResponse=  jfcFileBrowser.showOpenDialog(null);
-        Path pthRecordFilePath = null;
+        int intResponse =  jfcFileBrowser.showOpenDialog(null);
+        Path pthDatabaseFilePath = null;
         
         if (intResponse == JFileChooser.APPROVE_OPTION) {
-            pthRecordFilePath = Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
+            pthDatabaseFilePath = Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
         }
         else {
             return;
         }
         
-        //<editor-fold defaultstate="collapsed" desc="XML Loading">
-        
         String[][] smaGameData = null;
-        int intPlatformCount = 0;
         
+        //<editor-fold defaultstate="collapsed" desc="XML Loading">
         try {
             DocumentBuilder dcbBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document docXMLFile = dcbBuilder.parse(new File(pthRecordFilePath.toString()));
+            Document docXMLFile = dcbBuilder.parse(new File(pthDatabaseFilePath.toString()));
             docXMLFile.getDocumentElement().normalize();
             
             Element elmRoot = docXMLFile.getDocumentElement();
             
             NodeList ndlEntryNodes = elmRoot.getChildNodes();
             
+            /**
+             * Outstanding error affects the following code.
+             * Error effectively doubles file length, resulting in the need to divide the file length by two and 
+             *  use of the variable 'intIncrementNoSkip'
+             */
+            
             // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
             smaGameData = new String[ndlEntryNodes.getLength()/2][10];
             
             int intIncrementNoSkip = 0;
-            int intNumberAfterAttr = 2;
+            int intIndexAfterAttr = 2;
             
-            for (int i=0; i<smaGameData[0].length-1;i++) {
+            // Loop through the database and add each game to the data array
+            for (int i = 0; i < smaGameData[0].length - 1; i++) {
                 Node nodCurrent = ndlEntryNodes.item(i);
+                
                 if (nodCurrent != null && nodCurrent.getNodeType() == Node.ELEMENT_NODE) {
                     NamedNodeMap nnmAttrList = nodCurrent.getAttributes();
-                
-                    for (int j=0;j<nnmAttrList.getLength();j++) {
-                        smaGameData[i-(i-intIncrementNoSkip)][j] = nnmAttrList.item(j).getNodeValue();
+                    
+                    for (int j = 0; j < nnmAttrList.getLength(); j++) {
+                        smaGameData[intIncrementNoSkip][j] = nnmAttrList.item(j).getNodeValue();
                     }
                 
                     NodeList ndlDataList = nodCurrent.getChildNodes();
                     Node nodCurrentChild;
 
-                    for (int k=0; k<ndlDataList.getLength()-1; k++) {
+                    for (int k = 0; k < ndlDataList.getLength() - 1; k++) {
                         nodCurrentChild = ndlDataList.item(k);
                         if (nodCurrentChild.getNodeType() == Node.ELEMENT_NODE) {
-                            smaGameData[i-(i-intIncrementNoSkip)][intNumberAfterAttr] = nodCurrentChild.getTextContent();
-                            intNumberAfterAttr++;
+                            smaGameData[intIncrementNoSkip][intIndexAfterAttr] = nodCurrentChild.getTextContent();
+                            intIndexAfterAttr++;
                         }
                     }
-                    intNumberAfterAttr = 2;
+                    intIndexAfterAttr = 2;
                     intIncrementNoSkip++;
                 }
             }
+            
             intPlatformCount = Integer.parseInt(elmRoot.getAttributes().item(0).getTextContent());
         } catch (ParserConfigurationException | SAXException | IOException exc) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, exc);
@@ -928,57 +959,70 @@ public class MainWindow extends javax.swing.JFrame {
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="Add data to UI">
-        
         Map<String, PlatformTab> mapPlatformTabs = new HashMap<>();
-        String[] sarPlatformList = new String[intPlatformCount];
+        sarPlatformList = new String[intPlatformCount];
+        
+        // DO NOT remove potentially redundant for loops without aproval as they contain some vital function
         boolean barVisited[] = new boolean[smaGameData.length];
         Arrays.fill(barVisited, false);
-        int intDistinct=0;
-        // Traverse through array elements and
-        // count frequencies
+        
+        int intDistinctPlatforms = 0;
+        
+        // Used to count platforms and create a list of them as well as create new Platfom Tab instances for each
         for (int i = 0; i < smaGameData.length; i++) {
-            // Skip this element if already processed
-            if (barVisited[i] == true)
-               continue;
+            if (barVisited[i] == true) continue;
            
             for (int j = i + 1; j < smaGameData.length; j++) {
-                if (smaGameData[i][1].equals(smaGameData[j][1])) {
-                   barVisited[j] = true;
-                }
+                if (smaGameData[i][1].equals(smaGameData[j][1])) barVisited[j] = true;
             }
-            intDistinct = intDistinct+1;
-            sarPlatformList[intDistinct-1] = smaGameData[i][1];
-            mapPlatformTabs.put(sarPlatformList[intDistinct-1], new PlatformTab());
+            
+            intDistinctPlatforms = intDistinctPlatforms + 1;
+            sarPlatformList[intDistinctPlatforms-1] = smaGameData[i][1];
+            mapPlatformTabs.put(sarPlatformList[intDistinctPlatforms - 1], new PlatformTab());
         }
         
-        for (int j=0;j<intDistinct;j++) {
-            tbpGameEntries.addTab(sarPlatformList[j], mapPlatformTabs.get(sarPlatformList[j]));
+        // Add tabs to the interface
+        for (int i = 0; i < intDistinctPlatforms; i++) {
+            tbpGameEntries.addTab(sarPlatformList[i], mapPlatformTabs.get(sarPlatformList[i]));
         }
         
         Map<String, Map> mapPlatforms = new HashMap<>();
         
-        for (int i=0;i<sarPlatformList.length;i++) {
+        // Create new map for each platform to contain the game entries
+        for (String strCurrentPlatform : sarPlatformList) {
             Map<String, GameEntry> mapGames = new HashMap<>();
-            mapPlatforms.put(sarPlatformList[i], mapGames);
+            mapPlatforms.put(strCurrentPlatform, mapGames);
+            
+            Map<String, String[]> mapGameData = new HashMap<>();
+            mapLoadedData.put(strCurrentPlatform, mapGameData);
         }
         
-        for (int i=0;i<smaGameData.length;i++) {
-            Map<String, GameEntry> mapCurrentPlatform = mapPlatforms.get(smaGameData[i][1]);
-            mapCurrentPlatform.put(smaGameData[i][0], new GameEntry());
-            GameEntry gmeCurrentGame = mapCurrentPlatform.get(smaGameData[i][0]);
-            gmeCurrentGame.setFields(smaGameData[i]);
-            PlatformTab pmtCurrentTab = mapPlatformTabs.get(smaGameData[i][1]);
+        // Create, store, and add game entries to the interface
+        for (String[] sarCurrentGameData : smaGameData) {
+            Map<String, GameEntry> mapCurrentPlatformUI = mapPlatforms.get(sarCurrentGameData[1]);
+            mapCurrentPlatformUI.put(sarCurrentGameData[0], new GameEntry());
+            
+            GameEntry gmeCurrentGame = mapCurrentPlatformUI.get(sarCurrentGameData[0]);
+            gmeCurrentGame.setFields(sarCurrentGameData);
+            
+            PlatformTab pmtCurrentTab = mapPlatformTabs.get(sarCurrentGameData[1]);
             pmtCurrentTab.tabMainPanel.add(gmeCurrentGame);
+            bgpGameSelection.add(gmeCurrentGame);
+            
+            Map mapCurrentPlatformData = mapLoadedData.get(sarCurrentGameData[1]);
+            mapCurrentPlatformData.put(sarCurrentGameData[0], sarCurrentGameData);
         }
-        
         //</editor-fold>
         
-        optLoad.setEnabled(false);
-    }//GEN-LAST:event_optLoadActionPerformed
+        // Prevent consecutive loading of multiple files
+        mniLoad.setEnabled(false);
+        // mniAddNew.setEnabled(true);
+        mniUpdate.setEnabled(true);
+    }//GEN-LAST:event_mniLoadActionPerformed
 
-    private void optQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optQuitActionPerformed
+    private void mniQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQuitActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_optQuitActionPerformed
+    }//GEN-LAST:event_mniQuitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1015,7 +1059,9 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Variables declaration">
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgpGameSelection;
     private javax.swing.ButtonGroup bgpSearchCategories;
     private javax.swing.JButton btnAdvancedSearchToggle;
     private javax.swing.JButton btnClassificationToggle;
@@ -1053,18 +1099,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblSetMinMACL;
     private javax.swing.JLabel lblSetMinYear;
     private javax.swing.JMenuBar mnbTitleBar;
+    private javax.swing.JMenuItem mniAbout;
+    private javax.swing.JMenuItem mniAddNew;
+    private javax.swing.JMenuItem mniLoad;
+    private javax.swing.JMenuItem mniManual;
+    private javax.swing.JMenuItem mniOnlineDocs;
+    private javax.swing.JMenuItem mniQuit;
+    private javax.swing.JMenuItem mniRemove;
+    private javax.swing.JMenuItem mniSave;
+    private javax.swing.JMenuItem mniUpdate;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenu mnuGame;
     private javax.swing.JMenu mnuHelp;
-    private javax.swing.JMenuItem optAbout;
-    private javax.swing.JMenuItem optAddNew;
-    private javax.swing.JMenuItem optLoad;
-    private javax.swing.JMenuItem optManual;
-    private javax.swing.JMenuItem optOnlineDocs;
-    private javax.swing.JMenuItem optQuit;
-    private javax.swing.JMenuItem optRemove;
-    private javax.swing.JMenuItem optSave;
-    private javax.swing.JMenuItem optUpdate;
     private javax.swing.JPanel pnlAdvancedSearch;
     private javax.swing.JPanel pnlClassificationFilter;
     private javax.swing.JPanel pnlMACLFilter;
@@ -1085,4 +1131,5 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField txtSetMinMACL;
     private javax.swing.JTextField txtSetMinYear;
     // End of variables declaration//GEN-END:variables
+    //</editor-fold>
 }

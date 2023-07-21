@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JPopupMenu" name="pmnContextMenu">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="mniUpdate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Update"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniUpdateActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
+  <Events>
+    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="formMouseClicked"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -16,64 +40,54 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblFrontSpacer">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStar1">
+    <Component class="javax.swing.JLabel" name="lblStarOne">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar1MouseClicked"/>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar1MouseEntered"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar1MouseExited"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStarOneMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStar2">
+    <Component class="javax.swing.JLabel" name="lblStarTwo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar2MouseDragged"/>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar2MouseEntered"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar2MouseExited"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStarTwoMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStar3">
+    <Component class="javax.swing.JLabel" name="lblStarThree">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar3MouseDragged"/>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar3MouseEntered"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar3MouseExited"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStarThreeMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStar4">
+    <Component class="javax.swing.JLabel" name="lblStarFour">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar4MouseDragged"/>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar4MouseEntered"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar4MouseExited"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStarFourMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStar5">
+    <Component class="javax.swing.JLabel" name="lblStarFive">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/DeselectedStar.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblStar5MouseDragged"/>
-        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar5MouseEntered"/>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStar5MouseExited"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblStarFiveMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
@@ -141,11 +155,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="5_lblStar1">
-          <CodeVariable name="lblStar1" type="8194" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="5_lblStarOne">
+          <CodeVariable name="lblStarOne" type="8194" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblStar1"/>
+              <ComponentRef name="lblStarOne"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -157,11 +171,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="6_lblStar2">
-          <CodeVariable name="lblStar2" type="8194" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="6_lblStarTwo">
+          <CodeVariable name="lblStarTwo" type="8194" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblStar2"/>
+              <ComponentRef name="lblStarTwo"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -173,11 +187,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="7_lblStar3">
-          <CodeVariable name="lblStar3" type="8194" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="7_lblStarThree">
+          <CodeVariable name="lblStarThree" type="8194" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblStar3"/>
+              <ComponentRef name="lblStarThree"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -189,11 +203,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="8_lblStar4">
-          <CodeVariable name="lblStar4" type="8194" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="8_lblStarFour">
+          <CodeVariable name="lblStarFour" type="8194" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblStar4"/>
+              <ComponentRef name="lblStarFour"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -205,11 +219,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="9_lblStar5">
-          <CodeVariable name="lblStar5" type="8194" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="9_lblStarFive">
+          <CodeVariable name="lblStarFive" type="8194" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="lblStar5"/>
+              <ComponentRef name="lblStarFive"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>

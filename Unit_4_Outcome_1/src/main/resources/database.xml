@@ -27,10 +27,10 @@
         <gameName>The Last of Us</gameName>
         <MACL>15.0</MACL>
         <classification>R18+</classification>
-        <releaseYear>2013</releaseYear>
+        <releaseYear>2023</releaseYear>
         <playStatus>NP</playStatus>
-        <personalRating>5</personalRating>
-        <notes>I've never played it</notes>
+        <personalRating>2</personalRating>
+        <notes>I've never played it, and probably won't</notes>
     </game>
     
     <game id="LAST13" platform="PS3">

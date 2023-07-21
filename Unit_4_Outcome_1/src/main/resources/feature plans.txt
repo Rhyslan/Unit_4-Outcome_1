@@ -1,0 +1,14 @@
+looping could be a function taking which conditions to check for
+
+filters:
+- loop through every game entry and hide those filtered out (not meeting filter conditions)
+
+Range filter: 
+- loop through every game entry and hide those either > range-upper or < range-lower
+
+sort: 
+- may need to be excluded
+
+search: 
+- loop through every game entry and make the desired game selected 
+- may need to exclude notes search and exact match only (no fuzzy)

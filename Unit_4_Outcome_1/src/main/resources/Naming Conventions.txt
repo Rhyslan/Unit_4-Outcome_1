@@ -10,7 +10,8 @@ ifr - JInternalFrame
 lbl - JLabel
 lyp - JLayeredPane
 lst - JList
-mnu - JMenuBar
+mnb - JMenuBar
+mnu - JMenu
 mni - JMenuItem
 opt - JOptionPane
 pnl - JPanel
