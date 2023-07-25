@@ -98,7 +98,7 @@ public class GameEntry extends javax.swing.JToggleButton {
     
     private void mniUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUpdateActionPerformed
         GameDataWindow winUpdateGame = new GameDataWindow();
-        winUpdateGame.setTitle("Level-Up Library - Update Game");
+        winUpdateGame.setWindowType("edit");
         
         winUpdateGame.loadCurrentGameData(sarThisGameData);
         

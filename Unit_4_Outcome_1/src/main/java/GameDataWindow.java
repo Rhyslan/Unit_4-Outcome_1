@@ -3,11 +3,15 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -75,13 +79,23 @@ public class GameDataWindow extends javax.swing.JFrame {
 
         lblBoxArtImage.setBackground(new java.awt.Color(255, 0, 0));
         lblBoxArtImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBoxArtImage.setText("Box Art Image");
+        lblBoxArtImage.setText("No Image");
         lblBoxArtImage.setMinimumSize(new java.awt.Dimension(150, 225));
         lblBoxArtImage.setPreferredSize(new java.awt.Dimension(150, 225));
 
         btnLoadImage.setText("Load");
+        btnLoadImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadImageActionPerformed(evt);
+            }
+        });
 
         btnRemoveImage.setText("Clear");
+        btnRemoveImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveImageActionPerformed(evt);
+            }
+        });
 
         lblReleaseYear.setText("Release Year:");
 
@@ -117,6 +131,11 @@ public class GameDataWindow extends javax.swing.JFrame {
         });
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         srtRatingSelector.setIsSelector(true);
 
@@ -260,7 +279,11 @@ public class GameDataWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     */
     public static String[] sarCurrentGameData = new String[10];
+    private static String strWindowType = "";
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
@@ -269,6 +292,63 @@ public class GameDataWindow extends javax.swing.JFrame {
     private void btnSetRatingZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetRatingZeroActionPerformed
         srtRatingSelector.selectRatingZero();
     }//GEN-LAST:event_btnSetRatingZeroActionPerformed
+
+    private void btnLoadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadImageActionPerformed
+        JFileChooser jfcFileBrowser = new JFileChooser(System.getProperty("user.dir") + "\\src\\main\\resources\\");
+        jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("PNG Files", "png"));
+        jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("JPEG Files", "jpg"));
+        jfcFileBrowser.setAcceptAllFileFilterUsed(false);
+        int intResponse =  jfcFileBrowser.showOpenDialog(null);
+        Path pthImageFile = null;
+        
+        if (intResponse == JFileChooser.APPROVE_OPTION) {
+            pthImageFile = Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
+        }
+        else {
+            return;
+        }
+        
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(pthImageFile.toString()));
+        } catch (IOException e) {
+            System.out.println("Unable to load boxart image for GameEntry Update");
+        }
+        if (img != null) {
+            lblBoxArtImage.setText("");
+            Image dimg = img.getScaledInstance(lblBoxArtImage.getWidth(), lblBoxArtImage.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            lblBoxArtImage.setIcon(imageIcon);
+        } else {
+            lblBoxArtImage.setText("Unable to load image");
+        }
+    }//GEN-LAST:event_btnLoadImageActionPerformed
+
+    private void btnRemoveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveImageActionPerformed
+        lblBoxArtImage.setIcon(null);
+        lblBoxArtImage.setText("No Image");
+    }//GEN-LAST:event_btnRemoveImageActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if ("add".equals(strWindowType)) {
+            sarCurrentGameData[0] = "make game ID";
+        } else if ("edit".equals(strWindowType)) {
+            // sarCurrentGameData[0] = "already got this";
+            sarCurrentGameData[1] = cmbPlatformSelector.getSelectedItem().toString();
+            if (lblBoxArtImage.getIcon() != null) {
+                sarCurrentGameData[2] = lblBoxArtImage.getIcon().toString();
+            } else {
+                sarCurrentGameData[2] = "No Image";
+            }
+            sarCurrentGameData[3] = txtGameName.getText();
+            sarCurrentGameData[4] = txtMACLEntry.getText();
+            sarCurrentGameData[5] = cmbClassificationSelector.getSelectedItem().toString();
+            sarCurrentGameData[6] = cmbReleaseYearSelector.getSelectedItem().toString();
+            sarCurrentGameData[7] = cmbPlayStatus.getSelectedItem().toString();
+            sarCurrentGameData[8] = Integer.toString(srtRatingSelector.getRating());
+            sarCurrentGameData[9] = txaNotes.getText();
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     public void setYearSelector() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
@@ -320,6 +400,17 @@ public class GameDataWindow extends javax.swing.JFrame {
         srtRatingSelector.setRating(Integer.parseInt(sarData[8]));
         
         txaNotes.setText(sarData[9]);
+    }
+    
+    public void setWindowType(String strType) {
+        strWindowType = strType;
+        if ("add".equals(strType)) {
+            this.setTitle("Level-Up Library - Add Game");
+            btnRemoveGame.setEnabled(false);
+            setYearSelector();
+        } else if ("edit".equals(strType)) {
+            this.setTitle("Level-Up Library - Update Game");
+        }
     }
     
     /**

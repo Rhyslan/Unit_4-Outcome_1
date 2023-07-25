@@ -180,13 +180,13 @@ public class StarRating extends javax.swing.JPanel {
         winUpdateGame.setTitle("Level-Up Library - Update Game");
         winUpdateGame.setVisible(true);
     }//GEN-LAST:event_mniUpdateActionPerformed
-
-    public boolean getIsSelector() {
-        return booIsSelector;
-    }
     
     public void setIsSelector(boolean isSelector) {
         this.booIsSelector = isSelector;
+    }
+    
+    public boolean getIsSelector() {
+        return booIsSelector;
     }
     
     /**
@@ -247,6 +247,10 @@ public class StarRating extends javax.swing.JPanel {
                 System.err.println("Provided rating is not within the range of '0' to '5' inclusively");
             }
         }
+    }
+    
+    public int getRating() {
+        return intSelectedRating;
     }
     
 

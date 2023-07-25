@@ -864,16 +864,14 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void mniAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAddNewActionPerformed
         GameDataWindow winAddGame = new GameDataWindow();
-        winAddGame.setTitle("Level-Up Library - Add Game");
-        winAddGame.btnRemoveGame.setEnabled(false);
-        winAddGame.setYearSelector();
+        winAddGame.setWindowType("add");
         winAddGame.setVisible(true);
     }//GEN-LAST:event_mniAddNewActionPerformed
 
     private void mniUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUpdateActionPerformed
         try {
             GameDataWindow winUpdateGame = new GameDataWindow();
-            winUpdateGame.setTitle("Level-Up Library - Update Game");
+            winUpdateGame.setWindowType("edit");
             
             String strCurrentPlatformTitle = tbpGameEntries.getTitleAt(tbpGameEntries.getSelectedIndex());
             Map mapCurrentPlatformEntries = mapLoadedData.get(strCurrentPlatformTitle);
@@ -1016,7 +1014,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         // Prevent consecutive loading of multiple files
         mniLoad.setEnabled(false);
-        // mniAddNew.setEnabled(true);
+        mniAddNew.setEnabled(true);
         mniUpdate.setEnabled(true);
     }//GEN-LAST:event_mniLoadActionPerformed
 
