@@ -2,16 +2,37 @@
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -64,6 +85,7 @@ public class GameDataWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Level-Up Library - Game Data Window");
+        setAlwaysOnTop(true);
 
         lblTitle.setText("Game Title:");
 
@@ -73,6 +95,7 @@ public class GameDataWindow extends javax.swing.JFrame {
 
         lblPlatform.setText("Platform:");
 
+        cmbPlatformSelector.setEditable(true);
         cmbPlatformSelector.setPreferredSize(new java.awt.Dimension(150, 22));
 
         lblBoxArt.setText("Box Art Image:");
@@ -207,7 +230,7 @@ public class GameDataWindow extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(btnSetRatingZero, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addComponent(lblPlatform, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
-                                    .addComponent(lblNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblNotes))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -282,8 +305,10 @@ public class GameDataWindow extends javax.swing.JFrame {
     /**
      *
      */
+    // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
     public static String[] sarCurrentGameData = new String[10];
     private static String strWindowType = "";
+    private static String newID = "";
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
@@ -312,7 +337,7 @@ public class GameDataWindow extends javax.swing.JFrame {
         try {
             img = ImageIO.read(new File(pthImageFile.toString()));
         } catch (IOException e) {
-            System.out.println("Unable to load boxart image for GameEntry Update");
+            System.out.println("Unable to load boxart image for " + sarCurrentGameData[0] + " on " + sarCurrentGameData[1]);
         }
         if (img != null) {
             lblBoxArtImage.setText("");
@@ -330,30 +355,31 @@ public class GameDataWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveImageActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        sarCurrentGameData[3] = txtGameName.getText();
+        sarCurrentGameData[6] = cmbReleaseYearSelector.getSelectedItem().toString();
+        
+        sarCurrentGameData[1] = cmbPlatformSelector.getSelectedItem().toString();
+        if (lblBoxArtImage.getIcon() != null) {
+            sarCurrentGameData[2] = sarCurrentGameData[0] + ".png";
+        } else {
+            sarCurrentGameData[2] = "No Image";
+        }
+        sarCurrentGameData[4] = txtMACLEntry.getText();
+        sarCurrentGameData[5] = cmbClassificationSelector.getSelectedItem().toString();
+        sarCurrentGameData[7] = cmbPlayStatus.getSelectedItem().toString();
+        sarCurrentGameData[8] = Integer.toString(srtRatingSelector.getRating());
+        sarCurrentGameData[9] = txaNotes.getText();
+        
         if ("add".equals(strWindowType)) {
-            sarCurrentGameData[0] = "make game ID";
+            sarCurrentGameData[0] = sarCurrentGameData[3].substring(0, 4).toUpperCase() + sarCurrentGameData[6].substring(2);
+            addNewToDatabase();
         } else if ("edit".equals(strWindowType)) {
-            // sarCurrentGameData[0] = "already got this";
-            sarCurrentGameData[1] = cmbPlatformSelector.getSelectedItem().toString();
-            if (lblBoxArtImage.getIcon() != null) {
-                sarCurrentGameData[2] = lblBoxArtImage.getIcon().toString();
-            } else {
-                sarCurrentGameData[2] = "No Image";
-            }
-            sarCurrentGameData[3] = txtGameName.getText();
-            sarCurrentGameData[4] = txtMACLEntry.getText();
-            sarCurrentGameData[5] = cmbClassificationSelector.getSelectedItem().toString();
-            sarCurrentGameData[6] = cmbReleaseYearSelector.getSelectedItem().toString();
-            sarCurrentGameData[7] = cmbPlayStatus.getSelectedItem().toString();
-            sarCurrentGameData[8] = Integer.toString(srtRatingSelector.getRating());
-            sarCurrentGameData[9] = txaNotes.getText();
+            saveToDatabase();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     public void setYearSelector() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy");
-        Date date = new Date();
-        int currentYear = Integer.parseInt(dateFormat.format(date));
+        int currentYear = MainWindow.getCurrentYear();
         
         for (int i = 1958; i < currentYear + 1; i++) {
             cmbReleaseYearSelector.addItem(String.valueOf(i));
@@ -364,9 +390,6 @@ public class GameDataWindow extends javax.swing.JFrame {
         // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
         sarCurrentGameData = sarData;
         
-        for (int i = 0; i < MainWindow.intPlatformCount; i++) {
-            cmbPlatformSelector.addItem(MainWindow.sarPlatformList[i]);
-        }
         cmbPlatformSelector.getModel().setSelectedItem(sarData[1]);
         
         
@@ -374,12 +397,12 @@ public class GameDataWindow extends javax.swing.JFrame {
         try {
             img = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + sarData[2]));
         } catch (IOException e) {
-            System.out.println("Unable to load boxart image for GameEntry Update");
+            System.out.println("Unable to load boxart image for " + sarCurrentGameData[0] + " on " + sarCurrentGameData[1]);
         }
         if (img != null) {
             lblBoxArtImage.setText("");
             Image dimg = img.getScaledInstance(lblBoxArtImage.getWidth(), lblBoxArtImage.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon imageIcon = new ImageIcon(dimg);
+            ImageIcon imageIcon = new ImageIcon(dimg, dimg.toString());
             lblBoxArtImage.setIcon(imageIcon);
         } else {
             lblBoxArtImage.setText("Unable to load image");
@@ -404,13 +427,141 @@ public class GameDataWindow extends javax.swing.JFrame {
     
     public void setWindowType(String strType) {
         strWindowType = strType;
+        for (int i = 0; i < MainWindow.intPlatformCount; i++) {
+            cmbPlatformSelector.addItem(MainWindow.sarPlatformList[i]);
+        }
         if ("add".equals(strType)) {
             this.setTitle("Level-Up Library - Add Game");
             btnRemoveGame.setEnabled(false);
             setYearSelector();
+            cmbPlatformSelector.setSelectedIndex(-1);
+            cmbClassificationSelector.setSelectedIndex(0);
+            cmbPlayStatus.setSelectedIndex(0);
+            
+            cmbReleaseYearSelector.setSelectedItem(MainWindow.getCurrentYear());
         } else if ("edit".equals(strType)) {
             this.setTitle("Level-Up Library - Update Game");
         }
+    }
+    
+    private void saveToDatabase() {
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        XPath xpath = xpathFactory.newXPath();
+        // List<String> values = new ArrayList<>();
+        
+        try {
+            XPathExpression expr = xpath.compile("/gameList/game[@id = '" + sarCurrentGameData[0] + "']");
+            Node node = (Node) expr.evaluate(MainWindow.doc, XPathConstants.NODE);
+            NodeList children = node.getChildNodes();
+            Node child;
+            
+            node.getAttributes().item(1).setTextContent(sarCurrentGameData[1]);
+            // String platform = node.getAttributes().item(1).getTextContent();
+            
+            int intIndexAfterAttr = 2;
+            
+            for (int i = 0; i < children.getLength(); i++) {
+                child = children.item(i);
+                if (child != null && child.getNodeType() == Node.ELEMENT_NODE) {
+                    child.setTextContent(sarCurrentGameData[intIndexAfterAttr]);
+                    intIndexAfterAttr++;
+                }
+            }
+            // System.out.println(platform);
+        } catch (XPathExpressionException ex) {
+            System.out.println("Unable to get the xPathExpression: " + ex);
+        }
+        
+        try {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(MainWindow.doc);
+            FileOutputStream output = new FileOutputStream("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Unit_4_Outcome_1\\src\\main\\resources\\database_new.xml");
+            StreamResult result = new StreamResult(output);
+
+            transformer.transform(source, result);
+        }
+        catch (TransformerException | FileNotFoundException ex) {
+            System.out.println("Database editing didn't work (transformer or file error): " + ex);
+        }
+        
+        JOptionPane.showMessageDialog(null, "Game Updated Successfully");
+        
+        this.dispose();
+        
+        MainWindow.updateInterface();
+        MainWindow.isSaved = false;
+    }
+    
+    private void addNewToDatabase() {
+        Element newGame = MainWindow.doc.createElement("game");
+
+        newGame.setAttribute("id", sarCurrentGameData[0]);
+        newGame.setAttribute("platform", sarCurrentGameData[1]);
+
+        Element boxArt = MainWindow.doc.createElement("boxArt");
+        boxArt.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[2]));
+        newGame.appendChild(boxArt);
+
+        Element gameName = MainWindow.doc.createElement("gameName");
+        gameName.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[3]));
+        newGame.appendChild(gameName);
+
+        Element MACL = MainWindow.doc.createElement("MACL");
+        MACL.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[4]));
+        newGame.appendChild(MACL);
+
+        Element classification = MainWindow.doc.createElement("classification");
+        classification.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[5]));
+        newGame.appendChild(classification);
+
+        Element releaseYear = MainWindow.doc.createElement("releaseYear");
+        releaseYear.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[6]));
+        newGame.appendChild(releaseYear);
+
+        Element playStatus = MainWindow.doc.createElement("playStatus");
+        playStatus.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[7]));
+        newGame.appendChild(playStatus);
+
+        Element personalRating = MainWindow.doc.createElement("personalRating");
+        personalRating.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[8]));
+        newGame.appendChild(personalRating);
+
+        Element notes = MainWindow.doc.createElement("notes");
+        notes.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[9]));
+        newGame.appendChild(notes);
+
+        MainWindow.doc.getDocumentElement().appendChild(newGame);
+        
+        try {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(MainWindow.doc);
+            FileOutputStream output = new FileOutputStream("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Unit_4_Outcome_1\\src\\main\\resources\\database_new.xml");
+            StreamResult result = new StreamResult(output);
+
+            transformer.transform(source, result);
+        }
+        catch (TransformerException | FileNotFoundException ex) {
+            System.out.println("Database editing didn't work (transformer or file error): " + ex);
+        }
+        
+        JOptionPane.showMessageDialog(null, "Game Added Successfully");
+        
+        this.dispose();
+        
+        String[][] smaUpdatedRecords = new String[MainWindow.smaGameData.length + 1][10];
+        
+        System.arraycopy(MainWindow.smaGameData, 0, smaUpdatedRecords, 0, MainWindow.smaGameData.length);
+        
+        smaUpdatedRecords[MainWindow.smaGameData.length] = sarCurrentGameData;
+        
+        MainWindow.smaGameData = new String[smaUpdatedRecords.length][10];
+        
+        System.arraycopy(smaUpdatedRecords, 0, MainWindow.smaGameData, 0, smaUpdatedRecords.length);
+        
+        MainWindow.updateInterface();
+        MainWindow.isSaved = false;
     }
     
     /**

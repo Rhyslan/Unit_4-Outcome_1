@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Level-Up Library - Game Data Window"/>
+    <Property name="alwaysOnTop" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -96,7 +97,7 @@
                                       <Component id="btnSetRatingZero" pref="0" max="32767" attributes="0"/>
                                       <Component id="lblPlatform" pref="57" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="lblNotes" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="lblNotes" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -216,6 +217,7 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbPlatformSelector">
       <Properties>
+        <Property name="editable" type="boolean" value="true"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>

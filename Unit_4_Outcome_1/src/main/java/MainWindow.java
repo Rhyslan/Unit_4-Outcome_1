@@ -1,15 +1,21 @@
 
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JMenu;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -123,17 +129,24 @@ public class MainWindow extends javax.swing.JFrame {
         mniManual = new javax.swing.JMenuItem();
         mniAbout = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Level-Up Library - Main Window");
         setMinimumSize(new java.awt.Dimension(1024, 600));
         setName("MainWindow"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 600));
         setSize(new java.awt.Dimension(1024, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         srpSidebarScroll.setBorder(null);
         srpSidebarScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         srpSidebarScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        srpSidebarScroll.setEnabled(false);
 
+        pnlSidebarInner.setEnabled(false);
         pnlSidebarInner.setMinimumSize(new java.awt.Dimension(0, 0));
         pnlSidebarInner.setPreferredSize(new java.awt.Dimension(230, 1016));
         org.jdesktop.swingx.VerticalLayout verticalLayout1 = new org.jdesktop.swingx.VerticalLayout();
@@ -259,14 +272,39 @@ public class MainWindow extends javax.swing.JFrame {
         pnlClassificationFilter.setPreferredSize(new java.awt.Dimension(230, 85));
 
         cbxRatedG.setText("G");
+        cbxRatedG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRatedGActionPerformed(evt);
+            }
+        });
 
         cbxRatedPG.setText("PG");
+        cbxRatedPG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRatedPGActionPerformed(evt);
+            }
+        });
 
         cbxRatedM.setText("M");
+        cbxRatedM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRatedMActionPerformed(evt);
+            }
+        });
 
         cbxRatedMA15.setText("MA15+");
+        cbxRatedMA15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRatedMA15ActionPerformed(evt);
+            }
+        });
 
         cbxRatedR18.setText("R18+");
+        cbxRatedR18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRatedR18ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlClassificationFilterLayout = new javax.swing.GroupLayout(pnlClassificationFilter);
         pnlClassificationFilter.setLayout(pnlClassificationFilterLayout);
@@ -421,16 +459,46 @@ public class MainWindow extends javax.swing.JFrame {
         pnlRatingFilter.setPreferredSize(new java.awt.Dimension(230, 160));
 
         cbx0Stars.setText("None");
+        cbx0Stars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx0StarsActionPerformed(evt);
+            }
+        });
 
         cbx1Star.setText("1 Star");
+        cbx1Star.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx1StarActionPerformed(evt);
+            }
+        });
 
         cbx2Stars.setText("2 Stars");
+        cbx2Stars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx2StarsActionPerformed(evt);
+            }
+        });
 
         cbx3Stars.setText("3 Stars");
+        cbx3Stars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx3StarsActionPerformed(evt);
+            }
+        });
 
         cbx4Stars.setText("4 Stars");
+        cbx4Stars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx4StarsActionPerformed(evt);
+            }
+        });
 
         cbx5Stars.setText("5 Stars");
+        cbx5Stars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx5StarsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlRatingFilterLayout = new javax.swing.GroupLayout(pnlRatingFilter);
         pnlRatingFilter.setLayout(pnlRatingFilterLayout);
@@ -480,14 +548,39 @@ public class MainWindow extends javax.swing.JFrame {
         pnlSidebarInner.add(btnStatusToggle);
 
         cbxNotPlaying.setText("NP");
+        cbxNotPlaying.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNotPlayingActionPerformed(evt);
+            }
+        });
 
         cbxInProgress.setText("IP");
+        cbxInProgress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxInProgressActionPerformed(evt);
+            }
+        });
 
         cbxFinishedGame.setText("FG");
+        cbxFinishedGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFinishedGameActionPerformed(evt);
+            }
+        });
 
         cbxFinishedStory.setText("FS");
+        cbxFinishedStory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFinishedStoryActionPerformed(evt);
+            }
+        });
 
         cbxAbandoned.setText("AB");
+        cbxAbandoned.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAbandonedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlStatusFilterLayout = new javax.swing.GroupLayout(pnlStatusFilter);
         pnlStatusFilter.setLayout(pnlStatusFilterLayout);
@@ -643,6 +736,11 @@ public class MainWindow extends javax.swing.JFrame {
         mniSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniSave.setText("Save");
         mniSave.setEnabled(false);
+        mniSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSaveActionPerformed(evt);
+            }
+        });
         mnuFile.add(mniSave);
 
         mniQuit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -725,9 +823,17 @@ public class MainWindow extends javax.swing.JFrame {
     
     private static String strAdvancedPrevious = "N/A";
     
+    public static Path pthDatabaseFilePath = null;
+    public static String[][] smaGameData = null;
     public static Map<String, Map> mapLoadedData = new HashMap<>();
+    public static Document doc = null;
     public static String[] sarPlatformList = null;
     public static int intPlatformCount = 0;
+    
+    // Structure: [class, macl, rate, status, year]
+    private static String[][] filters = {{"", "", "", "", ""}, {"0", "999"}, {"", "", "", "", "", ""}, {"", "", "", "", ""}, {"1956", String.valueOf(getCurrentYear())}};
+    
+    public static boolean isSaved = true;
     
     public static String strSelectedGame = "N/A";
     
@@ -753,6 +859,139 @@ public class MainWindow extends javax.swing.JFrame {
         
         return mapFinalStates.get(strStates);
     }    
+    
+    public static void updateInterface() {
+        tbpGameEntries.removeAll();
+        
+        Map<String, PlatformTab> mapPlatformTabs = new HashMap<>();
+        sarPlatformList = new String[intPlatformCount];
+
+        // DO NOT remove potentially redundant for loops without aproval as they contain some vital function
+        boolean barVisited[] = new boolean[smaGameData.length];
+        Arrays.fill(barVisited, false);
+
+        int intDistinctPlatforms = 0;
+
+        // Used to count platforms and create a list of them as well as create new Platfom Tab instances for each
+        for (int i = 0; i < smaGameData.length; i++) {
+            if (barVisited[i] == true) {
+                continue;
+            }
+
+            for (int j = i + 1; j < smaGameData.length; j++) {
+                if (smaGameData[i][1].equals(smaGameData[j][1])) {
+                    barVisited[j] = true;
+                }
+            }
+
+            intDistinctPlatforms = intDistinctPlatforms + 1;
+            sarPlatformList[intDistinctPlatforms - 1] = smaGameData[i][1];
+            mapPlatformTabs.put(sarPlatformList[intDistinctPlatforms - 1], new PlatformTab());
+        }
+
+        // Add tabs to the interface
+        for (int i = 0; i < intDistinctPlatforms; i++) {
+            tbpGameEntries.addTab(sarPlatformList[i], mapPlatformTabs.get(sarPlatformList[i]));
+        }
+
+        Map<String, Map> mapPlatforms = new HashMap<>();
+
+        // Create new map for each platform to contain the game entries
+        for (String strCurrentPlatform : sarPlatformList) {
+            Map<String, GameEntry> mapGames = new HashMap<>();
+            mapPlatforms.put(strCurrentPlatform, mapGames);
+
+            Map<String, String[]> mapGameData = new HashMap<>();
+            mapLoadedData.put(strCurrentPlatform, mapGameData);
+        }
+
+        // Create, store, and add game entries to the interface
+        for (String[] sarCurrentGameData : smaGameData) {
+            Map<String, GameEntry> mapCurrentPlatformUI = mapPlatforms.get(sarCurrentGameData[1]);
+            mapCurrentPlatformUI.put(sarCurrentGameData[0], new GameEntry());
+
+            GameEntry gmeCurrentGame = mapCurrentPlatformUI.get(sarCurrentGameData[0]);
+            gmeCurrentGame.setFields(sarCurrentGameData);
+
+            PlatformTab pmtCurrentTab = mapPlatformTabs.get(sarCurrentGameData[1]);
+            pmtCurrentTab.tabMainPanel.add(gmeCurrentGame);
+            bgpGameSelection.add(gmeCurrentGame);
+
+            Map mapCurrentPlatformData = mapLoadedData.get(sarCurrentGameData[1]);
+            mapCurrentPlatformData.put(sarCurrentGameData[0], sarCurrentGameData);
+        }
+    }
+    
+    private void applyFilters() {
+        if (mniLoad.isEnabled() == true) {
+            System.out.println("Please load data first");
+        } else {
+            PlatformTab currentTab = (PlatformTab) tbpGameEntries.getSelectedComponent();
+            for (int i = 1; i < currentTab.tabMainPanel.getComponentCount(); i++) {
+                GameEntry currentGame = (GameEntry) currentTab.tabMainPanel.getComponent(i);
+                
+                
+                // Classification
+                for (int j = 0; j < filters[0].length; j++) {
+                    if (filters[0][j].equals(currentGame.sarThisGameData[5])) {
+                        currentGame.setVisible(true);
+                        break;
+                    } else {
+                        currentGame.setVisible(false);
+                    }
+                }
+                
+                /*
+                // Length
+                for (int j = 0; j < filters[1].length; j++) {
+                    if (filters[1][j].equals(currentGame.sarThisGameData[4])) {
+                        currentGame.setVisible(true);
+                    } else {
+                        currentGame.setVisible(false);
+                    }
+                }
+                */
+                
+                // Rating
+                for (int j = 0; j < filters[2].length; j++) {
+                    if (filters[2][j].equals(currentGame.sarThisGameData[8])) {
+                        currentGame.setVisible(true);
+                        break;
+                    } else {
+                        currentGame.setVisible(false);
+                    }
+                }
+                
+                // Play Status
+                for (int j = 0; j < filters[3].length; j++) {
+                    if (filters[3][j].equals(currentGame.sarThisGameData[7])) {
+                        currentGame.setVisible(true);
+                        break;
+                    } else {
+                        currentGame.setVisible(false);
+                    }
+                }
+                
+                /*
+                // Release Year
+                for (int j = 0; j < filters[4].length; j++) {
+                    if (filters[4][j].equals(currentGame.sarThisGameData[6])) {
+                        currentGame.setVisible(true);
+                    } else {
+                        currentGame.setVisible(false);
+                    }
+                }
+                */
+            }
+        }
+    }
+    
+    public static int getCurrentYear() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        int currentYear = Integer.parseInt(dateFormat.format(date));
+        return currentYear;
+    }
     
     //<editor-fold defaultstate="collapsed" desc="UI Setup Functions">
     private void btnSearchMenuToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMenuToggleActionPerformed
@@ -838,27 +1077,41 @@ public class MainWindow extends javax.swing.JFrame {
     private void rslMACLSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rslMACLSliderStateChanged
         txtSetMinMACL.setText(Integer.toString(rslMACLSlider.getValue()));
         txtSetMaxMACL.setText(Integer.toString(rslMACLSlider.getSecondValue()));
+        filters[1][0] = String.valueOf(rslMACLSlider.getValue());
+        filters[1][1] = String.valueOf(rslMACLSlider.getSecondValue());
+        applyFilters();
     }//GEN-LAST:event_rslMACLSliderStateChanged
 
     private void txtSetMinMACLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMinMACLActionPerformed
         rslMACLSlider.setValue(Integer.parseInt(txtSetMinMACL.getText()));
+        filters[1][0] = txtSetMinMACL.getText();
+        applyFilters();
     }//GEN-LAST:event_txtSetMinMACLActionPerformed
 
     private void txtSetMaxMACLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMaxMACLActionPerformed
         rslMACLSlider.setSecondValue(Integer.parseInt(txtSetMaxMACL.getText()));
+        filters[1][1] = txtSetMaxMACL.getText();
+        applyFilters();
     }//GEN-LAST:event_txtSetMaxMACLActionPerformed
 
     private void rslYearSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rslYearSliderStateChanged
         txtSetMinYear.setText(Integer.toString(rslYearSlider.getValue()));
         txtSetMaxYear.setText(Integer.toString(rslYearSlider.getSecondValue()));
+        filters[4][0] = String.valueOf(rslYearSlider.getValue());
+        filters[4][1] = String.valueOf(rslYearSlider.getSecondValue());
+        applyFilters();
     }//GEN-LAST:event_rslYearSliderStateChanged
 
     private void txtSetMinYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMinYearActionPerformed
         rslYearSlider.setValue(Integer.parseInt(txtSetMinYear.getText()));
+        filters[4][0] = txtSetMinYear.getText();
+        applyFilters();
     }//GEN-LAST:event_txtSetMinYearActionPerformed
 
     private void txtSetMaxYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMaxYearActionPerformed
         rslYearSlider.setSecondValue(Integer.parseInt(txtSetMaxYear.getText()));
+        filters[4][1] = txtSetMaxYear.getText();
+        applyFilters();
     }//GEN-LAST:event_txtSetMaxYearActionPerformed
     //</editor-fold>
     
@@ -891,7 +1144,6 @@ public class MainWindow extends javax.swing.JFrame {
         jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
         jfcFileBrowser.setAcceptAllFileFilterUsed(false);
         int intResponse =  jfcFileBrowser.showOpenDialog(null);
-        Path pthDatabaseFilePath = null;
         
         if (intResponse == JFileChooser.APPROVE_OPTION) {
             pthDatabaseFilePath = Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
@@ -900,13 +1152,12 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
         
-        String[][] smaGameData = null;
-        
         //<editor-fold defaultstate="collapsed" desc="XML Loading">
         try {
             DocumentBuilder dcbBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document docXMLFile = dcbBuilder.parse(new File(pthDatabaseFilePath.toString()));
             docXMLFile.getDocumentElement().normalize();
+            doc = docXMLFile;
             
             Element elmRoot = docXMLFile.getDocumentElement();
             
@@ -956,72 +1207,120 @@ public class MainWindow extends javax.swing.JFrame {
         }
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc="Add data to UI">
-        Map<String, PlatformTab> mapPlatformTabs = new HashMap<>();
-        sarPlatformList = new String[intPlatformCount];
-        
-        // DO NOT remove potentially redundant for loops without aproval as they contain some vital function
-        boolean barVisited[] = new boolean[smaGameData.length];
-        Arrays.fill(barVisited, false);
-        
-        int intDistinctPlatforms = 0;
-        
-        // Used to count platforms and create a list of them as well as create new Platfom Tab instances for each
-        for (int i = 0; i < smaGameData.length; i++) {
-            if (barVisited[i] == true) continue;
-           
-            for (int j = i + 1; j < smaGameData.length; j++) {
-                if (smaGameData[i][1].equals(smaGameData[j][1])) barVisited[j] = true;
-            }
-            
-            intDistinctPlatforms = intDistinctPlatforms + 1;
-            sarPlatformList[intDistinctPlatforms-1] = smaGameData[i][1];
-            mapPlatformTabs.put(sarPlatformList[intDistinctPlatforms - 1], new PlatformTab());
-        }
-        
-        // Add tabs to the interface
-        for (int i = 0; i < intDistinctPlatforms; i++) {
-            tbpGameEntries.addTab(sarPlatformList[i], mapPlatformTabs.get(sarPlatformList[i]));
-        }
-        
-        Map<String, Map> mapPlatforms = new HashMap<>();
-        
-        // Create new map for each platform to contain the game entries
-        for (String strCurrentPlatform : sarPlatformList) {
-            Map<String, GameEntry> mapGames = new HashMap<>();
-            mapPlatforms.put(strCurrentPlatform, mapGames);
-            
-            Map<String, String[]> mapGameData = new HashMap<>();
-            mapLoadedData.put(strCurrentPlatform, mapGameData);
-        }
-        
-        // Create, store, and add game entries to the interface
-        for (String[] sarCurrentGameData : smaGameData) {
-            Map<String, GameEntry> mapCurrentPlatformUI = mapPlatforms.get(sarCurrentGameData[1]);
-            mapCurrentPlatformUI.put(sarCurrentGameData[0], new GameEntry());
-            
-            GameEntry gmeCurrentGame = mapCurrentPlatformUI.get(sarCurrentGameData[0]);
-            gmeCurrentGame.setFields(sarCurrentGameData);
-            
-            PlatformTab pmtCurrentTab = mapPlatformTabs.get(sarCurrentGameData[1]);
-            pmtCurrentTab.tabMainPanel.add(gmeCurrentGame);
-            bgpGameSelection.add(gmeCurrentGame);
-            
-            Map mapCurrentPlatformData = mapLoadedData.get(sarCurrentGameData[1]);
-            mapCurrentPlatformData.put(sarCurrentGameData[0], sarCurrentGameData);
-        }
-        //</editor-fold>
+        updateInterface();
         
         // Prevent consecutive loading of multiple files
         mniLoad.setEnabled(false);
         mniAddNew.setEnabled(true);
         mniUpdate.setEnabled(true);
+        mniSave.setEnabled(true);
     }//GEN-LAST:event_mniLoadActionPerformed
 
     private void mniQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQuitActionPerformed
-        System.exit(0);
+        if (isSaved == false) {
+            int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, "Unsaved data!\nDo you wish to proceed?", "Unsaved Data", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (intConfirmExit == 0) System.exit(0);
+        } else {
+            System.exit(0);
+        }
     }//GEN-LAST:event_mniQuitActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if (isSaved == false) {
+            int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, "Unsaved data!\nDo you wish to proceed?", "Unsaved Data", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (intConfirmExit == 0) System.exit(0);
+        } else {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void mniSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSaveActionPerformed
+        JOptionPane.showMessageDialog(null, "Database Saved Successfully");
+        if (isSaved != true) isSaved = true;
+    }//GEN-LAST:event_mniSaveActionPerformed
+
+    //<editor-fold defaultstate="collapsed" desc="Set Filters">
+    private void cbxRatedGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedGActionPerformed
+        filters[0][0] = cbxRatedG.isSelected() ? "G" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxRatedGActionPerformed
+
+    private void cbxRatedPGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedPGActionPerformed
+        filters[0][1] = cbxRatedPG.isSelected() ? "PG" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxRatedPGActionPerformed
+
+    private void cbxRatedMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedMActionPerformed
+        filters[0][2] = cbxRatedM.isSelected() ? "M" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxRatedMActionPerformed
+
+    private void cbxRatedMA15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedMA15ActionPerformed
+        filters[0][3] = cbxRatedMA15.isSelected() ? "MA15" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxRatedMA15ActionPerformed
+
+    private void cbxRatedR18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedR18ActionPerformed
+        filters[0][4] = cbxRatedR18.isSelected() ? "R18" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxRatedR18ActionPerformed
+
+    private void cbx0StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx0StarsActionPerformed
+        filters[2][0] = cbx0Stars.isSelected() ? "0" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbx0StarsActionPerformed
+
+    private void cbx1StarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx1StarActionPerformed
+        filters[2][1] = cbx1Star.isSelected() ? "1" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbx1StarActionPerformed
+
+    private void cbx2StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx2StarsActionPerformed
+        filters[2][2] = cbx2Stars.isSelected() ? "2" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbx2StarsActionPerformed
+
+    private void cbx3StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx3StarsActionPerformed
+        filters[2][3] = cbx3Stars.isSelected() ? "3" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbx3StarsActionPerformed
+
+    private void cbx4StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx4StarsActionPerformed
+        filters[2][4] = cbx4Stars.isSelected() ? "4" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbx4StarsActionPerformed
+
+    private void cbx5StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx5StarsActionPerformed
+        filters[2][5] = cbx5Stars.isSelected() ? "5" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbx5StarsActionPerformed
+
+    private void cbxNotPlayingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNotPlayingActionPerformed
+        filters[3][0] = cbxNotPlaying.isSelected() ? "NP" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxNotPlayingActionPerformed
+
+    private void cbxInProgressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxInProgressActionPerformed
+        filters[3][1] = cbxInProgress.isSelected() ? "IP" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxInProgressActionPerformed
+
+    private void cbxFinishedGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFinishedGameActionPerformed
+        filters[3][2] = cbxFinishedGame.isSelected() ? "FG" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxFinishedGameActionPerformed
+
+    private void cbxFinishedStoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFinishedStoryActionPerformed
+        filters[3][3] = cbxFinishedStory.isSelected() ? "FG" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxFinishedStoryActionPerformed
+
+    private void cbxAbandonedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAbandonedActionPerformed
+        filters[3][4] = cbxAbandoned.isSelected() ? "AB" : "";
+        applyFilters();
+    }//GEN-LAST:event_cbxAbandonedActionPerformed
+    //</editor-fold>
+    
     /**
      * @param args the command line arguments
      */
@@ -1059,7 +1358,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc="Variables declaration">
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup bgpGameSelection;
+    private static javax.swing.ButtonGroup bgpGameSelection;
     private javax.swing.ButtonGroup bgpSearchCategories;
     private javax.swing.JButton btnAdvancedSearchToggle;
     private javax.swing.JButton btnClassificationToggle;
@@ -1122,7 +1421,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton rtnNotesCategory;
     private javax.swing.JRadioButton rtnTitleCategory;
     private javax.swing.JScrollPane srpSidebarScroll;
-    private javax.swing.JTabbedPane tbpGameEntries;
+    private static javax.swing.JTabbedPane tbpGameEntries;
     private javax.swing.JTextField txtSearchQuery;
     private javax.swing.JTextField txtSetMaxMACL;
     private javax.swing.JTextField txtSetMaxYear;

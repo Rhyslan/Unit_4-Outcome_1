@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gameList numberOfPlatforms="3">
+    <game id="MINE11" platform="3DS">
+        <boxArt>MINE11.png</boxArt>
+        <gameName>Minecraft</gameName>
+        <MACL>0.0</MACL>
+        <classification>M</classification>
+        <releaseYear>2011</releaseYear>
+        <playStatus>IP</playStatus>
+        <personalRating>4</personalRating>
+        <notes>Fun block game. Kinda boring.</notes>
+    </game>
+    
+    <game id="STRA22" platform="PC">
+        <boxArt>STRA22.png</boxArt>
+        <gameName>Stray</gameName>
+        <MACL>5.0</MACL>
+        <classification>PG</classification>
+        <releaseYear>2022</releaseYear>
+        <playStatus>FG</playStatus>
+        <personalRating>5</personalRating>
+        <notes>N/A</notes>
+    </game>
+    
+    <game id="LAST13" platform="PC">
+        <boxArt>LAST13.png</boxArt>
+        <gameName>The Last of Us</gameName>
+        <MACL>15.0</MACL>
+        <classification>R18+</classification>
+        <releaseYear>2023</releaseYear>
+        <playStatus>NP</playStatus>
+        <personalRating>2</personalRating>
+        <notes>I've never played it, and probably won't</notes>
+    </game>
+    
+    <game id="LAST13" platform="PS3">
+        <boxArt>LAST13.png</boxArt>
+        <gameName>The Last of Us</gameName>
+        <MACL>15.0</MACL>
+        <classification>R18+</classification>
+        <releaseYear>2013</releaseYear>
+        <playStatus>NP</playStatus>
+        <personalRating>5</personalRating>
+        <notes>I've never played it</notes>
+    </game>
+</gameList>

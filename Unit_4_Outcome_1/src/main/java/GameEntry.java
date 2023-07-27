@@ -121,7 +121,7 @@ public class GameEntry extends javax.swing.JToggleButton {
         try {
             img = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + sarGameData[2]));
         } catch (IOException e) {
-            System.out.println("Unable to load boxart image for GameEntry Update");
+            System.out.println("Unable to load boxart image " + "(" + System.getProperty("user.dir") + "\\src\\main\\resources\\" + sarGameData[2] + ") " + "for " + sarThisGameData[0] + " on " + sarThisGameData[1]);
         }
         if (img != null) {
             lblBoxArt.setText("");
