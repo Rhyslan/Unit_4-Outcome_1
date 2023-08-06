@@ -1,0 +1,94 @@
+** Data Types **
+*ar - (Data type) Array
+*ma - (Data type) Muli-dimensional array
+bln - Boolean
+chr - Character
+flt - Float
+int - Integer
+map - Map/HashMap
+str - String
+
+** Date **
+dte - Date
+dtf - Date Format
+
+** Encryption **
+cph - Cipher
+key - Key
+
+** Files **
+fil - File
+jfc - JFileChooser
+pth - Path
+** Streams **
+fis - File Input Stream
+fos - File Output Stream
+smr - Stream Result
+
+** Images **
+bim - Buffered Image
+icn - Image icon
+img - Image
+
+** Objects **
+gdw - Game Data Window (add/update)
+gme - Game Entry
+pmt - Platform Tab
+srt - Star Rating
+
+** Other **
+exc - exception
+
+** Swing Components **
+btn - JButton
+chk - JCheckBox
+clr - JColorChooser
+cmb - JComboBox
+edt - JEditorPane
+fch - JFileChooser
+ico - JDesktopIcon
+ifr - JInternalFrame
+lbl - JLabel
+lst - JList
+lyp - JLayeredPane
+mnb - JMenuBar
+mni - JMenuItem
+mnu - JMenu
+opt - JOptionPane
+pmn - JPopupMenu
+pnl - JPanel
+prg - JProgressBar
+rad - JRadioButton
+rot - JRootPane
+scb - JScollBar
+scr - JScrollPane
+sld - JSlider
+spl - JSplitPane
+spn - JSpinner
+spr - JSeparator
+tab - JTabbedPaneJTable
+tbh - JTableHeader
+tbl - JTable
+tgl - JToggleButton
+tlb - JToolBar
+tlt - JToolTip
+tre - JTree
+txa - JTextArea
+txp - JTextPane
+txt - JTextField
+vpr - JViewport
+win - JWindow and descendants (JFrame, JDialog, JFileDialog)
+
+** XML **
+dcb - Document Builder
+dms - DOM Source
+doc - Document
+elm - Element
+ndl - NodeList
+nnm - Named Node Map
+nod - Node
+tff - Transformer factory
+tsf - Transformer
+xpa - xPath
+xpe - XPathExpression
+xpf - xPathFactory

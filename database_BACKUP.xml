@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<gameList numberOfPlatforms="3">
+<gameList platformList="3DS, PC, PS3">
     <game id="MINE11" platform="3DS">
         <boxArt>MINE11.png</boxArt>
         <gameName>Minecraft</gameName>
-        <MACL>0.0</MACL>
-        <classification>M</classification>
+        <MACL>0</MACL>
+        <classification>G</classification>
         <releaseYear>2011</releaseYear>
         <playStatus>IP</playStatus>
         <personalRating>4</personalRating>
@@ -14,7 +14,7 @@
     <game id="STRA22" platform="PC">
         <boxArt>STRA22.png</boxArt>
         <gameName>Stray</gameName>
-        <MACL>5.0</MACL>
+        <MACL>5</MACL>
         <classification>PG</classification>
         <releaseYear>2022</releaseYear>
         <playStatus>FG</playStatus>
@@ -25,7 +25,7 @@
     <game id="LAST13" platform="PC">
         <boxArt>LAST13.png</boxArt>
         <gameName>The Last of Us</gameName>
-        <MACL>15.0</MACL>
+        <MACL>15</MACL>
         <classification>R18+</classification>
         <releaseYear>2023</releaseYear>
         <playStatus>NP</playStatus>
@@ -36,7 +36,7 @@
     <game id="LAST13" platform="PS3">
         <boxArt>LAST13.png</boxArt>
         <gameName>The Last of Us</gameName>
-        <MACL>15.0</MACL>
+        <MACL>15</MACL>
         <classification>R18+</classification>
         <releaseYear>2013</releaseYear>
         <playStatus>NP</playStatus>

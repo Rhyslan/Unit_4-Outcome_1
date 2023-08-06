@@ -2,28 +2,24 @@
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -32,7 +28,6 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 
 /**
@@ -85,7 +80,6 @@ public class GameDataWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Level-Up Library - Game Data Window");
-        setAlwaysOnTop(true);
 
         lblTitle.setText("Game Title:");
 
@@ -131,6 +125,11 @@ public class GameDataWindow extends javax.swing.JFrame {
         lblRating.setText("Rating:");
 
         btnRemoveGame.setText("Remove");
+        btnRemoveGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveGameActionPerformed(evt);
+            }
+        });
 
         txaNotes.setColumns(20);
         txaNotes.setLineWrap(true);
@@ -160,7 +159,7 @@ public class GameDataWindow extends javax.swing.JFrame {
             }
         });
 
-        srtRatingSelector.setIsSelector(true);
+        srtRatingSelector.mthSetIsSelector(true);
 
         btnSetRatingZero.setText("Clear");
         btnSetRatingZero.addActionListener(new java.awt.event.ActionListener() {
@@ -302,267 +301,477 @@ public class GameDataWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     *
-     */
+    //<editor-fold defaultstate="expanded" desc="Local Variables">
     // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
     public static String[] sarCurrentGameData = new String[10];
     private static String strWindowType = "";
-    private static String newID = "";
+    //</editor-fold>
+    
+    /**
+     * Gets the current year and adds every year between 1958 and the current year to the year selector combo box
+     */
+    public void mthSetYearSelector() {
+        int intCurrentYear = MainWindow.mthGetCurrentYear();
+        
+        for (int i = 1958; i < intCurrentYear + 1; i++) {
+            cmbReleaseYearSelector.addItem(String.valueOf(i));
+        }
+    }
+    
+    /**
+     * Takes an input array of data for a game and loads the appropriate values into each field of the game data window
+     * @param sarData 
+     */
+    public void mthLoadCurrentGameData(String[] sarData) {
+        // Store input data locally
+        sarCurrentGameData = sarData;
+        
+        /** 
+         * Get the box art image from the provided relative path and resize it to fit the label
+         * If the image cannot be loaded for whatever reason, the label's text states the inability to load the image
+         */
+        BufferedImage bimBoxArtImage = null;
+        try {
+            bimBoxArtImage = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + 
+                    sarData[2]));
+        } catch (IOException exc) {
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + 
+                    "Unable to load boxart image for " + sarCurrentGameData[0] + " on " + sarCurrentGameData[1]);
+        }
+        if (bimBoxArtImage != null) {
+            lblBoxArtImage.setText("");
+            Image imgBoxArtImage = bimBoxArtImage.getScaledInstance(lblBoxArtImage.getWidth(), 
+                    lblBoxArtImage.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon icnBoxArt = new ImageIcon(imgBoxArtImage, imgBoxArtImage.toString());
+            lblBoxArtImage.setIcon(icnBoxArt);
+        } else {
+            lblBoxArtImage.setText("Unable to load image");
+        }
+        
+        // Initialise and set the year selector
+        mthSetYearSelector();
+        cmbReleaseYearSelector.getModel().setSelectedItem(sarData[6]);
+        
+        // Set the values of the remaining game data fields
+        txtGameName.setText(sarData[3]);
+        txtMACLEntry.setText(sarData[4]);
+        cmbPlatformSelector.getModel().setSelectedItem(sarData[1]);
+        cmbClassificationSelector.getModel().setSelectedItem(sarData[5]);
+        cmbPlayStatus.getModel().setSelectedItem(sarData[7]);
+        srtRatingSelector.mthSetRating(Integer.parseInt(sarData[8]));
+        txaNotes.setText(sarData[9]);
+    }
+    
+    /**
+     * Sets up the window depending on the type of window specified when instanced
+     * @param strType 
+     */
+    public void mthSetWindowType(String strType) {
+        // Store the window type
+        strWindowType = strType;
+        
+        // Set up the platform selector
+        for (int i = 0; i < MainWindow.intPlatformCount; i++) {
+            cmbPlatformSelector.addItem(MainWindow.sarPlatformList[i]);
+        }
+        
+        /**
+         * Set the title and year selector, while clearing the remaining combo boxes and disabling the remove button 
+         *  for adding a new entry
+         */
+        if ("add".equals(strType)) {
+            this.setTitle("Level-Up Library - Add Game");
+            btnRemoveGame.setEnabled(false);
+            mthSetYearSelector();
+            cmbPlatformSelector.setSelectedIndex(-1);
+            cmbClassificationSelector.setSelectedIndex(0);
+            cmbPlayStatus.setSelectedIndex(0);
+            cmbReleaseYearSelector.setSelectedItem(MainWindow.mthGetCurrentYear());
+        } 
+        // Set the title for updating an exisitng entry
+        else if ("edit".equals(strType)) {
+            this.setTitle("Level-Up Library - Update Game");
+        }
+    }
+    
+    /**
+     * Updates the local data storage and writes the changes to the database
+     * If the platform is changed to one that doesn't already have entries, it is added to the list of platforms
+     * The interface is updated and the user is notified of success
+     */
+    private void mthSaveToDatabase() {
+        XPathFactory xpfXPathFactory = XPathFactory.newInstance();
+        XPath xpaXPath = xpfXPathFactory.newXPath();
+        
+        try {
+            // Get the current node of the loaded XML file by the ID of the current game and get the children nodes
+            XPathExpression xpeExpr = xpaXPath.compile("/gameList/game[@id = '" + sarCurrentGameData[0] + "']");
+            Node nodCurrentNode = (Node) xpeExpr.evaluate(MainWindow.docXMLFile, XPathConstants.NODE);
+            NodeList ndlChildren = nodCurrentNode.getChildNodes();
+            Node nodChild;
+            
+            // Set the platform of the updated game
+            nodCurrentNode.getAttributes().item(1).setTextContent(sarCurrentGameData[1]);
+            
+            // Update the platform list if the platform is new
+            if (!MainWindow.docXMLFile.getDocumentElement().getAttribute("platformList").contains(sarCurrentGameData[1])) {
+                // Update loaded XML file
+                MainWindow.docXMLFile.getDocumentElement().setAttribute("platformList", 
+                        MainWindow.docXMLFile.getDocumentElement().getAttribute("platformList") + ", " + 
+                                sarCurrentGameData[1]);
+
+                // Update data arrays
+                String[] smaUpdatedPlatforms = new String[MainWindow.sarPlatformList.length + 1];
+                System.arraycopy(MainWindow.sarPlatformList, 0, smaUpdatedPlatforms, 0, 
+                        MainWindow.sarPlatformList.length);
+                smaUpdatedPlatforms[MainWindow.sarPlatformList.length] = sarCurrentGameData[1];
+                MainWindow.sarPlatformList = new String[smaUpdatedPlatforms.length];
+                System.arraycopy(smaUpdatedPlatforms, 0, MainWindow.sarPlatformList, 0, 
+                        smaUpdatedPlatforms.length);
+                MainWindow.intPlatformCount++;
+            }
+            
+            // Update the child nodes of the current entry
+            int intIndexAfterAttr = 2;
+            for (int i = 0; i < ndlChildren.getLength(); i++) {
+                nodChild = ndlChildren.item(i);
+                
+                // Skip blank nodes
+                if (nodChild != null && nodChild.getNodeType() == Node.ELEMENT_NODE) {
+                    nodChild.setTextContent(sarCurrentGameData[intIndexAfterAttr]);
+                    intIndexAfterAttr++;
+                }
+            }
+            
+            // Create the temp file to store the decrypted database as an XML file
+            File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
+                    ".xml"));
+            filTempFile.createNewFile();
+            MainWindow.pthTempFile = filTempFile.toPath();
+            
+            // Decrypt the database and write it to the temp file
+            CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
+                    MainWindow.pthTempFile.toFile());
+            
+            // Create a XML transformer and write the loaded XML file to the temp file
+            TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
+            Transformer tsfTransformer = tffTransformerFactory.newTransformer();
+            tsfTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource dmsSource = new DOMSource(MainWindow.docXMLFile);
+            FileOutputStream fosOutput = new FileOutputStream(MainWindow.pthTempFile.toString());
+            StreamResult smrResult = new StreamResult(fosOutput);
+            tsfTransformer.transform(dmsSource, smrResult);
+            
+            // Re-encrypt the database and delete the temp file
+            CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
+                    MainWindow.pthDatabaseFilePath.toFile());
+            fosOutput.close();
+            filTempFile.delete();
+        } catch (XPathExpressionException | TransformerException | IOException | CryptoException exc) {
+            // Log any errors and notify the user of failure
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + exc);
+            JOptionPane.showMessageDialog(this, "Game Failed To Be Updated");
+        }
+        
+        // Close the window, update the interface, flag 'unsaved' actions and notify the user of success
+        this.dispose();
+        MainWindow.mthUpdateInterface();
+        MainWindow.blnIsSaved = false;
+        JOptionPane.showMessageDialog(null, "Game Updated Successfully");
+    }
+    
+    /**
+     * Adds a new entry the local data storage and writes the changes to the database
+     * If the platform is one that doesn't already have entries, it is added to the list of platforms
+     * The interface is updated and the user is notified of success
+     */
+    private void mthAddNewToDatabase() {
+        //<editor-fold defaultstate="collapsed" desc="Create new XML element">
+        // Create new 'game' XML element
+        Element elmNewGame = MainWindow.docXMLFile.createElement("game");
+
+        // Create and set the ID and platform attributes
+        elmNewGame.setAttribute("id", sarCurrentGameData[0]);
+        elmNewGame.setAttribute("platform", sarCurrentGameData[1]);
+        
+        // Update the platform list if the platform is new
+        if (!MainWindow.docXMLFile.getDocumentElement().getAttribute("platformList").contains(sarCurrentGameData[1])) {
+            // Update loaded XML file
+            MainWindow.docXMLFile.getDocumentElement().setAttribute("platformList", 
+                    MainWindow.docXMLFile.getDocumentElement().getAttribute("platformList") + ", " + 
+                            sarCurrentGameData[1]);
+            
+            // Update data arrays
+            String[] smaUpdatedPlatforms = new String[MainWindow.sarPlatformList.length + 1];
+            System.arraycopy(MainWindow.sarPlatformList, 0, smaUpdatedPlatforms, 0, 
+                    MainWindow.sarPlatformList.length);
+            smaUpdatedPlatforms[MainWindow.sarPlatformList.length] = sarCurrentGameData[1];
+            MainWindow.sarPlatformList = new String[smaUpdatedPlatforms.length];
+            System.arraycopy(smaUpdatedPlatforms, 0, MainWindow.sarPlatformList, 0, 
+                    smaUpdatedPlatforms.length);
+            MainWindow.intPlatformCount++;
+        }
+
+        // Create, set and add the child nodes to the 'game' node
+        Element emlBoxArt = MainWindow.docXMLFile.createElement("boxArt");
+        emlBoxArt.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[2]));
+        elmNewGame.appendChild(emlBoxArt);
+
+        Element emlGameName = MainWindow.docXMLFile.createElement("gameName");
+        emlGameName.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[3]));
+        elmNewGame.appendChild(emlGameName);
+
+        Element emlMACL = MainWindow.docXMLFile.createElement("MACL");
+        emlMACL.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[4]));
+        elmNewGame.appendChild(emlMACL);
+
+        Element emlClassification = MainWindow.docXMLFile.createElement("classification");
+        emlClassification.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[5]));
+        elmNewGame.appendChild(emlClassification);
+
+        Element emlReleaseYear = MainWindow.docXMLFile.createElement("releaseYear");
+        emlReleaseYear.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[6]));
+        elmNewGame.appendChild(emlReleaseYear);
+
+        Element emlPlayStatus = MainWindow.docXMLFile.createElement("playStatus");
+        emlPlayStatus.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[7]));
+        elmNewGame.appendChild(emlPlayStatus);
+
+        Element emlPersonalRating = MainWindow.docXMLFile.createElement("personalRating");
+        emlPersonalRating.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[8]));
+        elmNewGame.appendChild(emlPersonalRating);
+
+        Element emlNotes = MainWindow.docXMLFile.createElement("notes");
+        emlNotes.appendChild(MainWindow.docXMLFile.createTextNode(sarCurrentGameData[9]));
+        elmNewGame.appendChild(emlNotes);
+
+        // Add the new XML 'game' node to the loaded XMl file
+        MainWindow.docXMLFile.getDocumentElement().appendChild(elmNewGame);
+        //</editor-fold>
+        
+        try {
+            // Create the temp file to store the decrypted database as an XML file
+            File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
+                    ".xml"));
+            filTempFile.createNewFile();
+            MainWindow.pthTempFile = filTempFile.toPath();
+            
+            // Decrypt the database and write it to the temp file
+            CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
+                    MainWindow.pthTempFile.toFile());
+            
+            // Create a XML transformer and write the loaded XML file to the temp file
+            TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
+            Transformer tsfTransformer = tffTransformerFactory.newTransformer();
+            tsfTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource dmsSource = new DOMSource(MainWindow.docXMLFile);
+            FileOutputStream fosOutput = new FileOutputStream(MainWindow.pthTempFile.toString());
+            StreamResult smrResult = new StreamResult(fosOutput);
+            tsfTransformer.transform(dmsSource, smrResult);
+            
+            // Re-encrypt the database and delete the temp file
+            CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
+                    MainWindow.pthDatabaseFilePath.toFile());
+            fosOutput.close();
+            filTempFile.delete();
+        }
+        catch (TransformerException | IOException | CryptoException exc) {
+            // Log any errors and notify the user of failure
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + 
+                    "Database editing didn't work (transformer or file error): " + exc);
+            JOptionPane.showMessageDialog(this, "Game Failed To Be Added");
+        }
+        
+        // Add the new entry to the loaded data array
+        String[][] smaUpdatedRecords = new String[MainWindow.smaGameData.length + 1][10];
+        System.arraycopy(MainWindow.smaGameData, 0, smaUpdatedRecords, 0, 
+                MainWindow.smaGameData.length);
+        smaUpdatedRecords[MainWindow.smaGameData.length] = sarCurrentGameData;
+        MainWindow.smaGameData = new String[smaUpdatedRecords.length][10];
+        System.arraycopy(smaUpdatedRecords, 0, MainWindow.smaGameData, 0, 
+                smaUpdatedRecords.length);
+        
+        // Close the window, update the interface, flag 'unsaved' actions and notify the user of success
+        this.dispose();
+        MainWindow.mthUpdateInterface();
+        MainWindow.blnIsSaved = false;
+        JOptionPane.showMessageDialog(null, "Game Added Successfully");
+    }
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSetRatingZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetRatingZeroActionPerformed
-        srtRatingSelector.selectRatingZero();
+        // Clear the rating selection
+        srtRatingSelector.mthSelectRatingZero();
     }//GEN-LAST:event_btnSetRatingZeroActionPerformed
 
     private void btnLoadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadImageActionPerformed
+        // Create new file browser window that can only accept '.png' and .'jpg' files
         JFileChooser jfcFileBrowser = new JFileChooser(System.getProperty("user.dir") + "\\src\\main\\resources\\");
         jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("PNG Files", "png"));
         jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("JPEG Files", "jpg"));
         jfcFileBrowser.setAcceptAllFileFilterUsed(false);
+        
+        // If the open button is pressed, get the selected file and save the path
         int intResponse =  jfcFileBrowser.showOpenDialog(null);
         Path pthImageFile = null;
-        
         if (intResponse == JFileChooser.APPROVE_OPTION) {
             pthImageFile = Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
         }
-        else {
-            return;
-        }
+        else return;
         
-        BufferedImage img = null;
+        /** 
+         * Get the box art image from the path and resize it to fit the label
+         * If the image cannot be loaded for whatever reason, the label's text states the inability to load the image
+         */
+        BufferedImage bimBoxArtImage = null;
         try {
-            img = ImageIO.read(new File(pthImageFile.toString()));
-        } catch (IOException e) {
-            System.out.println("Unable to load boxart image for " + sarCurrentGameData[0] + " on " + sarCurrentGameData[1]);
+            bimBoxArtImage = ImageIO.read(new File(pthImageFile.toString()));
+        } catch (IOException exc) {
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + 
+                    "Unable to load boxart image for " + sarCurrentGameData[0] + " on " + sarCurrentGameData[1]);
         }
-        if (img != null) {
+        if (bimBoxArtImage != null) {
             lblBoxArtImage.setText("");
-            Image dimg = img.getScaledInstance(lblBoxArtImage.getWidth(), lblBoxArtImage.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon imageIcon = new ImageIcon(dimg);
-            lblBoxArtImage.setIcon(imageIcon);
+            Image imgBoxArtImage = bimBoxArtImage.getScaledInstance(lblBoxArtImage.getWidth(), 
+                    lblBoxArtImage.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon icnBoxArt = new ImageIcon(imgBoxArtImage);
+            lblBoxArtImage.setIcon(icnBoxArt);
         } else {
             lblBoxArtImage.setText("Unable to load image");
         }
     }//GEN-LAST:event_btnLoadImageActionPerformed
 
     private void btnRemoveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveImageActionPerformed
+        // Clear the label's icon and set the text to state that there is no image
         lblBoxArtImage.setIcon(null);
         lblBoxArtImage.setText("No Image");
     }//GEN-LAST:event_btnRemoveImageActionPerformed
 
+    /**
+     * Update the local game data array to contain the information in the fields of the game data window
+     * DO NOT change the order of the assignments, as some depend on others being set before them 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        sarCurrentGameData[3] = txtGameName.getText();
-        sarCurrentGameData[6] = cmbReleaseYearSelector.getSelectedItem().toString();
-        
+        // Set some of the data array from the game data window fields
         sarCurrentGameData[1] = cmbPlatformSelector.getSelectedItem().toString();
-        if (lblBoxArtImage.getIcon() != null) {
-            sarCurrentGameData[2] = sarCurrentGameData[0] + ".png";
-        } else {
-            sarCurrentGameData[2] = "No Image";
-        }
+        sarCurrentGameData[3] = txtGameName.getText();
         sarCurrentGameData[4] = txtMACLEntry.getText();
         sarCurrentGameData[5] = cmbClassificationSelector.getSelectedItem().toString();
+        sarCurrentGameData[6] = cmbReleaseYearSelector.getSelectedItem().toString();
         sarCurrentGameData[7] = cmbPlayStatus.getSelectedItem().toString();
-        sarCurrentGameData[8] = Integer.toString(srtRatingSelector.getRating());
-        sarCurrentGameData[9] = txaNotes.getText();
+        sarCurrentGameData[8] = Integer.toString(srtRatingSelector.mthGetRating());
         
+        // If there is no notes, set it to 'N/A' to avoid XML format issues, otherwise set it as the notes text
+        if (txaNotes.getText().equals("")) {
+            sarCurrentGameData[9] = "N/A";
+        } else {
+            sarCurrentGameData[9] = txaNotes.getText();
+        }
+        
+        // If the window is for adding a new game, generate a game ID and add it, otherwise, update the current entry
         if ("add".equals(strWindowType)) {
+            // Generate a new ID
             sarCurrentGameData[0] = sarCurrentGameData[3].substring(0, 4).toUpperCase() + sarCurrentGameData[6].substring(2);
-            addNewToDatabase();
-        } else if ("edit".equals(strWindowType)) {
-            saveToDatabase();
+            
+            // If there is an image loaded, set the image path, otherwise set it to 'No Image'
+            if (lblBoxArtImage.getIcon() != null) {
+                sarCurrentGameData[2] = sarCurrentGameData[0] + ".png";
+            } else {
+                sarCurrentGameData[2] = "No Image";
+            }
+            
+            // Add to database
+            mthAddNewToDatabase();
+        } 
+        else if ("edit".equals(strWindowType)) {
+            mthSaveToDatabase();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    public void setYearSelector() {
-        int currentYear = MainWindow.getCurrentYear();
+    /**
+     * Remove the current entry from the stored variables and the database file, decrypting and re-encrypting the file 
+     *  before and after the editing actions, respectively
+     * The interface is updated, actions are flagged as 'unsaved' and the user is notified of the success or failure 
+     *  of the action
+     */
+    private void btnRemoveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveGameActionPerformed
+        // Confirm with the user if they wish to delete the entry
+        int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, 
+                "Deleting entry!\nDo you wish to proceed?", "Remove Entry", JOptionPane.YES_NO_OPTION, 
+                JOptionPane.ERROR_MESSAGE);
+        if (intConfirmExit != 0) return;
         
-        for (int i = 1958; i < currentYear + 1; i++) {
-            cmbReleaseYearSelector.addItem(String.valueOf(i));
-        }
-    }
-    
-    public void loadCurrentGameData(String[] sarData) {
-        // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
-        sarCurrentGameData = sarData;
-        
-        cmbPlatformSelector.getModel().setSelectedItem(sarData[1]);
-        
-        
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\resources\\" + sarData[2]));
-        } catch (IOException e) {
-            System.out.println("Unable to load boxart image for " + sarCurrentGameData[0] + " on " + sarCurrentGameData[1]);
-        }
-        if (img != null) {
-            lblBoxArtImage.setText("");
-            Image dimg = img.getScaledInstance(lblBoxArtImage.getWidth(), lblBoxArtImage.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon imageIcon = new ImageIcon(dimg, dimg.toString());
-            lblBoxArtImage.setIcon(imageIcon);
-        } else {
-            lblBoxArtImage.setText("Unable to load image");
-        }
-        
-        
-        txtGameName.setText(sarData[3]);
-        
-        txtMACLEntry.setText(sarData[4]);
-        
-        cmbClassificationSelector.getModel().setSelectedItem(sarData[5]);
-        
-        setYearSelector();
-        cmbReleaseYearSelector.getModel().setSelectedItem(sarData[6]);
-        
-        cmbPlayStatus.getModel().setSelectedItem(sarData[7]);
-        
-        srtRatingSelector.setRating(Integer.parseInt(sarData[8]));
-        
-        txaNotes.setText(sarData[9]);
-    }
-    
-    public void setWindowType(String strType) {
-        strWindowType = strType;
-        for (int i = 0; i < MainWindow.intPlatformCount; i++) {
-            cmbPlatformSelector.addItem(MainWindow.sarPlatformList[i]);
-        }
-        if ("add".equals(strType)) {
-            this.setTitle("Level-Up Library - Add Game");
-            btnRemoveGame.setEnabled(false);
-            setYearSelector();
-            cmbPlatformSelector.setSelectedIndex(-1);
-            cmbClassificationSelector.setSelectedIndex(0);
-            cmbPlayStatus.setSelectedIndex(0);
-            
-            cmbReleaseYearSelector.setSelectedItem(MainWindow.getCurrentYear());
-        } else if ("edit".equals(strType)) {
-            this.setTitle("Level-Up Library - Update Game");
-        }
-    }
-    
-    private void saveToDatabase() {
-        XPathFactory xpathFactory = XPathFactory.newInstance();
-        XPath xpath = xpathFactory.newXPath();
-        // List<String> values = new ArrayList<>();
+        XPathFactory xpfXPathFactory = XPathFactory.newInstance();
+        XPath xpaXPath = xpfXPathFactory.newXPath();
         
         try {
-            XPathExpression expr = xpath.compile("/gameList/game[@id = '" + sarCurrentGameData[0] + "']");
-            Node node = (Node) expr.evaluate(MainWindow.doc, XPathConstants.NODE);
-            NodeList children = node.getChildNodes();
-            Node child;
+            // Get the node of the loaded XML file that matches the ID of the selected game
+            XPathExpression xpeExpr = xpaXPath.compile("/gameList/game[@id = '" + sarCurrentGameData[0] + "']");
+            Node nodCurrentNode = (Node) xpeExpr.evaluate(MainWindow.docXMLFile, XPathConstants.NODE);
+            nodCurrentNode.getParentNode().removeChild(nodCurrentNode);
             
-            node.getAttributes().item(1).setTextContent(sarCurrentGameData[1]);
-            // String platform = node.getAttributes().item(1).getTextContent();
+            // Update the platform list variables and the loaded XML attribute
+            String strPlatformList = Arrays.toString(MainWindow.sarPlatformList);
+            strPlatformList = strPlatformList.replace("[", "");
+            strPlatformList = strPlatformList.replace("]", "");
+            strPlatformList = strPlatformList.replace(", " + sarCurrentGameData[1], "");
+            MainWindow.docXMLFile.getDocumentElement().setAttribute("platformList", strPlatformList);
+            MainWindow.sarPlatformList = new String[MainWindow.sarPlatformList.length];
+            MainWindow.sarPlatformList = strPlatformList.split(", ");
+            MainWindow.intPlatformCount--;
             
-            int intIndexAfterAttr = 2;
+            // Create the temp file to store the decrypted database as an XML file
+            File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
+                    ".xml"));
+            filTempFile.createNewFile();
+            MainWindow.pthTempFile = filTempFile.toPath();
             
-            for (int i = 0; i < children.getLength(); i++) {
-                child = children.item(i);
-                if (child != null && child.getNodeType() == Node.ELEMENT_NODE) {
-                    child.setTextContent(sarCurrentGameData[intIndexAfterAttr]);
-                    intIndexAfterAttr++;
-                }
-            }
-            // System.out.println(platform);
-        } catch (XPathExpressionException ex) {
-            System.out.println("Unable to get the xPathExpression: " + ex);
+            // Decrypt the database and write it to the temp file
+            CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
+                    MainWindow.pthTempFile.toFile());
+            
+            // Create a XML transformer and write the loaded XML file to the temp file
+            TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
+            Transformer tsfTransformer = tffTransformerFactory.newTransformer();
+            tsfTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource dmsSource = new DOMSource(MainWindow.docXMLFile);
+            FileOutputStream fosOutput = new FileOutputStream(MainWindow.pthTempFile.toString());
+            StreamResult smrResult = new StreamResult(fosOutput);
+            tsfTransformer.transform(dmsSource, smrResult);
+            
+            // Re-encrypt the database and delete the temp file
+            CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
+                    MainWindow.pthDatabaseFilePath.toFile());
+            fosOutput.close();
+            filTempFile.delete();
+        } catch (XPathExpressionException | TransformerException | IOException | CryptoException exc) {
+            // Log any errors and notify the user of failure
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + exc);
+            JOptionPane.showMessageDialog(this, "Game Failed To Be Removed");
         }
         
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(MainWindow.doc);
-            FileOutputStream output = new FileOutputStream("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Unit_4_Outcome_1\\src\\main\\resources\\database_new.xml");
-            StreamResult result = new StreamResult(output);
-
-            transformer.transform(source, result);
+        // Update the data array and reduce its length
+        String[][] smaUpdatedRecords = new String[MainWindow.smaGameData.length - 1][10];
+        int intNewIndex = 0;
+        for (String[] smaGameData : MainWindow.smaGameData) {
+            if (!smaGameData[0].equals(sarCurrentGameData[0])) {
+                smaUpdatedRecords[intNewIndex] = smaGameData;
+                intNewIndex++;
+            } 
+            else break;
         }
-        catch (TransformerException | FileNotFoundException ex) {
-            System.out.println("Database editing didn't work (transformer or file error): " + ex);
-        }
-        
-        JOptionPane.showMessageDialog(null, "Game Updated Successfully");
-        
-        this.dispose();
-        
-        MainWindow.updateInterface();
-        MainWindow.isSaved = false;
-    }
-    
-    private void addNewToDatabase() {
-        Element newGame = MainWindow.doc.createElement("game");
-
-        newGame.setAttribute("id", sarCurrentGameData[0]);
-        newGame.setAttribute("platform", sarCurrentGameData[1]);
-
-        Element boxArt = MainWindow.doc.createElement("boxArt");
-        boxArt.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[2]));
-        newGame.appendChild(boxArt);
-
-        Element gameName = MainWindow.doc.createElement("gameName");
-        gameName.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[3]));
-        newGame.appendChild(gameName);
-
-        Element MACL = MainWindow.doc.createElement("MACL");
-        MACL.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[4]));
-        newGame.appendChild(MACL);
-
-        Element classification = MainWindow.doc.createElement("classification");
-        classification.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[5]));
-        newGame.appendChild(classification);
-
-        Element releaseYear = MainWindow.doc.createElement("releaseYear");
-        releaseYear.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[6]));
-        newGame.appendChild(releaseYear);
-
-        Element playStatus = MainWindow.doc.createElement("playStatus");
-        playStatus.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[7]));
-        newGame.appendChild(playStatus);
-
-        Element personalRating = MainWindow.doc.createElement("personalRating");
-        personalRating.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[8]));
-        newGame.appendChild(personalRating);
-
-        Element notes = MainWindow.doc.createElement("notes");
-        notes.appendChild(MainWindow.doc.createTextNode(sarCurrentGameData[9]));
-        newGame.appendChild(notes);
-
-        MainWindow.doc.getDocumentElement().appendChild(newGame);
-        
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(MainWindow.doc);
-            FileOutputStream output = new FileOutputStream("C:\\Users\\dylan\\School\\Year_12\\Software_Development\\Unit 4\\Level-Up_Library\\Unit_4_Outcome_1\\src\\main\\resources\\database_new.xml");
-            StreamResult result = new StreamResult(output);
-
-            transformer.transform(source, result);
-        }
-        catch (TransformerException | FileNotFoundException ex) {
-            System.out.println("Database editing didn't work (transformer or file error): " + ex);
-        }
-        
-        JOptionPane.showMessageDialog(null, "Game Added Successfully");
-        
-        this.dispose();
-        
-        String[][] smaUpdatedRecords = new String[MainWindow.smaGameData.length + 1][10];
-        
-        System.arraycopy(MainWindow.smaGameData, 0, smaUpdatedRecords, 0, MainWindow.smaGameData.length);
-        
-        smaUpdatedRecords[MainWindow.smaGameData.length] = sarCurrentGameData;
-        
         MainWindow.smaGameData = new String[smaUpdatedRecords.length][10];
-        
         System.arraycopy(smaUpdatedRecords, 0, MainWindow.smaGameData, 0, smaUpdatedRecords.length);
         
-        MainWindow.updateInterface();
-        MainWindow.isSaved = false;
-    }
+        // Update the interface, flag 'unsaved' actions and notify the user of success
+        this.dispose();
+        MainWindow.mthUpdateInterface();
+        MainWindow.blnIsSaved = false;
+        JOptionPane.showMessageDialog(this, "Game Removed Successfully");
+    }//GEN-LAST:event_btnRemoveGameActionPerformed
     
     /**
      * @param args the command line arguments

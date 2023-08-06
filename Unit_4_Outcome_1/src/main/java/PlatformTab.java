@@ -27,14 +27,14 @@ public class PlatformTab extends javax.swing.JPanel {
 
         tabScroll = new javax.swing.JScrollPane();
         tabMainPanel = new javax.swing.JPanel();
-        topSpacer = new javax.swing.JLabel();
+        lblSpacer = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
         org.jdesktop.swingx.VerticalLayout verticalLayout1 = new org.jdesktop.swingx.VerticalLayout();
         verticalLayout1.setGap(5);
         tabMainPanel.setLayout(verticalLayout1);
-        tabMainPanel.add(topSpacer);
+        tabMainPanel.add(lblSpacer);
 
         tabScroll.setViewportView(tabMainPanel);
 
@@ -43,8 +43,8 @@ public class PlatformTab extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblSpacer;
     public javax.swing.JPanel tabMainPanel;
     public javax.swing.JScrollPane tabScroll;
-    private javax.swing.JLabel topSpacer;
     // End of variables declaration//GEN-END:variables
 }

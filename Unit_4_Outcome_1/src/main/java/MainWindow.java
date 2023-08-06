@@ -1,7 +1,9 @@
 
-import java.awt.Component;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
@@ -9,17 +11,26 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HexFormat;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -51,6 +62,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         bgpSearchCategories = new javax.swing.ButtonGroup();
         bgpGameSelection = new javax.swing.ButtonGroup();
+        bgpClassification = new javax.swing.ButtonGroup();
+        bgpRating = new javax.swing.ButtonGroup();
+        bgpStatus = new javax.swing.ButtonGroup();
         srpSidebarScroll = new javax.swing.JScrollPane();
         srpSidebarScroll.getVerticalScrollBar().setUnitIncrement(20);
         pnlSidebarInner = new javax.swing.JPanel();
@@ -69,6 +83,7 @@ public class MainWindow extends javax.swing.JFrame {
         rtnNotesCategory = new javax.swing.JRadioButton();
         cbxExactSearch = new javax.swing.JCheckBox();
         lblFilters = new javax.swing.JLabel();
+        btnClearFilters = new javax.swing.JButton();
         btnClassificationToggle = new javax.swing.JButton();
         pnlClassificationFilter = new javax.swing.JPanel();
         pnlClassificationFilter.setVisible(false);
@@ -125,11 +140,9 @@ public class MainWindow extends javax.swing.JFrame {
         mniUpdate = new javax.swing.JMenuItem();
         mniRemove = new javax.swing.JMenuItem();
         mnuHelp = new javax.swing.JMenu();
-        mniOnlineDocs = new javax.swing.JMenuItem();
-        mniManual = new javax.swing.JMenuItem();
         mniAbout = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Level-Up Library - Main Window");
         setMinimumSize(new java.awt.Dimension(1024, 600));
         setName("MainWindow"); // NOI18N
@@ -167,9 +180,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlSearchMenu.setPreferredSize(new java.awt.Dimension(230, 40));
 
-        txtSearchQuery.setText("search query");
+        txtSearchQuery.setToolTipText("");
 
         btnSearchButton.setText("Search");
+        btnSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlSearchMenuLayout = new javax.swing.GroupLayout(pnlSearchMenu);
         pnlSearchMenu.setLayout(pnlSearchMenuLayout);
@@ -256,6 +274,14 @@ public class MainWindow extends javax.swing.JFrame {
         lblFilters.setPreferredSize(new java.awt.Dimension(31, 20));
         pnlSidebarInner.add(lblFilters);
 
+        btnClearFilters.setText("Clear Filters");
+        btnClearFilters.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearFiltersActionPerformed(evt);
+            }
+        });
+        pnlSidebarInner.add(btnClearFilters);
+
         btnClassificationToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Collapsed.png"))); // NOI18N
         btnClassificationToggle.setText("Classification");
         btnClassificationToggle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -271,6 +297,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlClassificationFilter.setPreferredSize(new java.awt.Dimension(230, 85));
 
+        bgpClassification.add(cbxRatedG);
         cbxRatedG.setText("G");
         cbxRatedG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,6 +305,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpClassification.add(cbxRatedPG);
         cbxRatedPG.setText("PG");
         cbxRatedPG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,6 +313,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpClassification.add(cbxRatedM);
         cbxRatedM.setText("M");
         cbxRatedM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,6 +321,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpClassification.add(cbxRatedMA15);
         cbxRatedMA15.setText("MA15+");
         cbxRatedMA15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,6 +329,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpClassification.add(cbxRatedR18);
         cbxRatedR18.setText("R18+");
         cbxRatedR18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -458,6 +489,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlRatingFilter.setPreferredSize(new java.awt.Dimension(230, 160));
 
+        bgpRating.add(cbx0Stars);
         cbx0Stars.setText("None");
         cbx0Stars.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -465,6 +497,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpRating.add(cbx1Star);
         cbx1Star.setText("1 Star");
         cbx1Star.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -472,6 +505,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpRating.add(cbx2Stars);
         cbx2Stars.setText("2 Stars");
         cbx2Stars.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -479,6 +513,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpRating.add(cbx3Stars);
         cbx3Stars.setText("3 Stars");
         cbx3Stars.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,6 +521,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpRating.add(cbx4Stars);
         cbx4Stars.setText("4 Stars");
         cbx4Stars.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -493,6 +529,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpRating.add(cbx5Stars);
         cbx5Stars.setText("5 Stars");
         cbx5Stars.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -547,6 +584,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         pnlSidebarInner.add(btnStatusToggle);
 
+        bgpStatus.add(cbxNotPlaying);
         cbxNotPlaying.setText("NP");
         cbxNotPlaying.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -554,6 +592,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpStatus.add(cbxInProgress);
         cbxInProgress.setText("IP");
         cbxInProgress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -561,6 +600,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpStatus.add(cbxFinishedGame);
         cbxFinishedGame.setText("FG");
         cbxFinishedGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -568,6 +608,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpStatus.add(cbxFinishedStory);
         cbxFinishedStory.setText("FS");
         cbxFinishedStory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -575,6 +616,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        bgpStatus.add(cbxAbandoned);
         cbxAbandoned.setText("AB");
         cbxAbandoned.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -779,19 +821,23 @@ public class MainWindow extends javax.swing.JFrame {
         mniRemove.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
         mniRemove.setText("Remove");
         mniRemove.setEnabled(false);
+        mniRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniRemoveActionPerformed(evt);
+            }
+        });
         mnuGame.add(mniRemove);
 
         mnbTitleBar.add(mnuGame);
 
         mnuHelp.setText("Help");
 
-        mniOnlineDocs.setText("Online Docs");
-        mnuHelp.add(mniOnlineDocs);
-
-        mniManual.setText("Manual");
-        mnuHelp.add(mniManual);
-
         mniAbout.setText("About");
+        mniAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniAboutActionPerformed(evt);
+            }
+        });
         mnuHelp.add(mniAbout);
 
         mnbTitleBar.add(mnuHelp);
@@ -817,27 +863,49 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private final ImageIcon icnCollapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
-    private final ImageIcon icnExpandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
     
-    private static String strAdvancedPrevious = "N/A";
-    
+    //<editor-fold defaultstate="expanded" desc="Global Variables">
+    // Paths to encoded and temp decoded database
     public static Path pthDatabaseFilePath = null;
+    public static Path pthTempFile = null;
+    
+    // Loaded database storage
+    // smaGameData Array Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
     public static String[][] smaGameData = null;
     public static Map<String, Map> mapLoadedData = new HashMap<>();
-    public static Document doc = null;
+    public static Map<String, Map> mapPlatforms = new HashMap<>();
+    public static Document docXMLFile = null;
     public static String[] sarPlatformList = null;
     public static int intPlatformCount = 0;
     
-    // Structure: [class, macl, rate, status, year]
-    private static String[][] filters = {{"", "", "", "", ""}, {"0", "999"}, {"", "", "", "", "", ""}, {"", "", "", "", ""}, {"1956", String.valueOf(getCurrentYear())}};
+    // Encryption Key
+    public static final byte[] barEncryptionKey = 
+            HexFormat.ofDelimiter(" ").parseHex("29 20 4e 9b 2b da 82 04 21 94 8b c4 d5 99 53 2c");
     
-    public static boolean isSaved = true;
-    
+    // States
+    public static boolean blnIsSaved = true;
     public static String strSelectedGame = "N/A";
+    //</editor-fold>
     
-    private static String determineVisibilityStates(String strStates) {
+    //<editor-fold defaultstate="expanded" desc="Local Variables">
+    // States
+    // Structure: [class, macl, rate, status, year]
+    private static final String[][] smaFilterStates = {{"N/A"}, {"0", "999"}, {"N/A"}, {"N/A"}, {"1956", 
+        String.valueOf(mthGetCurrentYear())}};
+    private static String strAdvancedPrevious = "N/A";
+    
+    // Icons
+    private final ImageIcon icnCollapsedIcon = new ImageIcon(getClass().getResource("/Collapsed.png"));
+    private final ImageIcon icnExpandedIcon = new ImageIcon(getClass().getResource("/Expanded.png"));
+    //</editor-fold>
+    
+    /**
+     * Based on the provided current states of the search and advanced search interface elements, determine the new 
+     *  states and return them
+     * @param strStates
+     * @return 
+     */
+    private static String mthDetermineVisibilityStates(String strStates) {
         /**
          ************ KEY *************
          * OS = Opening search
@@ -860,42 +928,22 @@ public class MainWindow extends javax.swing.JFrame {
         return mapFinalStates.get(strStates);
     }    
     
-    public static void updateInterface() {
+    /**
+     * Update the user interface to accommodate for changes
+     * Clears the interface first to not have duplicated tabs or entries
+     * Stores all tabs and entries in the maps declared above
+     */
+    public static void mthUpdateInterface() {
+        // Clear interface
         tbpGameEntries.removeAll();
         
+        // Add and store tabs based on what platforms there are
         Map<String, PlatformTab> mapPlatformTabs = new HashMap<>();
-        sarPlatformList = new String[intPlatformCount];
-
-        // DO NOT remove potentially redundant for loops without aproval as they contain some vital function
-        boolean barVisited[] = new boolean[smaGameData.length];
-        Arrays.fill(barVisited, false);
-
-        int intDistinctPlatforms = 0;
-
-        // Used to count platforms and create a list of them as well as create new Platfom Tab instances for each
-        for (int i = 0; i < smaGameData.length; i++) {
-            if (barVisited[i] == true) {
-                continue;
-            }
-
-            for (int j = i + 1; j < smaGameData.length; j++) {
-                if (smaGameData[i][1].equals(smaGameData[j][1])) {
-                    barVisited[j] = true;
-                }
-            }
-
-            intDistinctPlatforms = intDistinctPlatforms + 1;
-            sarPlatformList[intDistinctPlatforms - 1] = smaGameData[i][1];
-            mapPlatformTabs.put(sarPlatformList[intDistinctPlatforms - 1], new PlatformTab());
-        }
-
-        // Add tabs to the interface
-        for (int i = 0; i < intDistinctPlatforms; i++) {
+        for (int i = 0; i < intPlatformCount; i++) {
+            mapPlatformTabs.put(sarPlatformList[i], new PlatformTab());
             tbpGameEntries.addTab(sarPlatformList[i], mapPlatformTabs.get(sarPlatformList[i]));
         }
-
-        Map<String, Map> mapPlatforms = new HashMap<>();
-
+        
         // Create new map for each platform to contain the game entries
         for (String strCurrentPlatform : sarPlatformList) {
             Map<String, GameEntry> mapGames = new HashMap<>();
@@ -911,7 +959,7 @@ public class MainWindow extends javax.swing.JFrame {
             mapCurrentPlatformUI.put(sarCurrentGameData[0], new GameEntry());
 
             GameEntry gmeCurrentGame = mapCurrentPlatformUI.get(sarCurrentGameData[0]);
-            gmeCurrentGame.setFields(sarCurrentGameData);
+            gmeCurrentGame.mthSetFields(sarCurrentGameData);
 
             PlatformTab pmtCurrentTab = mapPlatformTabs.get(sarCurrentGameData[1]);
             pmtCurrentTab.tabMainPanel.add(gmeCurrentGame);
@@ -922,409 +970,668 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
     
-    private void applyFilters() {
-        if (mniLoad.isEnabled() == true) {
-            System.out.println("Please load data first");
+    /**
+     * Update the interface for the current tab based on the filters selected
+     * Sets entries that don't match the filters and are still to be invisible and sets them to visible if they do 
+     *  match, but not if they are invisible
+     * Only one filter per category can be selected at a time
+     */
+    private void mthApplyFilters() {
+        // Check that there is data
+        if (smaGameData == null) {
+            JOptionPane.showMessageDialog(null, "Please load data first", "No data", 
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            PlatformTab currentTab = (PlatformTab) tbpGameEntries.getSelectedComponent();
-            for (int i = 1; i < currentTab.tabMainPanel.getComponentCount(); i++) {
-                GameEntry currentGame = (GameEntry) currentTab.tabMainPanel.getComponent(i);
+            // Get the current tab and loop through each game entry
+            PlatformTab pmtCurrentTab = (PlatformTab) tbpGameEntries.getSelectedComponent();
+            for (int i = 1; i < pmtCurrentTab.tabMainPanel.getComponentCount(); i++) {
+                GameEntry gmCcurrentGame = (GameEntry) pmtCurrentTab.tabMainPanel.getComponent(i);
                 
-                
-                // Classification
-                for (int j = 0; j < filters[0].length; j++) {
-                    if (filters[0][j].equals(currentGame.sarThisGameData[5])) {
-                        currentGame.setVisible(true);
-                        break;
-                    } else {
-                        currentGame.setVisible(false);
-                    }
+                // Classification filter
+                if (gmCcurrentGame.sarThisGameData[5].equals(smaFilterStates[0][0]) || 
+                        "N/A".equals(smaFilterStates[0][0])) {
+                    gmCcurrentGame.setVisible(true);
+                } else {
+                    gmCcurrentGame.setVisible(false);
                 }
                 
-                /*
-                // Length
-                for (int j = 0; j < filters[1].length; j++) {
-                    if (filters[1][j].equals(currentGame.sarThisGameData[4])) {
-                        currentGame.setVisible(true);
-                    } else {
-                        currentGame.setVisible(false);
-                    }
-                }
-                */
-                
-                // Rating
-                for (int j = 0; j < filters[2].length; j++) {
-                    if (filters[2][j].equals(currentGame.sarThisGameData[8])) {
-                        currentGame.setVisible(true);
-                        break;
-                    } else {
-                        currentGame.setVisible(false);
-                    }
+                // Length filter (range)
+                if (Integer.parseInt(gmCcurrentGame.sarThisGameData[4]) >= Integer.parseInt(smaFilterStates[1][0]) && 
+                        Integer.parseInt(gmCcurrentGame.sarThisGameData[4]) <= Integer.parseInt(smaFilterStates[1][1]) && 
+                            gmCcurrentGame.isVisible()) {
+                    gmCcurrentGame.setVisible(true);
+                } else {
+                    gmCcurrentGame.setVisible(false);
                 }
                 
-                // Play Status
-                for (int j = 0; j < filters[3].length; j++) {
-                    if (filters[3][j].equals(currentGame.sarThisGameData[7])) {
-                        currentGame.setVisible(true);
-                        break;
-                    } else {
-                        currentGame.setVisible(false);
-                    }
+                // Rating filter
+                if (gmCcurrentGame.sarThisGameData[8].equals(smaFilterStates[2][0]) && gmCcurrentGame.isVisible()) {
+                    gmCcurrentGame.setVisible(true);
+                } else if ("N/A".equals(smaFilterStates[2][0])) {
+                    gmCcurrentGame.setVisible(true);
+                } else {
+                    gmCcurrentGame.setVisible(false);
                 }
                 
-                /*
-                // Release Year
-                for (int j = 0; j < filters[4].length; j++) {
-                    if (filters[4][j].equals(currentGame.sarThisGameData[6])) {
-                        currentGame.setVisible(true);
-                    } else {
-                        currentGame.setVisible(false);
-                    }
+                // Play status filter
+                if (gmCcurrentGame.sarThisGameData[7].equals(smaFilterStates[3][0]) && gmCcurrentGame.isVisible()) {
+                    gmCcurrentGame.setVisible(true);
+                } else if ("N/A".equals(smaFilterStates[3][0])) {
+                    gmCcurrentGame.setVisible(true);
+                } else {
+                    gmCcurrentGame.setVisible(false);
                 }
-                */
+                
+                // Release Year filter (range)
+                if (Integer.parseInt(gmCcurrentGame.sarThisGameData[6]) >= Integer.parseInt(smaFilterStates[4][0]) && 
+                        Integer.parseInt(gmCcurrentGame.sarThisGameData[6]) <= Integer.parseInt(smaFilterStates[4][1]) && 
+                            gmCcurrentGame.isVisible()) {
+                    gmCcurrentGame.setVisible(true);
+                } else {
+                    gmCcurrentGame.setVisible(false);
+                }
             }
         }
     }
     
-    public static int getCurrentYear() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy");
-        Date date = new Date();
-        int currentYear = Integer.parseInt(dateFormat.format(date));
-        return currentYear;
+    public static int mthGetCurrentYear() {
+        // Gets the current year
+        DateFormat dtDdateFormat = new SimpleDateFormat("yyyy");
+        Date dteDate = new Date();
+        int intCurrentYear = Integer.parseInt(dtDdateFormat.format(dteDate));
+        return intCurrentYear;
     }
     
     //<editor-fold defaultstate="collapsed" desc="UI Setup Functions">
     private void btnSearchMenuToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMenuToggleActionPerformed
-        boolean searchState = pnlSearchMenu.isVisible();
-        boolean advancedState = pnlAdvancedSearch.isVisible();
-        String searchCode = "N/A";
-        String advancedCode = "N/A";
+        /**
+         * Determines what the visibility of both the normal search and advanced search should be and sets them and the 
+         *  appropriate icons
+         */
         
-        if (searchState == true) searchCode = "CS";
-        else if (searchState == false) searchCode = "OS";
+        boolean blnSearchState = pnlSearchMenu.isVisible();
+        boolean blnAdvancedState = pnlAdvancedSearch.isVisible();
+        String strSearchCode = "N/A";
+        String strAdvancedCode = "N/A";
         
-        if (advancedState == true) advancedCode = "AWO";
-        else if (advancedState == false) advancedCode = "AWC";
+        // Determine current states
+        if (blnSearchState == true) strSearchCode = "CS";
+        else if (blnSearchState == false) strSearchCode = "OS";
+        if (blnAdvancedState == true) strAdvancedCode = "AWO";
+        else if (blnAdvancedState == false) strAdvancedCode = "AWC";
+        if ("OS".equals(strSearchCode)) strAdvancedCode = strAdvancedPrevious;
         
-        if (searchCode == "OS") advancedCode = strAdvancedPrevious;
+        // Get new states and store
+        String strNewStates = mthDetermineVisibilityStates(strSearchCode + ", " + strAdvancedCode);
+        strAdvancedPrevious = strAdvancedCode;
+        String[] sarBools = strNewStates.split(", ");
         
-        String newStates = determineVisibilityStates(searchCode + ", " + advancedCode);
+        // Set new states
+        pnlSearchMenu.setVisible(Boolean.parseBoolean(sarBools[0]));
+        btnAdvancedSearchToggle.setVisible(Boolean.parseBoolean(sarBools[0]));
+        pnlAdvancedSearch.setVisible(Boolean.parseBoolean(sarBools[1]));
         
-        strAdvancedPrevious = advancedCode;
-        
-        String[] bools = newStates.split(", ");
-        
-        pnlSearchMenu.setVisible(Boolean.parseBoolean(bools[0]));
-        btnAdvancedSearchToggle.setVisible(Boolean.parseBoolean(bools[0]));
-        pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
-        
+        // Set icons
         if (pnlSearchMenu.isVisible()) btnSearchMenuToggle.setIcon(icnExpandedIcon);
         else btnSearchMenuToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnSearchMenuToggleActionPerformed
 
     private void btnAdvancedSearchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdvancedSearchToggleActionPerformed
-        boolean advancedState = pnlAdvancedSearch.isVisible();
-        String searchCode = "SIO";
-        String advancedCode = "N/A";
+        /**
+         * Determines what the visibility of both the normal search and advanced search should be and sets them and the 
+         *  appropriate icons
+         */
         
-        if (advancedState == true) advancedCode = "CA";
-        else if (advancedState == false) advancedCode = "OA";
+        boolean blnAdvancedState = pnlAdvancedSearch.isVisible();
+        String stSearchCode = "SIO";
+        String strAdvancedCode = "N/A";
         
-        strAdvancedPrevious = advancedCode;
+        // Determine current states
+        if (blnAdvancedState == true) strAdvancedCode = "CA";
+        else if (blnAdvancedState == false) strAdvancedCode = "OA";
         
-        String newStates = determineVisibilityStates(searchCode + ", " + advancedCode);
+        // Get new states and store
+        strAdvancedPrevious = strAdvancedCode;
+        String strNewStates = mthDetermineVisibilityStates(stSearchCode + ", " + strAdvancedCode);
+        String[] sarBools = strNewStates.split(", ");
         
-        String[] bools = newStates.split(", ");
+        // Set new states
+        pnlSearchMenu.setVisible(Boolean.parseBoolean(sarBools[0]));
+        btnAdvancedSearchToggle.setVisible(Boolean.parseBoolean(sarBools[0]));
+        pnlAdvancedSearch.setVisible(Boolean.parseBoolean(sarBools[1]));
         
-        pnlSearchMenu.setVisible(Boolean.parseBoolean(bools[0]));
-        btnAdvancedSearchToggle.setVisible(Boolean.parseBoolean(bools[0]));
-        pnlAdvancedSearch.setVisible(Boolean.parseBoolean(bools[1]));
-        
+        // Set icons
         if (pnlAdvancedSearch.isVisible()) btnAdvancedSearchToggle.setIcon(icnExpandedIcon);
         else btnAdvancedSearchToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnAdvancedSearchToggleActionPerformed
 
     private void btnClassificationToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClassificationToggleActionPerformed
+        // Toggle visibility and set icons
         pnlClassificationFilter.setVisible(!pnlClassificationFilter.isVisible());
         if (pnlClassificationFilter.isVisible()) btnClassificationToggle.setIcon(icnExpandedIcon);
         else btnClassificationToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnClassificationToggleActionPerformed
 
     private void btnMACLToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMACLToggleActionPerformed
+        // Toggle visibility and set icons
         pnlMACLFilter.setVisible(!pnlMACLFilter.isVisible());
         if (pnlMACLFilter.isVisible()) btnMACLToggle.setIcon(icnExpandedIcon);
         else btnMACLToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnMACLToggleActionPerformed
 
     private void btnRatingToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRatingToggleActionPerformed
+        // Toggle visibility and set icons
         pnlRatingFilter.setVisible(!pnlRatingFilter.isVisible());
         if (pnlRatingFilter.isVisible()) btnRatingToggle.setIcon(icnExpandedIcon);
         else btnRatingToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnRatingToggleActionPerformed
 
     private void btnStatusToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusToggleActionPerformed
+        // Toggle visibility and set icons
         pnlStatusFilter.setVisible(!pnlStatusFilter.isVisible());
         if (pnlStatusFilter.isVisible()) btnStatusToggle.setIcon(icnExpandedIcon);
         else btnStatusToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnStatusToggleActionPerformed
 
     private void btnYearToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYearToggleActionPerformed
+        // Toggle visibility and set icons
         pnlYearFilter.setVisible(!pnlYearFilter.isVisible());
         if (pnlYearFilter.isVisible()) btnYearToggle.setIcon(icnExpandedIcon);
         else btnYearToggle.setIcon(icnCollapsedIcon);
     }//GEN-LAST:event_btnYearToggleActionPerformed
 
     private void rslMACLSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rslMACLSliderStateChanged
+        // Set text boxes and filter states to the values of the range slider
         txtSetMinMACL.setText(Integer.toString(rslMACLSlider.getValue()));
         txtSetMaxMACL.setText(Integer.toString(rslMACLSlider.getSecondValue()));
-        filters[1][0] = String.valueOf(rslMACLSlider.getValue());
-        filters[1][1] = String.valueOf(rslMACLSlider.getSecondValue());
-        applyFilters();
+        smaFilterStates[1][0] = Integer.toString(rslMACLSlider.getValue());
+        smaFilterStates[1][1] = Integer.toString(rslMACLSlider.getSecondValue());
+        mthApplyFilters();
     }//GEN-LAST:event_rslMACLSliderStateChanged
 
     private void txtSetMinMACLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMinMACLActionPerformed
+        // Set the range slider's value and filter states to the text box value
         rslMACLSlider.setValue(Integer.parseInt(txtSetMinMACL.getText()));
-        filters[1][0] = txtSetMinMACL.getText();
-        applyFilters();
+        smaFilterStates[1][0] = txtSetMinMACL.getText();
+        mthApplyFilters();
     }//GEN-LAST:event_txtSetMinMACLActionPerformed
 
     private void txtSetMaxMACLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMaxMACLActionPerformed
+        // Set the range slider's value and filter states to the text box value
         rslMACLSlider.setSecondValue(Integer.parseInt(txtSetMaxMACL.getText()));
-        filters[1][1] = txtSetMaxMACL.getText();
-        applyFilters();
+        smaFilterStates[1][1] = txtSetMaxMACL.getText();
+        mthApplyFilters();
     }//GEN-LAST:event_txtSetMaxMACLActionPerformed
 
     private void rslYearSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rslYearSliderStateChanged
+        // Set text boxes and filter states to the values of the range slider
         txtSetMinYear.setText(Integer.toString(rslYearSlider.getValue()));
         txtSetMaxYear.setText(Integer.toString(rslYearSlider.getSecondValue()));
-        filters[4][0] = String.valueOf(rslYearSlider.getValue());
-        filters[4][1] = String.valueOf(rslYearSlider.getSecondValue());
-        applyFilters();
+        smaFilterStates[4][0] = Integer.toString(rslMACLSlider.getValue());
+        smaFilterStates[4][1] = Integer.toString(rslMACLSlider.getSecondValue());
+        mthApplyFilters();
     }//GEN-LAST:event_rslYearSliderStateChanged
 
     private void txtSetMinYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMinYearActionPerformed
+        // Set the range slider's value and filter states to the text box value
         rslYearSlider.setValue(Integer.parseInt(txtSetMinYear.getText()));
-        filters[4][0] = txtSetMinYear.getText();
-        applyFilters();
+        smaFilterStates[4][0] = txtSetMinYear.getText();
+        mthApplyFilters();
     }//GEN-LAST:event_txtSetMinYearActionPerformed
 
     private void txtSetMaxYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSetMaxYearActionPerformed
+        // Set the range slider's value and filter states to the text box value
         rslYearSlider.setSecondValue(Integer.parseInt(txtSetMaxYear.getText()));
-        filters[4][1] = txtSetMaxYear.getText();
-        applyFilters();
+        smaFilterStates[4][1] = txtSetMaxYear.getText();
+        mthApplyFilters();
     }//GEN-LAST:event_txtSetMaxYearActionPerformed
     //</editor-fold>
     
     private void mniAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAddNewActionPerformed
-        GameDataWindow winAddGame = new GameDataWindow();
-        winAddGame.setWindowType("add");
-        winAddGame.setVisible(true);
+        // Create new game data window and set its type to adding a new entry
+        GameDataWindow gdwAddGame = new GameDataWindow();
+        gdwAddGame.mthSetWindowType("add");
+        gdwAddGame.setVisible(true);
     }//GEN-LAST:event_mniAddNewActionPerformed
 
     private void mniUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUpdateActionPerformed
         try {
-            GameDataWindow winUpdateGame = new GameDataWindow();
-            winUpdateGame.setWindowType("edit");
+            // Create new game data window and set its type to edit the selected entry
+            GameDataWindow gdwUpdateGame = new GameDataWindow();
+            gdwUpdateGame.mthSetWindowType("edit");
             
+            // Get the selected entry and its associated data
             String strCurrentPlatformTitle = tbpGameEntries.getTitleAt(tbpGameEntries.getSelectedIndex());
             Map mapCurrentPlatformEntries = mapLoadedData.get(strCurrentPlatformTitle);
             String[] sarCurrentGameData = (String[]) mapCurrentPlatformEntries.get(strSelectedGame);
-            winUpdateGame.loadCurrentGameData(sarCurrentGameData);
+            gdwUpdateGame.mthLoadCurrentGameData(sarCurrentGameData);
             
-            winUpdateGame.setVisible(true);
+            gdwUpdateGame.setVisible(true);
         } catch (NullPointerException exc) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.WARNING, null, exc);
-            System.err.println("Most likely no game selected: strSelectedGame = " + strSelectedGame);
+            // Handle no selected game
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + exc);
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + 
+                    "Most likely no game selected: strSelectedGame = " + strSelectedGame);
         }
     }//GEN-LAST:event_mniUpdateActionPerformed
 
+    /**
+     * Open file browser window for user to load the encrypted database file, which will be decrypted into an XML file 
+     *  and interpreted to load all the game entries into the database storage variables
+     * The interface is then updated and several buttons are enabled while the loading button is disabled
+     */
     private void mniLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoadActionPerformed
+        // Create file browser that only allows '.encrypted' files to be loaded
         JFileChooser jfcFileBrowser = new JFileChooser(System.getProperty("user.dir") + "\\src\\main\\resources\\");
-        jfcFileBrowser.setSelectedFile(new File("database.xml"));
-        jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
+        jfcFileBrowser.setSelectedFile(new File("database.encrypted"));
+        jfcFileBrowser.addChoosableFileFilter(new FileNameExtensionFilter("Encrypted Files", "encrypted"));
         jfcFileBrowser.setAcceptAllFileFilterUsed(false);
         int intResponse =  jfcFileBrowser.showOpenDialog(null);
         
-        if (intResponse == JFileChooser.APPROVE_OPTION) {
-            pthDatabaseFilePath = Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
-        }
-        else {
-            return;
-        }
+        // Set the database path if a file is selected
+        if (intResponse == JFileChooser.APPROVE_OPTION) pthDatabaseFilePath = 
+                Paths.get(jfcFileBrowser.getSelectedFile().getAbsolutePath());
+        else return;
         
         //<editor-fold defaultstate="collapsed" desc="XML Loading">
         try {
+            // Create the temp file to store the decrypted database as an XML file
+            File filTempFile = new File(pthDatabaseFilePath.toString().replace(".encrypted", ".xml"));
+            filTempFile.createNewFile();
+            pthTempFile = filTempFile.toPath();
+            
+            // Decrypt the database and write it to the temp file
+            CryptoUtils.mthDecryptFile(barEncryptionKey, pthDatabaseFilePath.toFile(), pthTempFile.toFile());
+            
+            // Load the XML file and get all the game entries
             DocumentBuilder dcbBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document docXMLFile = dcbBuilder.parse(new File(pthDatabaseFilePath.toString()));
+            docXMLFile = dcbBuilder.parse(new File(pthTempFile.toString()));
             docXMLFile.getDocumentElement().normalize();
-            doc = docXMLFile;
-            
             Element elmRoot = docXMLFile.getDocumentElement();
-            
             NodeList ndlEntryNodes = elmRoot.getChildNodes();
             
             /**
-             * Outstanding error affects the following code.
+             * Outstanding error affects the following code
              * Error effectively doubles file length, resulting in the need to divide the file length by two and 
              *  use of the variable 'intIncrementNoSkip'
              */
             
-            // Stucture: [id, platform, boxart path, title, length, class, year, status, rating, notes]
+            // Create a new array based on how many entries there are
             smaGameData = new String[ndlEntryNodes.getLength()/2][10];
             
             int intIncrementNoSkip = 0;
             int intIndexAfterAttr = 2;
             
             // Loop through the database and add each game to the data array
-            for (int i = 0; i < smaGameData[0].length - 1; i++) {
+            for (int i = 0; i < smaGameData[0].length; i++) {
                 Node nodCurrent = ndlEntryNodes.item(i);
                 
+                // Only process nodes that contain actual data
                 if (nodCurrent != null && nodCurrent.getNodeType() == Node.ELEMENT_NODE) {
                     NamedNodeMap nnmAttrList = nodCurrent.getAttributes();
                     
+                    // Add the node attributes to the data array
                     for (int j = 0; j < nnmAttrList.getLength(); j++) {
                         smaGameData[intIncrementNoSkip][j] = nnmAttrList.item(j).getNodeValue();
                     }
                 
+                    // Loop through children nodes and put the data into the data array
                     NodeList ndlDataList = nodCurrent.getChildNodes();
                     Node nodCurrentChild;
 
-                    for (int k = 0; k < ndlDataList.getLength() - 1; k++) {
-                        nodCurrentChild = ndlDataList.item(k);
+                    for (int j = 0; j < ndlDataList.getLength() - 1; j++) {
+                        nodCurrentChild = ndlDataList.item(j);
                         if (nodCurrentChild.getNodeType() == Node.ELEMENT_NODE) {
                             smaGameData[intIncrementNoSkip][intIndexAfterAttr] = nodCurrentChild.getTextContent();
                             intIndexAfterAttr++;
                         }
                     }
+                    // Update the index variables
                     intIndexAfterAttr = 2;
                     intIncrementNoSkip++;
                 }
             }
             
-            intPlatformCount = Integer.parseInt(elmRoot.getAttributes().item(0).getTextContent());
-        } catch (ParserConfigurationException | SAXException | IOException exc) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, exc);
+            // Get and set the platform list variables from the database
+            sarPlatformList = elmRoot.getAttributes().item(0).getTextContent().split(", ");
+            intPlatformCount = sarPlatformList.length;
+            
+            // Delete the temp file to maintain security
+            filTempFile.delete();
+        } catch (ParserConfigurationException | SAXException | IOException | CryptoException exc) {
+            // Log any errors
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + exc);
         }
         //</editor-fold>
         
-        updateInterface();
+        mthUpdateInterface();
         
         // Prevent consecutive loading of multiple files
         mniLoad.setEnabled(false);
+        
+        // Allow data manipulation actions
         mniAddNew.setEnabled(true);
         mniUpdate.setEnabled(true);
         mniSave.setEnabled(true);
+        mniRemove.setEnabled(true);
     }//GEN-LAST:event_mniLoadActionPerformed
 
     private void mniQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQuitActionPerformed
-        if (isSaved == false) {
-            int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, "Unsaved data!\nDo you wish to proceed?", "Unsaved Data", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+        // Warn of any 'unsaved' actions and exit when the quit button is pressed
+        if (blnIsSaved == false) {
+            int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, 
+                    "Unsaved data!\nDo you wish to proceed?", "Unsaved Data", JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.ERROR_MESSAGE);
             if (intConfirmExit == 0) System.exit(0);
-        } else {
-            System.exit(0);
-        }
+        } else System.exit(0);
     }//GEN-LAST:event_mniQuitActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (isSaved == false) {
-            int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, "Unsaved data!\nDo you wish to proceed?", "Unsaved Data", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+        // Warn of any 'unsaved' actions and exit when the window is closed from the title bar
+        if (blnIsSaved == false) {
+            int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, 
+                    "Unsaved data!\nDo you wish to proceed?", "Unsaved Data", JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.ERROR_MESSAGE);
             if (intConfirmExit == 0) System.exit(0);
-        } else {
-            System.exit(0);
-        }
+        } else System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
+    /**
+     * Since the database is edited when a game is updated or added there should never be a case where the database is 
+     *  not identical to the stored variables, thus, the save button has no 'saving' functionality
+     */
     private void mniSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSaveActionPerformed
         JOptionPane.showMessageDialog(null, "Database Saved Successfully");
-        if (isSaved != true) isSaved = true;
+        if (blnIsSaved != true) blnIsSaved = true;
     }//GEN-LAST:event_mniSaveActionPerformed
 
+    /**
+     * Set the filter state array based on what checkbox is selected for each category and then apply the filters
+     */
     //<editor-fold defaultstate="collapsed" desc="Set Filters">
     private void cbxRatedGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedGActionPerformed
-        filters[0][0] = cbxRatedG.isSelected() ? "G" : "";
-        applyFilters();
+        smaFilterStates[0][0] = "G";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxRatedGActionPerformed
 
     private void cbxRatedPGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedPGActionPerformed
-        filters[0][1] = cbxRatedPG.isSelected() ? "PG" : "";
-        applyFilters();
+        smaFilterStates[0][0] = "PG";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxRatedPGActionPerformed
 
     private void cbxRatedMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedMActionPerformed
-        filters[0][2] = cbxRatedM.isSelected() ? "M" : "";
-        applyFilters();
+        smaFilterStates[0][0] = "M";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxRatedMActionPerformed
 
     private void cbxRatedMA15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedMA15ActionPerformed
-        filters[0][3] = cbxRatedMA15.isSelected() ? "MA15" : "";
-        applyFilters();
+        smaFilterStates[0][0] = "MA15+";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxRatedMA15ActionPerformed
 
     private void cbxRatedR18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRatedR18ActionPerformed
-        filters[0][4] = cbxRatedR18.isSelected() ? "R18" : "";
-        applyFilters();
+        smaFilterStates[0][0] = "R18+";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxRatedR18ActionPerformed
 
     private void cbx0StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx0StarsActionPerformed
-        filters[2][0] = cbx0Stars.isSelected() ? "0" : "";
-        applyFilters();
+        smaFilterStates[2][0] = "0";
+        mthApplyFilters();
     }//GEN-LAST:event_cbx0StarsActionPerformed
 
     private void cbx1StarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx1StarActionPerformed
-        filters[2][1] = cbx1Star.isSelected() ? "1" : "";
-        applyFilters();
+        smaFilterStates[2][0] = "1";
+        mthApplyFilters();
     }//GEN-LAST:event_cbx1StarActionPerformed
 
     private void cbx2StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx2StarsActionPerformed
-        filters[2][2] = cbx2Stars.isSelected() ? "2" : "";
-        applyFilters();
+        smaFilterStates[2][0] = "2";
+        mthApplyFilters();
     }//GEN-LAST:event_cbx2StarsActionPerformed
 
     private void cbx3StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx3StarsActionPerformed
-        filters[2][3] = cbx3Stars.isSelected() ? "3" : "";
-        applyFilters();
+        smaFilterStates[2][0] = "3";
+        mthApplyFilters();
     }//GEN-LAST:event_cbx3StarsActionPerformed
 
     private void cbx4StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx4StarsActionPerformed
-        filters[2][4] = cbx4Stars.isSelected() ? "4" : "";
-        applyFilters();
+        smaFilterStates[2][0] = "4";
+        mthApplyFilters();
     }//GEN-LAST:event_cbx4StarsActionPerformed
 
     private void cbx5StarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx5StarsActionPerformed
-        filters[2][5] = cbx5Stars.isSelected() ? "5" : "";
-        applyFilters();
+        smaFilterStates[2][0] = "5";
+        mthApplyFilters();
     }//GEN-LAST:event_cbx5StarsActionPerformed
 
     private void cbxNotPlayingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNotPlayingActionPerformed
-        filters[3][0] = cbxNotPlaying.isSelected() ? "NP" : "";
-        applyFilters();
+        smaFilterStates[3][0] = "NP";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxNotPlayingActionPerformed
 
     private void cbxInProgressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxInProgressActionPerformed
-        filters[3][1] = cbxInProgress.isSelected() ? "IP" : "";
-        applyFilters();
+        smaFilterStates[3][0] = "IP";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxInProgressActionPerformed
 
     private void cbxFinishedGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFinishedGameActionPerformed
-        filters[3][2] = cbxFinishedGame.isSelected() ? "FG" : "";
-        applyFilters();
+        smaFilterStates[3][0] = "FG";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxFinishedGameActionPerformed
 
     private void cbxFinishedStoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFinishedStoryActionPerformed
-        filters[3][3] = cbxFinishedStory.isSelected() ? "FG" : "";
-        applyFilters();
+        smaFilterStates[3][0] = "FS";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxFinishedStoryActionPerformed
 
     private void cbxAbandonedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAbandonedActionPerformed
-        filters[3][4] = cbxAbandoned.isSelected() ? "AB" : "";
-        applyFilters();
+        smaFilterStates[3][0] = "AB";
+        mthApplyFilters();
     }//GEN-LAST:event_cbxAbandonedActionPerformed
     //</editor-fold>
     
     /**
-     * @param args the command line arguments
+     * Reset the filter state array and the filters interface elements, only if data is loaded
      */
-    public static void main(String args[]) {
+    private void btnClearFiltersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearFiltersActionPerformed
+        if (smaGameData == null) {
+            JOptionPane.showMessageDialog(null, "Please load data first", "No data", 
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Reset the filter states array
+            smaFilterStates[0][0] = "N/A";
+            smaFilterStates[1][0] = "0";
+            smaFilterStates[1][1] = "999";
+            smaFilterStates[2][0] = "N/A";
+            smaFilterStates[3][0] = "N/A";
+            smaFilterStates[4][0] = "1956";
+            smaFilterStates[4][1] = String.valueOf(mthGetCurrentYear());
+            
+            // Reset the length slider and text boxes
+            rslMACLSlider.setValue(Integer.parseInt(smaFilterStates[1][0]));
+            rslMACLSlider.setSecondValue(Integer.parseInt(smaFilterStates[1][1]));
+            txtSetMinMACL.setText(smaFilterStates[1][0]);
+            txtSetMaxMACL.setText(smaFilterStates[1][1]);
+            
+            // Reset the release year slider and text boxes
+            rslYearSlider.setValue(Integer.parseInt(smaFilterStates[4][0]));
+            rslYearSlider.setSecondValue(Integer.parseInt(smaFilterStates[4][1]));
+            txtSetMinYear.setText(smaFilterStates[4][0]);
+            txtSetMaxYear.setText(smaFilterStates[4][1]);
+            
+            mthApplyFilters();
+        }
+    }//GEN-LAST:event_btnClearFiltersActionPerformed
+
+    /**
+     * Based on the selected advanced search options, conduct a search of every game entry for any matching games
+     * Only the first matching game will be selected due to the limitations of the program
+     */
+    private void btnSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchButtonActionPerformed
+        if (smaGameData == null) {
+            JOptionPane.showMessageDialog(null, "Please load data first", "No data", 
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            for (String[] smaCurrentGameData : smaGameData) {
+                // Fuzzy search using the '.contains()' method
+                if (!cbxExactSearch.isSelected()) {
+                    // Search game titles
+                    if (rtnTitleCategory.isSelected()) {
+                        // If a game matches, get the matching game entry in the interface, select it and end the operations
+                        if ((smaCurrentGameData[3]).contains(txtSearchQuery.getText())) {
+                            Map mapCurrentTab = mapPlatforms.get(tbpGameEntries.getTitleAt(
+                                    tbpGameEntries.getSelectedIndex()));
+                            GameEntry gmeMatchingGame = (GameEntry) mapCurrentTab.get(smaCurrentGameData[0]);
+                            gmeMatchingGame.setSelected(true);
+                            return;
+                        }
+                    }
+                    // Search game notes
+                    else if (rtnNotesCategory.isSelected()) {
+                        // If a game matches, get the matching game entry in the interface, select it and end the operations
+                        if ((smaCurrentGameData[9]).contains(txtSearchQuery.getText())) {
+                            Map mapCurrentTab = mapPlatforms.get(tbpGameEntries.getTitleAt(
+                                    tbpGameEntries.getSelectedIndex()));
+                            GameEntry gmeMatchingGame = (GameEntry) mapCurrentTab.get(smaCurrentGameData[0]);
+                            gmeMatchingGame.setSelected(true);
+                            return;
+                        }
+                    }
+                }
+                // Exact search using the '.equals()' method
+                else {
+                    // Search game titles
+                    if (rtnTitleCategory.isSelected()) {
+                        // If a game matches, get the matching game entry in the interface, select it and end the operations
+                        if ((smaCurrentGameData[3]).equals(txtSearchQuery.getText())) {
+                            Map mapCurrentTab = mapPlatforms.get(tbpGameEntries.getTitleAt(
+                                    tbpGameEntries.getSelectedIndex()));
+                            GameEntry gmeMatchingGame = (GameEntry) mapCurrentTab.get(smaCurrentGameData[0]);
+                            gmeMatchingGame.setSelected(true);
+                            return;
+                        }
+                    } 
+                    // Search game notes
+                    else if (rtnNotesCategory.isSelected()) {
+                        // If a game matches, get the matching game entry in the interface, select it and end the operations
+                        if ((smaCurrentGameData[9]).equals(txtSearchQuery.getText())) {
+                            Map mapCurrentTab = mapPlatforms.get(tbpGameEntries.getTitleAt(
+                                    tbpGameEntries.getSelectedIndex()));
+                            GameEntry gmeMmatchingGame = (GameEntry) mapCurrentTab.get(smaCurrentGameData[0]);
+                            gmeMmatchingGame.setSelected(true);
+                            return;
+                        }
+                    }
+                }
+            }
+            // Notify the user is no game entry matches the search query
+            JOptionPane.showMessageDialog(null, "No matching game", "Search warning", 
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSearchButtonActionPerformed
+
+    /**
+     * Get the selected game entry and remove it from the stored variables and the database file, decrypting and 
+     *  re-encrypting the file before and after the editing actions, respectively
+     * The interface is updated, actions are flagged as 'unsaved' and the user is notified of the success or failure 
+     *  of the action
+     */
+    private void mniRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRemoveActionPerformed
+        // Get the selected game and its associated data
+        String strCurrentPlatformTitle = tbpGameEntries.getTitleAt(tbpGameEntries.getSelectedIndex());
+        Map mapCurrentPlatformEntries = mapLoadedData.get(strCurrentPlatformTitle);
+        String[] sarCurrentGameData = (String[]) mapCurrentPlatformEntries.get(strSelectedGame);
+        
+        // Confirm with the user if they wish to delete the entry
+        int intConfirmExit = (int) JOptionPane.showConfirmDialog(null, 
+                "Deleting entry!\nDo you wish to proceed?", "Remove Entry", JOptionPane.YES_NO_OPTION, 
+                JOptionPane.ERROR_MESSAGE);
+        if (intConfirmExit != 0) return;
+        
+        XPathFactory xpfXPathFactory = XPathFactory.newInstance();
+        XPath xpaXPath = xpfXPathFactory.newXPath();
+        
+        try {
+            // Get the node of the loaded XML file that matches the ID of the selected game
+            XPathExpression xpeExpression = xpaXPath.compile("/gameList/game[@id = '" + sarCurrentGameData[0] + "']");
+            Node nodCurrentNode = (Node) xpeExpression.evaluate(MainWindow.docXMLFile, XPathConstants.NODE);
+            
+            // Delete the node from the loaded XML
+            nodCurrentNode.getParentNode().removeChild(nodCurrentNode);
+            
+            // Update the platform list variables and the loaded XML attribute
+            String strPlatformList = Arrays.toString(MainWindow.sarPlatformList);
+            strPlatformList = strPlatformList.replace("[", "");
+            strPlatformList = strPlatformList.replace("]", "");
+            strPlatformList = strPlatformList.replace(", " + sarCurrentGameData[1], "");
+            MainWindow.docXMLFile.getDocumentElement().setAttribute("platformList", strPlatformList);
+            MainWindow.sarPlatformList = new String[MainWindow.sarPlatformList.length];
+            MainWindow.sarPlatformList = strPlatformList.split(", ");
+            MainWindow.intPlatformCount--;
+            
+            // Create the temp file to store the decrypted database as an XML file
+            File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
+                    ".xml"));
+            filTempFile.createNewFile();
+            MainWindow.pthTempFile = filTempFile.toPath();
+            
+            // Decrypt the database and write it to the temp file
+            CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
+                    MainWindow.pthTempFile.toFile());
+            
+            // Create a XML transformer and write the loaded XML file to the temp file
+            TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
+            Transformer tsfTransformer = tffTransformerFactory.newTransformer();
+            tsfTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource dmsSource = new DOMSource(MainWindow.docXMLFile);
+            FileOutputStream fosOutput = new FileOutputStream(MainWindow.pthTempFile.toString());
+            StreamResult smrResult = new StreamResult(fosOutput);
+            tsfTransformer.transform(dmsSource, smrResult);
+            
+            // Re-encrypt the database and delete the temp file
+            CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
+                    MainWindow.pthDatabaseFilePath.toFile());
+            fosOutput.close();
+            filTempFile.delete();
+        } catch (TransformerException | IOException | CryptoException | XPathExpressionException exc) {
+            // Log any errors and notify the user of failure
+            System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + 
+                    "Database editing didn't work (transformer or file error): " + exc);
+            JOptionPane.showMessageDialog(this, "Game Failed To Be Removed");
+        }
+        
+        // Update the data array and reduce its length
+        String[][] smaUpdatedData = new String[MainWindow.smaGameData.length - 1][10];
+        int intNewIndex = 0;
+        for (String[] smaData : MainWindow.smaGameData) {
+            if (!smaData[0].equals(sarCurrentGameData[0])) {
+                smaUpdatedData[intNewIndex] = smaData;
+                intNewIndex++;
+            } 
+            else break;
+        }
+        MainWindow.smaGameData = new String[smaUpdatedData.length][10];
+        System.arraycopy(smaUpdatedData, 0, MainWindow.smaGameData, 0, smaUpdatedData.length);
+        
+        // Update the interface, flag 'unsaved' actions and notify the user of success
+        MainWindow.mthUpdateInterface();
+        MainWindow.blnIsSaved = false;
+        JOptionPane.showMessageDialog(this, "Game Removed Successfully");
+    }//GEN-LAST:event_mniRemoveActionPerformed
+
+    private void mniAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAboutActionPerformed
+        // Open a new 'about' window
+        new AboutWindow().setVisible(true);
+    }//GEN-LAST:event_mniAboutActionPerformed
+    
+    /**
+     * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
+     */
+    public static void main(String args[]) throws FileNotFoundException {
+        // Set the java 'err' output stream to log to the 'error.log' file
+        System.setErr(new PrintStream(new FileOutputStream(System.getProperty("user.dir") +
+                "\\src\\main\\resources\\" + "/errors.log")));
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1358,10 +1665,14 @@ public class MainWindow extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc="Variables declaration">
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgpClassification;
     private static javax.swing.ButtonGroup bgpGameSelection;
+    private javax.swing.ButtonGroup bgpRating;
     private javax.swing.ButtonGroup bgpSearchCategories;
+    private javax.swing.ButtonGroup bgpStatus;
     private javax.swing.JButton btnAdvancedSearchToggle;
     private javax.swing.JButton btnClassificationToggle;
+    private javax.swing.JButton btnClearFilters;
     private javax.swing.JButton btnMACLToggle;
     private javax.swing.JButton btnRatingToggle;
     private javax.swing.JButton btnSearchButton;
@@ -1399,8 +1710,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniAbout;
     private javax.swing.JMenuItem mniAddNew;
     private javax.swing.JMenuItem mniLoad;
-    private javax.swing.JMenuItem mniManual;
-    private javax.swing.JMenuItem mniOnlineDocs;
     private javax.swing.JMenuItem mniQuit;
     private javax.swing.JMenuItem mniRemove;
     private javax.swing.JMenuItem mniSave;

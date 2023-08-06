@@ -33,7 +33,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="topSpacer">
+            <Component class="javax.swing.JLabel" name="lblSpacer">
             </Component>
           </SubComponents>
           <LayoutCode>
@@ -85,11 +85,11 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="4_topSpacer">
-                  <CodeVariable name="topSpacer" type="8194" declaredType="javax.swing.JLabel"/>
+                <CodeExpression id="4_lblSpacer">
+                  <CodeVariable name="lblSpacer" type="8194" declaredType="javax.swing.JLabel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="topSpacer"/>
+                      <ComponentRef name="lblSpacer"/>
                     </ExpressionProvider>
                   </ExpressionOrigin>
                 </CodeExpression>

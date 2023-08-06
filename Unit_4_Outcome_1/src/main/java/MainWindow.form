@@ -9,6 +9,12 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
       </AuxValues>
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="bgpClassification">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="bgpRating">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="bgpStatus">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="mnbTitleBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mnuFile">
@@ -89,6 +95,9 @@
                 <Property name="text" type="java.lang.String" value="Remove"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniRemoveActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -97,20 +106,13 @@
             <Property name="text" type="java.lang.String" value="Help"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mniOnlineDocs">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Online Docs"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniManual">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Manual"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniAbout">
               <Properties>
                 <Property name="text" type="java.lang.String" value="About"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniAboutActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -118,7 +120,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="0"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Level-Up Library - Main Window"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1024, 600]"/>
@@ -250,13 +252,16 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="txtSearchQuery">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="search query"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnSearchButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Search"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchButtonActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -359,6 +364,14 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="btnClearFilters">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear Filters"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearFiltersActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JButton" name="btnClassificationToggle">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -429,6 +442,9 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbxRatedG">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpClassification"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="G"/>
                   </Properties>
                   <Events>
@@ -437,6 +453,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxRatedPG">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpClassification"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="PG"/>
                   </Properties>
                   <Events>
@@ -445,6 +464,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxRatedM">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpClassification"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="M"/>
                   </Properties>
                   <Events>
@@ -453,6 +475,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxRatedMA15">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpClassification"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="MA15+"/>
                   </Properties>
                   <Events>
@@ -461,6 +486,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxRatedR18">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpClassification"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="R18+"/>
                   </Properties>
                   <Events>
@@ -674,6 +702,9 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbx0Stars">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpRating"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="None"/>
                   </Properties>
                   <Events>
@@ -682,6 +713,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbx1Star">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpRating"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="1 Star"/>
                   </Properties>
                   <Events>
@@ -690,6 +724,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbx2Stars">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpRating"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="2 Stars"/>
                   </Properties>
                   <Events>
@@ -698,6 +735,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbx3Stars">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpRating"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="3 Stars"/>
                   </Properties>
                   <Events>
@@ -706,6 +746,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbx4Stars">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpRating"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="4 Stars"/>
                   </Properties>
                   <Events>
@@ -714,6 +757,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbx5Stars">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpRating"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="5 Stars"/>
                   </Properties>
                   <Events>
@@ -786,6 +832,9 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="cbxNotPlaying">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpStatus"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="NP"/>
                   </Properties>
                   <Events>
@@ -794,6 +843,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxInProgress">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpStatus"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="IP"/>
                   </Properties>
                   <Events>
@@ -802,6 +854,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxFinishedGame">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpStatus"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="FG"/>
                   </Properties>
                   <Events>
@@ -810,6 +865,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxFinishedStory">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpStatus"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="FS"/>
                   </Properties>
                   <Events>
@@ -818,6 +876,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbxAbandoned">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="bgpStatus"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="AB"/>
                   </Properties>
                   <Events>
@@ -1092,7 +1153,23 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="9_btnClassificationToggle">
+                <CodeExpression id="9_btnClearFilters">
+                  <CodeVariable name="btnClearFilters" type="8194" declaredType="javax.swing.JButton"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="btnClearFilters"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="3_pnlSidebarInner"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="10_btnClassificationToggle">
                   <CodeVariable name="btnClassificationToggle" type="8194" declaredType="javax.swing.JButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1108,7 +1185,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="10_pnlClassificationFilter">
+                <CodeExpression id="11_pnlClassificationFilter">
                   <CodeVariable name="pnlClassificationFilter" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1124,7 +1201,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="11_btnMACLToggle">
+                <CodeExpression id="12_btnMACLToggle">
                   <CodeVariable name="btnMACLToggle" type="8194" declaredType="javax.swing.JButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1140,7 +1217,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="12_pnlMACLFilter">
+                <CodeExpression id="13_pnlMACLFilter">
                   <CodeVariable name="pnlMACLFilter" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1156,7 +1233,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="13_btnRatingToggle">
+                <CodeExpression id="14_btnRatingToggle">
                   <CodeVariable name="btnRatingToggle" type="8194" declaredType="javax.swing.JButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1172,7 +1249,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="14_pnlRatingFilter">
+                <CodeExpression id="15_pnlRatingFilter">
                   <CodeVariable name="pnlRatingFilter" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1188,7 +1265,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="15_btnStatusToggle">
+                <CodeExpression id="16_btnStatusToggle">
                   <CodeVariable name="btnStatusToggle" type="8194" declaredType="javax.swing.JButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1204,7 +1281,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="16_pnlStatusFilter">
+                <CodeExpression id="17_pnlStatusFilter">
                   <CodeVariable name="pnlStatusFilter" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1220,7 +1297,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="17_btnYearToggle">
+                <CodeExpression id="18_btnYearToggle">
                   <CodeVariable name="btnYearToggle" type="8194" declaredType="javax.swing.JButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -1236,7 +1313,7 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="18_pnlYearFilter">
+                <CodeExpression id="19_pnlYearFilter">
                   <CodeVariable name="pnlYearFilter" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">

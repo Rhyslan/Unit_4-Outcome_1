@@ -24,8 +24,6 @@ public class StarRating extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pmnContextMenu = new javax.swing.JPopupMenu();
-        mniUpdate = new javax.swing.JMenuItem();
         lblFrontSpacer = new javax.swing.JLabel();
         lblStarOne = new javax.swing.JLabel();
         lblStarTwo = new javax.swing.JLabel();
@@ -33,21 +31,6 @@ public class StarRating extends javax.swing.JPanel {
         lblStarFour = new javax.swing.JLabel();
         lblStarFive = new javax.swing.JLabel();
 
-        pmnContextMenu.setName(""); // NOI18N
-
-        mniUpdate.setText("Update");
-        mniUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniUpdateActionPerformed(evt);
-            }
-        });
-        pmnContextMenu.add(mniUpdate);
-
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
         org.jdesktop.swingx.HorizontalLayout horizontalLayout1 = new org.jdesktop.swingx.HorizontalLayout();
         horizontalLayout1.setGap(5);
         setLayout(horizontalLayout1);
@@ -94,15 +77,113 @@ public class StarRating extends javax.swing.JPanel {
         add(lblStarFive);
     }// </editor-fold>//GEN-END:initComponents
 
-    private ImageIcon icnSelectedIcon = new ImageIcon(getClass().getResource("/SelectedStar.png"));
-    private ImageIcon icnDeselectedIcon = new ImageIcon(getClass().getResource("/DeselectedStar.png"));
-    
-    private boolean booIsSelector = false;
-    
+    //<editor-fold defaultstate="expanded" desc="Global Variables">
     public int intSelectedRating = 0;
+    // </editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="Click Selection">
-    public void selectRatingZero() {
+    //<editor-fold defaultstate="expanded" desc="Local Variables">
+    private final ImageIcon icnSelectedIcon = new ImageIcon(getClass().getResource("/SelectedStar.png"));
+    private final ImageIcon icnDeselectedIcon = new ImageIcon(getClass().getResource("/DeselectedStar.png"));
+    private boolean booIsSelector = false;
+    // </editor-fold>
+    
+    /**
+     * Set if the rating is editable
+     * @param isSelector 
+     */
+    public void mthSetIsSelector(boolean isSelector) {
+        this.booIsSelector = isSelector;
+    }
+    
+    /**
+     * Returns if the rating is editable
+     * @return 
+     */
+    public boolean mthGetIsSelector() {
+        return booIsSelector;
+    }
+    
+    /**
+     * Sets the icons of the labels depending on what rating is provided
+     * @param intRating
+     */
+    public void mthSetRating(int intRating) {
+        // Locally store the rating
+        intSelectedRating = intRating;
+        
+        switch (intRating){
+            // Rating of 0
+            case 0 -> {
+                lblStarOne.setIcon(icnDeselectedIcon);
+                lblStarTwo.setIcon(icnDeselectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            // Rating of 1
+            case 1 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnDeselectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            // Rating of 2
+            case 2 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            // Rating of 3
+            case 3 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnSelectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            // Rating of 4
+            case 4 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnSelectedIcon);
+                lblStarFour.setIcon(icnSelectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+            }
+            // Rating of 5
+            case 5 -> {
+                lblStarOne.setIcon(icnSelectedIcon);
+                lblStarTwo.setIcon(icnSelectedIcon);
+                lblStarThree.setIcon(icnSelectedIcon);
+                lblStarFour.setIcon(icnSelectedIcon);
+                lblStarFive.setIcon(icnSelectedIcon);
+            }
+            // Sets the rating to 0 if the number provided is not within 0-5 inclusively
+            default -> {
+                lblStarOne.setIcon(icnDeselectedIcon);
+                lblStarTwo.setIcon(icnDeselectedIcon);
+                lblStarThree.setIcon(icnDeselectedIcon);
+                lblStarFour.setIcon(icnDeselectedIcon);
+                lblStarFive.setIcon(icnDeselectedIcon);
+                System.err.println("Provided rating is not within the range of '0' to '5' inclusive");
+            }
+        }
+    }
+    
+    /**
+     * Returns the locally stored rating
+     * @return 
+     */
+    public int mthGetRating() {
+        return intSelectedRating;
+    }
+    
+    /**
+     * If the rating is editable, clear the rating
+     */
+    public void mthSelectRatingZero() {
         if (booIsSelector == true) {
             intSelectedRating = 0;
             lblStarOne.setIcon(icnDeselectedIcon);
@@ -113,6 +194,10 @@ public class StarRating extends javax.swing.JPanel {
         }
     }
     
+    //<editor-fold defaultstate="collapsed" desc="Click Selection">
+    /**
+     * If the rating is editable, depending on which star icon is clicked, set the rating and stars to match to selection
+     */
     private void lblStarOneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblStarOneMouseClicked
         if (booIsSelector == true) {
             intSelectedRating = 1;
@@ -169,91 +254,7 @@ public class StarRating extends javax.swing.JPanel {
     }//GEN-LAST:event_lblStarFiveMouseClicked
     //</editor-fold>
     
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        if (SwingUtilities.isRightMouseButton(evt)) {
-            pmnContextMenu.show(this, evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_formMouseClicked
-
-    private void mniUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniUpdateActionPerformed
-        GameDataWindow winUpdateGame = new GameDataWindow();
-        winUpdateGame.setTitle("Level-Up Library - Update Game");
-        winUpdateGame.setVisible(true);
-    }//GEN-LAST:event_mniUpdateActionPerformed
-    
-    public void setIsSelector(boolean isSelector) {
-        this.booIsSelector = isSelector;
-    }
-    
-    public boolean getIsSelector() {
-        return booIsSelector;
-    }
-    
-    /**
-     *
-     * @param intRating
-     */
-    public void setRating(int intRating) {
-        intSelectedRating = intRating;
-        switch (intRating){
-            case 0 -> {
-                lblStarOne.setIcon(icnDeselectedIcon);
-                lblStarTwo.setIcon(icnDeselectedIcon);
-                lblStarThree.setIcon(icnDeselectedIcon);
-                lblStarFour.setIcon(icnDeselectedIcon);
-                lblStarFive.setIcon(icnDeselectedIcon);
-            }
-            case 1 -> {
-                lblStarOne.setIcon(icnSelectedIcon);
-                lblStarTwo.setIcon(icnDeselectedIcon);
-                lblStarThree.setIcon(icnDeselectedIcon);
-                lblStarFour.setIcon(icnDeselectedIcon);
-                lblStarFive.setIcon(icnDeselectedIcon);
-            }
-            case 2 -> {
-                lblStarOne.setIcon(icnSelectedIcon);
-                lblStarTwo.setIcon(icnSelectedIcon);
-                lblStarThree.setIcon(icnDeselectedIcon);
-                lblStarFour.setIcon(icnDeselectedIcon);
-                lblStarFive.setIcon(icnDeselectedIcon);
-            }
-            case 3 -> {
-                lblStarOne.setIcon(icnSelectedIcon);
-                lblStarTwo.setIcon(icnSelectedIcon);
-                lblStarThree.setIcon(icnSelectedIcon);
-                lblStarFour.setIcon(icnDeselectedIcon);
-                lblStarFive.setIcon(icnDeselectedIcon);
-            }
-            case 4 -> {
-                lblStarOne.setIcon(icnSelectedIcon);
-                lblStarTwo.setIcon(icnSelectedIcon);
-                lblStarThree.setIcon(icnSelectedIcon);
-                lblStarFour.setIcon(icnSelectedIcon);
-                lblStarFive.setIcon(icnDeselectedIcon);
-            }
-            case 5 -> {
-                lblStarOne.setIcon(icnSelectedIcon);
-                lblStarTwo.setIcon(icnSelectedIcon);
-                lblStarThree.setIcon(icnSelectedIcon);
-                lblStarFour.setIcon(icnSelectedIcon);
-                lblStarFive.setIcon(icnSelectedIcon);
-            }
-            default -> {
-                lblStarOne.setIcon(icnDeselectedIcon);
-                lblStarTwo.setIcon(icnDeselectedIcon);
-                lblStarThree.setIcon(icnDeselectedIcon);
-                lblStarFour.setIcon(icnDeselectedIcon);
-                lblStarFive.setIcon(icnDeselectedIcon);
-                System.err.println("Provided rating is not within the range of '0' to '5' inclusively");
-            }
-        }
-    }
-    
-    public int getRating() {
-        return intSelectedRating;
-    }
-    
-
+    //<editor-fold defaultstate="collapsed" desc="Variables declaration">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblFrontSpacer;
     private javax.swing.JLabel lblStarFive;
@@ -261,7 +262,6 @@ public class StarRating extends javax.swing.JPanel {
     private javax.swing.JLabel lblStarOne;
     private javax.swing.JLabel lblStarThree;
     private javax.swing.JLabel lblStarTwo;
-    private javax.swing.JMenuItem mniUpdate;
-    private javax.swing.JPopupMenu pmnContextMenu;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold>
 }
