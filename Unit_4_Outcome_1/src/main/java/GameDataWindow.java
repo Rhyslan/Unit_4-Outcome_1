@@ -443,6 +443,7 @@ public class GameDataWindow extends javax.swing.JFrame {
                 }
             }
             
+            
             // Create the temp file to store the decrypted database as an XML file
             File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
                     ".xml"));
@@ -453,6 +454,7 @@ public class GameDataWindow extends javax.swing.JFrame {
             CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
                     MainWindow.pthTempFile.toFile());
             
+            
             // Create a XML transformer and write the loaded XML file to the temp file
             TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
             Transformer tsfTransformer = tffTransformerFactory.newTransformer();
@@ -462,11 +464,13 @@ public class GameDataWindow extends javax.swing.JFrame {
             StreamResult smrResult = new StreamResult(fosOutput);
             tsfTransformer.transform(dmsSource, smrResult);
             
+            
             // Re-encrypt the database and delete the temp file
             CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
                     MainWindow.pthDatabaseFilePath.toFile());
             fosOutput.close();
             filTempFile.delete();
+            
         } catch (XPathExpressionException | TransformerException | IOException | CryptoException exc) {
             // Log any errors and notify the user of failure
             System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + exc);
@@ -550,6 +554,7 @@ public class GameDataWindow extends javax.swing.JFrame {
         //</editor-fold>
         
         try {
+            
             // Create the temp file to store the decrypted database as an XML file
             File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
                     ".xml"));
@@ -560,6 +565,7 @@ public class GameDataWindow extends javax.swing.JFrame {
             CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
                     MainWindow.pthTempFile.toFile());
             
+            
             // Create a XML transformer and write the loaded XML file to the temp file
             TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
             Transformer tsfTransformer = tffTransformerFactory.newTransformer();
@@ -569,11 +575,13 @@ public class GameDataWindow extends javax.swing.JFrame {
             StreamResult smrResult = new StreamResult(fosOutput);
             tsfTransformer.transform(dmsSource, smrResult);
             
+            
             // Re-encrypt the database and delete the temp file
             CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
                     MainWindow.pthDatabaseFilePath.toFile());
             fosOutput.close();
             filTempFile.delete();
+            
         }
         catch (TransformerException | IOException | CryptoException exc) {
             // Log any errors and notify the user of failure
@@ -723,6 +731,7 @@ public class GameDataWindow extends javax.swing.JFrame {
             MainWindow.sarPlatformList = strPlatformList.split(", ");
             MainWindow.intPlatformCount--;
             
+            
             // Create the temp file to store the decrypted database as an XML file
             File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
                     ".xml"));
@@ -733,6 +742,7 @@ public class GameDataWindow extends javax.swing.JFrame {
             CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
                     MainWindow.pthTempFile.toFile());
             
+            
             // Create a XML transformer and write the loaded XML file to the temp file
             TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
             Transformer tsfTransformer = tffTransformerFactory.newTransformer();
@@ -742,12 +752,14 @@ public class GameDataWindow extends javax.swing.JFrame {
             StreamResult smrResult = new StreamResult(fosOutput);
             tsfTransformer.transform(dmsSource, smrResult);
             
+            
             // Re-encrypt the database and delete the temp file
             CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
                     MainWindow.pthDatabaseFilePath.toFile());
             fosOutput.close();
             filTempFile.delete();
-        } catch (XPathExpressionException | TransformerException | IOException | CryptoException exc) {
+            
+        } catch (XPathExpressionException | TransformerException | IOException  | CryptoException exc) {
             // Log any errors and notify the user of failure
             System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + exc);
             JOptionPane.showMessageDialog(this, "Game Failed To Be Removed");

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gameList platformList="GBA, XBox">
+	<game id="GAME04" platform="GBA">
+        <boxArt>GAME04.png</boxArt>
+        <gameName>Game 1</gameName>
+        <MACL>30</MACL>  
+        <classification>G</classification>
+        <releaseYear>2004</releaseYear>
+        <playStatus>IP</playStatus>
+        <personalRating>4</personalRating>
+        <notes>Test1 Notes</notes>
+    </game>
+    
+    <game id="GAME05" platform="XBox">
+        <boxArt>No Image</boxArt>
+        <gameName>Game 2</gameName>
+        <MACL>0</MACL>  
+        <classification>G</classification>
+        <releaseYear>2005</releaseYear>
+        <playStatus>NP</playStatus>
+        <personalRating>1</personalRating>
+        <notes>Test 7</notes>
+    </game>
+</gameList>

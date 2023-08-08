@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gameList platformList="PC, DS, GBA, XBox">
+	<game id="MINE11" platform="PC">
+        <boxArt>MINE11.png</boxArt>
+        <gameName>Minecraft</gameName>
+        <MACL>20</MACL>  
+        <classification>G</classification>
+        <releaseYear>2011</releaseYear>
+        <playStatus>AB</playStatus>
+        <personalRating>2</personalRating>
+        <notes>Test1 Notes</notes>
+    </game>
+
+    <game id="STRA22" platform="PC">
+        <boxArt>STRA22.png</boxArt>
+        <gameName>Stray</gameName>
+        <MACL>4</MACL>  
+        <classification>G</classification>
+        <releaseYear>2022</releaseYear>
+        <playStatus>FG</playStatus>
+        <personalRating>5</personalRating>
+        <notes>Test1 Notes</notes>
+    </game>
+
+    <game id="NEW 06" platform="DS">
+        <boxArt>NEW 06.png</boxArt>
+        <gameName>New Super Mario Bros.</gameName>
+        <MACL>7</MACL>  
+        <classification>G</classification>
+        <releaseYear>2006</releaseYear>
+        <playStatus>NP</playStatus>
+        <personalRating>0</personalRating>
+        <notes>Test1 Notes</notes>
+    </game>
+
+    <game id="POKE04" platform="GBA">
+        <boxArt>POKE04.png</boxArt>
+        <gameName>Pokemon Fire Red</gameName>
+        <MACL>30</MACL>  
+        <classification>G</classification>
+        <releaseYear>2004</releaseYear>
+        <playStatus>IP</playStatus>
+        <personalRating>4</personalRating>
+        <notes>Test1 Notes</notes>
+    </game>
+    
+    <game id="FORZ05" platform="XBox">
+        <boxArt>No Image</boxArt>
+        <gameName>Forza Motorsport</gameName>
+        <MACL>0</MACL>  
+        <classification>G</classification>
+        <releaseYear>2005</releaseYear>
+        <playStatus>NP</playStatus>
+        <personalRating>1</personalRating>
+        <notes>Test1 Notes</notes>
+    </game>
+</gameList>

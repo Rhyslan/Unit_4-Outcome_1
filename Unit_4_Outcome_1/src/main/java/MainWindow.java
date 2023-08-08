@@ -1235,6 +1235,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         //<editor-fold defaultstate="collapsed" desc="XML Loading">
         try {
+            
             // Create the temp file to store the decrypted database as an XML file
             File filTempFile = new File(pthDatabaseFilePath.toString().replace(".encrypted", ".xml"));
             filTempFile.createNewFile();
@@ -1242,6 +1243,7 @@ public class MainWindow extends javax.swing.JFrame {
             
             // Decrypt the database and write it to the temp file
             CryptoUtils.mthDecryptFile(barEncryptionKey, pthDatabaseFilePath.toFile(), pthTempFile.toFile());
+            
             
             // Load the XML file and get all the game entries
             DocumentBuilder dcbBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -1296,8 +1298,10 @@ public class MainWindow extends javax.swing.JFrame {
             sarPlatformList = elmRoot.getAttributes().item(0).getTextContent().split(", ");
             intPlatformCount = sarPlatformList.length;
             
+            
             // Delete the temp file to maintain security
             filTempFile.delete();
+            
         } catch (ParserConfigurationException | SAXException | IOException | CryptoException exc) {
             // Log any errors
             System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + exc);
@@ -1569,6 +1573,7 @@ public class MainWindow extends javax.swing.JFrame {
             MainWindow.sarPlatformList = strPlatformList.split(", ");
             MainWindow.intPlatformCount--;
             
+            
             // Create the temp file to store the decrypted database as an XML file
             File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
                     ".xml"));
@@ -1579,6 +1584,7 @@ public class MainWindow extends javax.swing.JFrame {
             CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
                     MainWindow.pthTempFile.toFile());
             
+            
             // Create a XML transformer and write the loaded XML file to the temp file
             TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
             Transformer tsfTransformer = tffTransformerFactory.newTransformer();
@@ -1588,12 +1594,14 @@ public class MainWindow extends javax.swing.JFrame {
             StreamResult smrResult = new StreamResult(fosOutput);
             tsfTransformer.transform(dmsSource, smrResult);
             
+            
             // Re-encrypt the database and delete the temp file
             CryptoUtils.mthEncryptFile(MainWindow.barEncryptionKey, MainWindow.pthTempFile.toFile(), 
                     MainWindow.pthDatabaseFilePath.toFile());
             fosOutput.close();
             filTempFile.delete();
-        } catch (TransformerException | IOException | CryptoException | XPathExpressionException exc) {
+            
+        } catch (TransformerException | IOException | XPathExpressionException | CryptoException exc) {
             // Log any errors and notify the user of failure
             System.err.println(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) + " " + 
                     "Database editing didn't work (transformer or file error): " + exc);
