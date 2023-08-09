@@ -196,7 +196,6 @@ public class GameEntry extends javax.swing.JToggleButton {
             MainWindow.sarPlatformList = strPlatformList.split(", ");
             MainWindow.intPlatformCount--;
             
-            
             // Create the temp file to store the decrypted database as an XML file
             File filTempFile = new File(MainWindow.pthDatabaseFilePath.toString().replace(".encrypted", 
                     ".xml"));
@@ -206,7 +205,6 @@ public class GameEntry extends javax.swing.JToggleButton {
             // Decrypt the database and write it to the temp file
             CryptoUtils.mthDecryptFile(MainWindow.barEncryptionKey, MainWindow.pthDatabaseFilePath.toFile(), 
                     MainWindow.pthTempFile.toFile());
-            
             
             // Create a XML transformer and write the loaded XML file to the temp file
             TransformerFactory tffTransformerFactory = TransformerFactory.newInstance();
