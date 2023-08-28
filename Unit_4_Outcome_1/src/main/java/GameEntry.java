@@ -24,10 +24,6 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Node;
 
-/**
- *
- * @author dylan
- */
 public class GameEntry extends javax.swing.JToggleButton {
 
     /**
