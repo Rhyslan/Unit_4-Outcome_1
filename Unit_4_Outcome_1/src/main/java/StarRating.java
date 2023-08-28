@@ -2,10 +2,6 @@
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author dylan
- */
 public class StarRating extends javax.swing.JPanel {
 
     /**
