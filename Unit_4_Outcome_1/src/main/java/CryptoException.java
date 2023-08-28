@@ -3,10 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/**
- *
- * @author dylan
- */
 public class CryptoException extends Exception{
     public CryptoException() {
     }
