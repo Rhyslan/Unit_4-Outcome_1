@@ -38,10 +38,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/**
- *
- * @author dylan
- */
 public class MainWindow extends javax.swing.JFrame {
 
     /**
