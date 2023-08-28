@@ -3,10 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/**
- *
- * @author dylan
- */
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
