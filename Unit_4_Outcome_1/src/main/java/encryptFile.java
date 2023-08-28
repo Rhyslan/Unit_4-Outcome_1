@@ -11,10 +11,6 @@ import java.util.HexFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author dylan
- */
 public class encryptFile {
     /**
      * @param args the command line arguments
