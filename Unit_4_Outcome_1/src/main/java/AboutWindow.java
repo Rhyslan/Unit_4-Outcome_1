@@ -3,10 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-/**
- *
- * @author dylan
- */
 public class AboutWindow extends javax.swing.JFrame {
 
     /**
