@@ -28,7 +28,7 @@ public class AboutWindow extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAuthor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAuthor.setText("Made By Dylan");
+        lblAuthor.setText("Made By {AuthorName}");
         getContentPane().add(lblAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 172, 55));
 
         pack();
